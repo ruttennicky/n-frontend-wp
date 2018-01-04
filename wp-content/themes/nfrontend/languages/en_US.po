@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: N digital studio\n"
+"POT-Creation-Date: 2017-11-20 08:43+0100\n"
+"PO-Revision-Date: 2017-11-20 08:44+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _e;__;_n\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: src\n"
+"X-Poedit-SearchPathExcluded-2: js\n"
+
+#: footer.php:29
+msgid "lbl_facebooklink"
+msgstr "Go to the Facebook page"
+
+#: footer.php:38
+msgid "lbl_twitterlink"
+msgstr "Go to the Twitter profile"
+
+#: footer.php:47
+msgid "lbl_instagramlink"
+msgstr "Go to the Instagram profile"
+
+#: footer.php:56
+msgid "lbl_linkedinlink"
+msgstr "Go to the LinkedIn page"
+
+#: footer.php:65
+msgid "lbl_pinterestlink"
+msgstr "Go to the Pinterest page"
+
+#: front-page.php:32
+msgid "lbl_contacttitle"
+msgstr "Get in touch with us"
+
+#: front-page.php:32
+msgid "lbl_contactlink"
+msgstr "Get in touch right now"
+
+#: front-page.php:42
+msgid "ttl_ourstudio"
+msgstr "Our studio can help you with..."
+
+#: front-page.php:56 front-page.php:111 page--blog.php:54
+msgid "lbl_readmore"
+msgstr "Read more"
+
+#: front-page.php:77 page--portfolio.php:46
+msgid "lbl_referencetitle"
+msgstr "Go to this reference"
+
+#: front-page.php:112
+msgid "lbl_allarticlesalt"
+msgstr "Read all articles"
+
+#: front-page.php:112
+msgid "lbl_allarticleslink"
+msgstr "Read all articles"
+
+#: front-page.php:122
+msgid "ttl_newslettertitle"
+msgstr "Want to keep up to date?"
+
+#: front-page.php:125
+msgid "txt_newslettertext"
+msgstr ""
+"Subscribe to our newsletter and we’ll keep you posted on interesting things, "
+"new projects, etc. Don’t worry, we won’t spam you and you can always "
+"unsubscribe if you don’t like things we send out."
+
+#: functions.php:98
+msgid "Main menu"
+msgstr ""
+
+#: functions.php:99
+msgid "Footer menu"
+msgstr ""
+
+#: functions.php:100
+msgid "Mobile menu"
+msgstr ""
+
+#: functions.php:101
+msgid "Meta menu"
+msgstr ""
+
+#: functions.php:102
+msgid "Language menu"
+msgstr ""
+
+#: header.php:13
+msgid "lbl_menutitle"
+msgstr "Open the mobile menu"
+
+#: header.php:14
+msgid "lbl_menulink"
+msgstr "Menu"
+
+#: header.php:18
+msgid "lbl_homelink"
+msgstr "Go to the homepage"
+
+#: header.php:19
+msgid "lbl_logoalt"
+msgstr "Logo N digital studio"
+
+#: page--blog.php:52
+msgid "lbl_writtenon"
+msgstr "Written on"
+
+#: page--portfolioitem.php:36
+msgid "ttl_servicestitle"
+msgstr "Services in this project"
+
+#: page--portfolioitem.php:43
+msgid "ttl_portfoliotitle"
+msgstr "Our full portfolio?"
+
+#: page--portfolioitem.php:44
+msgid "lbl_portfoliotitle"
+msgstr "Our full portfolio"
+
+#: page--portfolioitem.php:44
+msgid "txt_portfoliotext"
+msgstr "Watch our portfolio on issuu.com"
+
+#: page--portfolioitem.php:55
+msgid "lbl_stilltitle"
+msgstr "Watch this image enlarged"
+
+#: page--portfolioitem.php:66
+msgid "lbl_galleryprevtitle"
+msgstr "Previous image"
+
+#: page--portfolioitem.php:74
+msgid "lbl_gallerynexttitle"
+msgstr "Next image"
+
+#~ msgid "lbl_socialtextprefix"
+#~ msgstr "You’ll find even more on"
+
+#~ msgid "lbl_newsletterbaseline"
+#~ msgstr ""
+#~ "If you drop us your emailaddress, we like to send you regular updates "
+#~ "about interesting articles, project updates and general messages from the "
+#~ "industry"

@@ -1,0 +1,1437 @@
+/*
+        ==========================
+        ======    MIXINS    ======
+        ==========================
+*/
+
+@mixin margin($value,$side)
+{
+    @if $side == left {
+        @media (max-width: $screen-xs-max) {
+            margin-left:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            margin-left:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            margin-left:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            margin-left:$value;
+        }
+    } @else if $side == right {
+        @media (max-width: $screen-xs-max) {
+            margin-right:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            margin-right:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            margin-right:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            margin-right:$value;
+        }
+    } @else if $side == top {
+        @media (max-width: $screen-xs-max) {
+            margin-top:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            margin-top:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            margin-top:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            margin-top:$value;
+        }
+    } @else if $side == bottom {
+        @media (max-width: $screen-xs-max) {
+            margin-bottom:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            margin-bottom:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            margin-bottom:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            margin-bottom:$value;
+        }
+    } @else {     margin:0;       }
+}
+
+@mixin padding($value,$side)
+{
+    @if $side == left {
+        @media (max-width: $screen-xs-max) {
+            padding-left:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            padding-left:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            padding-left:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            padding-left:$value;
+        }
+    } @else if $side == right {
+        @media (max-width: $screen-xs-max) {
+            padding-right:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            padding-right:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            padding-right:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            padding-right:$value;
+        }
+    } @else if $side == top {
+        @media (max-width: $screen-xs-max) {
+            padding-top:$value*0.75;
+        }
+        @media (min-width: $screen-sm-min) {
+            padding-top:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            padding-top:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            padding-top:$value;
+        }
+    } @else if $side == bottom {
+        @media (max-width: $screen-xs-max) {
+            padding-bottom:$value*0.6;
+        }
+        @media (min-width: $screen-sm-min) {
+            padding-bottom:$value*0.75;
+        }
+        @media (min-width: $screen-md-min) {
+            padding-bottom:$value;
+        }
+        @media (min-width: $screen-lg-min) {
+            padding-bottom:$value;
+        }
+    } @else {     padding:0;       }
+}
+
+@mixin border-radius($radius)    {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin border($thickness,$style,$color,$side) {
+    @if $side == left {
+        border-left:$thickness $style $color;
+    } @else if $side == right {
+        border-right:$thickness $style $color;
+    } @else if $side == top {
+        border-top:$thickness $style $color;
+    } @else if $side == bottom {
+        border-bottom:$thickness $style $color;
+    } @else if $side == full {
+    	border:$thickness $style $color;
+    }
+}
+
+@mixin height($value) {
+    @media (max-width: $screen-xs-max) {
+        height:$value*0.6;
+    }
+    @media (min-width: $screen-sm-min) {
+        height:$value*0.85;
+    }
+    @media (min-width: $screen-md-min) {
+        height:$value;
+    }
+    @media (min-width: $screen-lg-min) {
+        height:$value;
+    }
+}
+
+@mixin animation($duration) {
+  -webkit-transition: all $duration ease-in-out;
+  -moz-transition: all $duration ease-in-out;
+  -ms-transition: all $duration ease-in-out;
+  -o-transition: all $duration ease-in-out;
+  transition: all $duration ease-in-out;
+}
+
+@mixin placeholder($color) {
+	::-webkit-input-placeholder {
+	    color:    $color;
+	}
+	:-moz-placeholder {
+	   color:    $color;
+	   opacity:  $opacity;
+	}
+	::-moz-placeholder {
+	   color:    $color;
+	   opacity:  $opacity;
+	}
+	:-ms-input-placeholder {
+	   color:    $color;
+	}
+}
+
+@mixin shadow($hor,$ver,$blur,$width,$color) {
+	-webkit-box-shadow: $hor $ver $blur $width $color;
+	-moz-box-shadow:    $hor $ver $blur $width $color;
+	box-shadow:         $hor $ver $blur $width $color;
+}
+
+@mixin text-shadow($hor,$ver,$blur,$color) {
+	text-shadow:$hor $ver $blur $color
+}
+
+@mixin position($value,$side) {
+    @if $side == left {
+       left:$value;
+    } @else if $side == right {
+       right:$value;
+    } @else if $side == top {
+       top:$value;
+    } @else if $side == bottom {
+       bottom:$value;
+    } @else if $side == full {
+    	left:$value;
+    	right:$value;
+    	top:$value;
+    	bottom:$value;
+    }
+}
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+/*
+		    ==========================
+        ======   PADDINGS   ======
+        ==========================
+*/
+
+.p-0          {   @include padding(0,all);         }
+.p-top-0      {   @include padding(0,top);         }
+.p-top-5      {   @include padding(5px,top);       }
+.p-top-10     {   @include padding(10px,top);      }
+.p-top-15     {   @include padding(15px,top);      }
+.p-top-20     {   @include padding(20px,top);      }
+.p-top-25     {   @include padding(25px,top);      }
+.p-top-30     {   @include padding(30px,top);      }
+.p-top-35     {   @include padding(35px,top);      }
+.p-top-40     {   @include padding(40px,top);      }
+.p-top-45     {   @include padding(45px,top);      }
+.p-top-50     {   @include padding(50px,top);      }
+.p-top-55     {   @include padding(55px,top);      }
+.p-top-60     {   @include padding(60px,top);      }
+.p-top-65     {   @include padding(65px,top);      }
+.p-top-70     {   @include padding(70px,top);      }
+.p-top-75     {   @include padding(75px,top);      }
+.p-top-80     {   @include padding(80px,top);      }
+.p-top-85     {   @include padding(85px,top);      }
+.p-top-90     {   @include padding(90px,top);      }
+.p-top-95     {   @include padding(95px,top);      }
+.p-top-100    {   @include padding(100px,top);     }
+.p-top-110    {   @include padding(110px,top);     }
+.p-top-120    {   @include padding(120px,top);     }
+.p-top-130    {   @include padding(130px,top);     }
+.p-top-140    {   @include padding(140px,top);     }
+.p-top-150    {   @include padding(150px,top);     }
+.p-top-160    {   @include padding(160px,top);     }
+.p-top-170    {   @include padding(170px,top);     }
+.p-top-180    {   @include padding(180px,top);     }
+.p-top-190    {   @include padding(190px,top);     }
+.p-top-200    {   @include padding(200px,top);     }
+.p-top-250    {   @include padding(250px,top);     }
+.p-top-300    {   @include padding(300px,top);     }
+.p-top-350    {   @include padding(350px,top);     }
+.p-top-400    {   @include padding(400px,top);     }
+.p-bottom-0   {   @include padding(0,bottom);      }
+.p-bottom-5   {   @include padding(5px,bottom);    }
+.p-bottom-10  {   @include padding(10px,bottom);   }
+.p-bottom-15  {   @include padding(15px,bottom);   }
+.p-bottom-20  {   @include padding(20px,bottom);   }
+.p-bottom-25  {   @include padding(25px,bottom);   }
+.p-bottom-30  {   @include padding(30px,bottom);   }
+.p-bottom-35  {   @include padding(35px,bottom);   }
+.p-bottom-40  {   @include padding(40px,bottom);   }
+.p-bottom-45  {   @include padding(45px,bottom);   }
+.p-bottom-50  {   @include padding(50px,bottom);   }
+.p-bottom-55  {   @include padding(55px,bottom);   }
+.p-bottom-60  {   @include padding(60px,bottom);   }
+.p-bottom-65  {   @include padding(65px,bottom);   }
+.p-bottom-70  {   @include padding(70px,bottom);   }
+.p-bottom-75  {   @include padding(75px,bottom);   }
+.p-bottom-80  {   @include padding(80px,bottom);   }
+.p-bottom-85  {   @include padding(85px,bottom);   }
+.p-bottom-90  {   @include padding(90px,bottom);   }
+.p-bottom-95  {   @include padding(95px,bottom);   }
+.p-bottom-100 {   @include padding(100px,bottom);  }
+.p-bottom-110 {   @include padding(110px,bottom);  }
+.p-bottom-120 {   @include padding(120px,bottom);  }
+.p-bottom-130 {   @include padding(130px,bottom);  }
+.p-bottom-140 {   @include padding(140px,bottom);  }
+.p-bottom-150 {   @include padding(150px,bottom);  }
+.p-bottom-160 {   @include padding(160px,bottom);  }
+.p-bottom-170 {   @include padding(170px,bottom);  }
+.p-bottom-180 {   @include padding(180px,bottom);  }
+.p-bottom-190 {   @include padding(190px,bottom);  }
+.p-bottom-200 {   @include padding(200px,bottom);  }
+.p-bottom-250 {   @include padding(250px,bottom);  }
+.p-bottom-300 {   @include padding(300px,bottom);  }
+.p-bottom-350 {   @include padding(350px,bottom);  }
+.p-bottom-400 {   @include padding(400px,bottom);  }
+.p-left-0     {   @include padding(0,left);        }
+.p-left-5     {   @include padding(5px,left);      }
+.p-left-10    {   @include padding(10px,left);     }
+.p-left-15    {   @include padding(15px,left);     }
+.p-left-20    {   @include padding(20px,left);     }
+.p-left-25    {   @include padding(25px,left);     }
+.p-left-30    {   @include padding(30px,left);     }
+.p-left-35    {   @include padding(35px,left);     }
+.p-left-40    {   @include padding(40px,left);     }
+.p-left-45    {   @include padding(45px,left);     }
+.p-left-50    {   @include padding(50px,left);     }
+.p-left-55    {   @include padding(55px,left);     }
+.p-left-60    {   @include padding(60px,left);     }
+.p-left-65    {   @include padding(65px,left);     }
+.p-left-70    {   @include padding(70px,left);     }
+.p-left-75    {   @include padding(75px,left);     }
+.p-left-80    {   @include padding(80px,left);     }
+.p-left-85    {   @include padding(85px,left);     }
+.p-left-90    {   @include padding(90px,left);     }
+.p-left-95    {   @include padding(95px,left);     }
+.p-left-100   {   @include padding(100px,left);    }
+.p-left-110   {   @include padding(110px,left);    }
+.p-left-120   {   @include padding(120px,left);    }
+.p-left-130   {   @include padding(130px,left);    }
+.p-left-140   {   @include padding(140px,left);    }
+.p-left-150   {   @include padding(150px,left);    }
+.p-left-160   {   @include padding(160px,left);    }
+.p-left-170   {   @include padding(170px,left);    }
+.p-left-180   {   @include padding(180px,left);    }
+.p-left-190   {   @include padding(190px,left);    }
+.p-left-200   {   @include padding(200px,left);    }
+.p-left-250   {   @include padding(250px,left);    }
+.p-left-300   {   @include padding(300px,left);    }
+.p-left-310   {   @include padding(310px,left);    }
+.p-left-315   {   @include padding(315px,left);    }
+.p-left-325   {   @include padding(325px,left);    }
+.p-left-350   {   @include padding(350px,left);    }
+.p-left-400   {   @include padding(400px,left);    }
+.p-right-0    {   @include padding(0,right);       }
+.p-right-5    {   @include padding(5px,right);     }
+.p-right-10   {   @include padding(10px,right);    }
+.p-right-15   {   @include padding(15px,right);    }
+.p-right-20   {   @include padding(20px,right);    }
+.p-right-25   {   @include padding(25px,right);    }
+.p-right-30   {   @include padding(30px,right);    }
+.p-right-35   {   @include padding(35px,right);    }
+.p-right-40   {   @include padding(40px,right);    }
+.p-right-45   {   @include padding(45px,right);    }
+.p-right-50   {   @include padding(50px,right);    }
+.p-right-55   {   @include padding(55px,right);    }
+.p-right-60   {   @include padding(60px,right);    }
+.p-right-65   {   @include padding(65px,right);    }
+.p-right-70   {   @include padding(70px,right);    }
+.p-right-75   {   @include padding(75px,right);    }
+.p-right-80   {   @include padding(80px,right);    }
+.p-right-85   {   @include padding(85px,right);    }
+.p-right-90   {   @include padding(90px,right);    }
+.p-right-95   {   @include padding(95px,right);    }
+.p-right-100  {   @include padding(100px,right);   }
+.p-right-110  {   @include padding(110px,right);   }
+.p-right-120  {   @include padding(120px,right);   }
+.p-right-130  {   @include padding(130px,right);   }
+.p-right-140  {   @include padding(140px,right);   }
+.p-right-150  {   @include padding(150px,right);   }
+.p-right-160  {   @include padding(160px,right);   }
+.p-right-170  {   @include padding(170px,right);   }
+.p-right-180  {   @include padding(180px,right);   }
+.p-right-190  {   @include padding(190px,right);   }
+.p-right-200  {   @include padding(200px,right);   }
+.p-right-250  {   @include padding(250px,right);   }
+.p-right-300  {   @include padding(300px,right);   }
+.p-right-350  {   @include padding(350px,right);   }
+.p-right-400  {   @include padding(400px,right);   }
+
+
+/*
+		==========================
+        ======    MARGINS   ======
+        ==========================
+*/
+
+.m-0          {   @include margin(0,all);         }
+.m-top-0      {   @include margin(0,top);         }
+.m-top-5      {   @include margin(5px,top);       }
+.m-top-10     {   @include margin(10px,top);      }
+.m-top-15     {   @include margin(15px,top);      }
+.m-top-20     {   @include margin(20px,top);      }
+.m-top-25     {   @include margin(25px,top);      }
+.m-top-30     {   @include margin(30px,top);      }
+.m-top-35     {   @include margin(35px,top);      }
+.m-top-40     {   @include margin(40px,top);      }
+.m-top-45     {   @include margin(45px,top);      }
+.m-top-50     {   @include margin(50px,top);      }
+.m-top-55     {   @include margin(55px,top);      }
+.m-top-60     {   @include margin(60px,top);      }
+.m-top-65     {   @include margin(65px,top);      }
+.m-top-70     {   @include margin(70px,top);      }
+.m-top-75     {   @include margin(75px,top);      }
+.m-top-80     {   @include margin(80px,top);      }
+.m-top-85     {   @include margin(85px,top);      }
+.m-top-90     {   @include margin(90px,top);      }
+.m-top-95     {   @include margin(95px,top);      }
+.m-top-100    {   @include margin(100px,top);     }
+.m-top-110    {   @include margin(110px,top);     }
+.m-top-120    {   @include margin(120px,top);     }
+.m-top-130    {   @include margin(130px,top);     }
+.m-top-140    {   @include margin(140px,top);     }
+.m-top-150    {   @include margin(150px,top);     }
+.m-top-160    {   @include margin(160px,top);     }
+.m-top-170    {   @include margin(170px,top);     }
+.m-top-180    {   @include margin(180px,top);     }
+.m-top-190    {   @include margin(190px,top);     }
+.m-top-200    {   @include margin(200px,top);     }
+.m-top-250    {   @include margin(250px,top);     }
+.m-top-300    {   @include margin(300px,top);     }
+.m-top-350    {   @include margin(350px,top);     }
+.m-top-400    {   @include margin(400px,top);     }
+.m-bottom-0   {   @include margin(0,bottom);      }
+.m-bottom-5   {   @include margin(5px,bottom);    }
+.m-bottom-10  {   @include margin(10px,bottom);   }
+.m-bottom-15  {   @include margin(15px,bottom);   }
+.m-bottom-20  {   @include margin(20px,bottom);   }
+.m-bottom-25  {   @include margin(25px,bottom);   }
+.m-bottom-30  {   @include margin(30px,bottom);   }
+.m-bottom-35  {   @include margin(35px,bottom);   }
+.m-bottom-40  {   @include margin(40px,bottom);   }
+.m-bottom-45  {   @include margin(45px,bottom);   }
+.m-bottom-50  {   @include margin(50px,bottom);   }
+.m-bottom-55  {   @include margin(55px,bottom);   }
+.m-bottom-60  {   @include margin(60px,bottom);   }
+.m-bottom-65  {   @include margin(65px,bottom);   }
+.m-bottom-70  {   @include margin(70px,bottom);   }
+.m-bottom-75  {   @include margin(75px,bottom);   }
+.m-bottom-80  {   @include margin(80px,bottom);   }
+.m-bottom-85  {   @include margin(85px,bottom);   }
+.m-bottom-90  {   @include margin(90px,bottom);   }
+.m-bottom-95  {   @include margin(95px,bottom);   }
+.m-bottom-100 {   @include margin(100px,bottom);  }
+.m-bottom-110 {   @include margin(110px,bottom);  }
+.m-bottom-120 {   @include margin(120px,bottom);  }
+.m-bottom-130 {   @include margin(130px,bottom);  }
+.m-bottom-140 {   @include margin(140px,bottom);  }
+.m-bottom-150 {   @include margin(150px,bottom);  }
+.m-bottom-160 {   @include margin(160px,bottom);  }
+.m-bottom-170 {   @include margin(170px,bottom);  }
+.m-bottom-180 {   @include margin(180px,bottom);  }
+.m-bottom-190 {   @include margin(190px,bottom);  }
+.m-bottom-200 {   @include margin(200px,bottom);  }
+.m-bottom-250 {   @include margin(250px,bottom);  }
+.m-bottom-300 {   @include margin(300px,bottom);  }
+.m-bottom-350 {   @include margin(350px,bottom);  }
+.m-bottom-400 {   @include margin(400px,bottom);  }
+.m-left-0     {   @include margin(0,left);        }
+.m-left-5     {   @include margin(5px,left);      }
+.m-left-10    {   @include margin(10px,left);     }
+.m-left-15    {   @include margin(15px,left);     }
+.m-left-20    {   @include margin(20px,left);     }
+.m-left-25    {   @include margin(25px,left);     }
+.m-left-30    {   @include margin(30px,left);     }
+.m-left-35    {   @include margin(35px,left);     }
+.m-left-40    {   @include margin(40px,left);     }
+.m-left-45    {   @include margin(45px,left);     }
+.m-left-50    {   @include margin(50px,left);     }
+.m-left-55    {   @include margin(55px,left);     }
+.m-left-60    {   @include margin(60px,left);     }
+.m-left-65    {   @include margin(65px,left);     }
+.m-left-70    {   @include margin(70px,left);     }
+.m-left-75    {   @include margin(75px,left);     }
+.m-left-80    {   @include margin(80px,left);     }
+.m-left-85    {   @include margin(85px,left);     }
+.m-left-90    {   @include margin(90px,left);     }
+.m-left-95    {   @include margin(95px,left);     }
+.m-left-100   {   @include margin(100px,left);    }
+.m-left-110   {   @include margin(110px,left);    }
+.m-left-120   {   @include margin(120px,left);    }
+.m-left-130   {   @include margin(130px,left);    }
+.m-left-140   {   @include margin(140px,left);    }
+.m-left-150   {   @include margin(150px,left);    }
+.m-left-160   {   @include margin(160px,left);    }
+.m-left-170   {   @include margin(170px,left);    }
+.m-left-180   {   @include margin(180px,left);    }
+.m-left-190   {   @include margin(190px,left);    }
+.m-left-200   {   @include margin(200px,left);    }
+.m-left-250   {   @include margin(250px,left);    }
+.m-left-300   {   @include margin(300px,left);    }
+.m-left-350   {   @include margin(350px,left);    }
+.m-left-400   {   @include margin(400px,left);    }
+.m-right-0    {   @include margin(0,right);       }
+.m-right-5    {   @include margin(5px,right);     }
+.m-right-10   {   @include margin(10px,right);    }
+.m-right-15   {   @include margin(15px,right);    }
+.m-right-20   {   @include margin(20px,right);    }
+.m-right-25   {   @include margin(25px,right);    }
+.m-right-30   {   @include margin(30px,right);    }
+.m-right-35   {   @include margin(35px,right);    }
+.m-right-40   {   @include margin(40px,right);    }
+.m-right-45   {   @include margin(45px,right);    }
+.m-right-50   {   @include margin(50px,right);    }
+.m-right-55   {   @include margin(55px,right);    }
+.m-right-60   {   @include margin(60px,right);    }
+.m-right-65   {   @include margin(65px,right);    }
+.m-right-70   {   @include margin(70px,right);    }
+.m-right-75   {   @include margin(75px,right);    }
+.m-right-80   {   @include margin(80px,right);    }
+.m-right-85   {   @include margin(85px,right);    }
+.m-right-90   {   @include margin(90px,right);    }
+.m-right-95   {   @include margin(95px,right);    }
+.m-right-100  {   @include margin(100px,right);   }
+.m-right-110  {   @include margin(110px,right);   }
+.m-right-120  {   @include margin(120px,right);   }
+.m-right-130  {   @include margin(130px,right);   }
+.m-right-140  {   @include margin(140px,right);   }
+.m-right-150  {   @include margin(150px,right);   }
+.m-right-160  {   @include margin(160px,right);   }
+.m-right-170  {   @include margin(170px,right);   }
+.m-right-180  {   @include margin(180px,right);   }
+.m-right-190  {   @include margin(190px,right);   }
+.m-right-200  {   @include margin(200px,right);   }
+.m-right-250  {   @include margin(250px,right);   }
+.m-right-300  {   @include margin(300px,right);   }
+.m-right-350  {   @include margin(350px,right);   }
+.m-right-400  {   @include margin(400px,right);   }
+
+
+/*
+		==========================
+        ======    FONTS     ======
+        ==========================
+*/
+
+.f-s-06 {  font-size:0.6em;  }
+.f-s-07 {  font-size:0.7em;  }
+.f-s-08 {  font-size:0.8em;  }
+.f-s-09 {  font-size:0.9em;  }
+.f-s-1  {  font-size:1em;    }
+.f-s-12 {  font-size:1.2em;  }
+.f-s-15 {  font-size:1.5em;  }
+.f-s-175 {  font-size:1.75em; }
+.f-s-2  {  font-size:2em;     }
+.f-s-3	{	font-size:3em;	  }
+.f-s-5  {  font-size:5em;     }
+
+.f-bold      {   font-weight: 700;     		  }
+.f-non-bold  {   font-weight: 300;     		  }
+.f-italic	   {	 font-style: italic;   		  }
+.f-upper	   {	 text-transform: uppercase;	}
+
+
+.f-white    	   {  	color:$white;   			  }
+.f-white-opacity {		color:$white-opacity;		}
+.f-black    	   {  	color:$black;   			  }
+.f-grey     	   {  	color:$grey;    			  }
+.f-darker-grey   {    color:$darker-grey;     }
+.f-red			     {  	color:$red;					    }
+.f-green		     {		color:$green;				    }
+
+.f-primary 		   {  	color:$brand-primary;		}
+.f-secondary 	   {		color:$brand-secondary;	}
+.f-third		     { 		color:$brand-third;			}
+.f-fourth		     {		color:$brand-fourth;		}
+
+.f-grey			     {		color:$grey;				    }
+.f-light-grey	   {		color:$light-grey;			}
+.f-lightest-grey {		color:$lightest-grey;			}
+
+.f-f-primary 	   {   	font-family: $font-family       			}
+.f-f-secondary 	 {		font-family: $font-family-secondary;	}
+.f-f-third		   {		font-family: $font-family-third;			}
+
+.l-h-1		{	line-height:1em;		  }
+.l-h-125	{	line-height:1.25em;		}
+.l-h-15		{	line-height:1.5em;		}
+.l-h-2		{	line-height:2em;		  }
+.l-h-25		{	line-height:2.5em;		}
+.l-h-3		{	line-height:3em;		  }
+.l-h-35		{	line-height:3.5em;		}
+.l-h-4		{	line-height:4em;		  }
+
+.transparant	{			opacity:$opacity;			}
+
+
+/*
+		=======================
+        ======  OVERFLOW ======
+        =======================
+*/
+
+.no-overflow	{		overflow:hidden;			}
+
+
+/*
+		===========================
+        ======  POSITIONING  ======
+        ===========================
+*/
+
+.full-width,.js-full-screen 	{  	 	width:100%;     }
+
+.p-relative 	{		position: relative;			}
+.p-absolute		{ 		position: absolute;			}
+.p-fixed		{		position: fixed;			}
+
+.js-hide        {       visibility: hidden;              }
+
+.h-1       	{       @include height(1px);        }
+.h-3       	{       @include height(3px);        }
+.h-5        {       @include height(5px);        }
+.h-10       {       @include height(10px);       }
+.h-35       {       @include height(35px);       }
+.h-50       {       @include height(50px);       }
+.h-100			{		    @include height(100px);		   }
+.h-125			{		    @include height(125px);		   }
+.h-150			{		    @include height(150px);		   }
+.h-300      {       @include height(300px);      }
+.h-400			{       @include height(400px);      }
+.h-500			{       @include height(500px);      }
+
+.h-2em			{		height:2em;					 }
+.h-3em			{		height:3em;					 }
+.h-4em			{		height:4em;					 }
+
+.h-100p			{		height:100%;				 }
+.h-auto			{		height:auto;				 }
+
+.w-15p			{		width:15%;					 }
+.w-20p			{		width:20%;					 }
+.w-25p			{		width:25%;					 }
+.w-35p			{		width:35%;					 }
+.w-50p			{		width:50%;					 }
+.w-65p      {   width:65%;           }
+
+.w-3em      {   width:3em;           }
+
+.a-l-0			{		left:0;						 }
+
+.a-r-0			{		right:0;					 }
+
+.a-t-0			{		top:0;						 }
+.a-t---50p		{		top:-50%;					 }
+.a-t---75p		{		top:-75%;					 }
+
+.a-b-0			{ 		bottom:0;					 }
+
+.block			{		display: block;				 }
+
+.v-text-center    {
+    p       {    @include vertical-align();    }
+}
+
+.resp-container {
+
+  img {  @extend .img-responsive;  }
+
+}
+
+
+/*
+		=====================
+        ====== BORDERS ======
+        =====================
+*/
+
+.corners					 {	    @include border-radius(3px);								}
+
+.border-lightest-grey-full   {      @include border(1px,solid,$light-grey,full);        		}
+.border-lightest-grey-left   {      @include border(1px,solid,$light-grey,left);        		}
+.border-lightest-grey-right  {      @include border(1px,solid,$light-grey,right);        		}
+.border-lightest-grey-top    {      @include border(1px,solid,$light-grey,top);        			}
+.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        	}
+
+.border-light-grey-full    	 {      @include border(1px,solid,$light-grey,full);        		}
+.border-light-grey-left    	 {      @include border(1px,solid,$light-grey,left);        		}
+.border-light-grey-right   	 {      @include border(1px,solid,$light-grey,right);        		}
+.border-light-grey-top    	 {      @include border(1px,solid,$light-grey,top);        			}
+.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        	}
+
+.border-grey-full    	 	 {      @include border(1px,solid,$grey,full);        				  }
+.border-grey-left    		 {      @include border(1px,solid,$grey,left);        				  }
+.border-grey-right   	 	 {	    @include border(1px,solid,$grey,right);        				  }
+.border-grey-top    	 	 {      @include border(1px,solid,$grey,top);        				    }
+.border-grey-bottom 	 	 {      @include border(1px,solid,$grey,bottom);        			  }
+
+.border-darker-grey-full	 {		@include border(1px,solid,$darker-grey,full);				    }
+.border-darker-grey-left	 {		@include border(1px,solid,$darker-grey,left);				    }
+.border-darker-grey-right	 {		@include border(1px,solid,$darker-grey,right);				  }
+.border-darker-grey-top	 	 {		@include border(1px,solid,$darker-grey,top);				    }
+.border-darker-grey-bottom	 {		@include border(1px,solid,$darker-grey,bottom);				}
+
+.border-dark-grey-full		 {		@include border(1px,solid,$dark-grey,full);					}
+.border-dark-grey-left	 	 {		@include border(1px,solid,$dark-grey,left);					}
+.border-dark-grey-right	 	 {		@include border(1px,solid,$dark-grey,right);				}
+.border-dark-grey-top	 	   {		@include border(1px,solid,$dark-grey,top);					}
+.border-dark-grey-bottom 	 {		@include border(1px,solid,$dark-grey,bottom);				}
+
+.border-primary-full 		   {      @include border(1px,solid,$brand-primary,full);         }
+.border-primary-left 		   {      @include border(1px,solid,$brand-primary,left);        	}
+.border-primary-right 		 {      @include border(1px,solid,$brand-primary,right);        }
+.border-primary-top 		   {      @include border(1px,solid,$brand-primary,top);        	}
+.border-primary-bottom 		 {      @include border(1px,solid,$brand-primary,bottom);     	}
+
+.border-secondary-full 		 {      @include border(1px,solid,$brand-secondary,full);       }
+.border-secondary-left 		 {      @include border(1px,solid,$brand-secondary,left);       }
+.border-secondary-right 	 {      @include border(1px,solid,$brand-secondary,right);      }
+.border-secondary-top 		 {      @include border(1px,solid,$brand-secondary,top);        }
+.border-secondary-bottom 	 {      @include border(1px,solid,$brand-secondary,bottom);     }
+
+.border-third-full 			 {      @include border(1px,solid,$brand-third,full);        		}
+.border-third-left 			 {      @include border(1px,solid,$brand-third,left);        		}
+.border-third-right 		 {      @include border(1px,solid,$brand-third,right);        	}
+.border-third-top 			 {      @include border(1px,solid,$brand-third,top);        		}
+.border-third-bottom 		 {      @include border(1px,solid,$brand-third,bottom);     		}
+
+.border-fourth-full 		 {      @include border(1px,solid,$brand-fourth,full);        	}
+.border-fourth-left 		 {      @include border(1px,solid,$brand-fourth,left);        	}
+.border-fourth-right 		 {      @include border(1px,solid,$brand-fourth,right);        	}
+.border-fourth-top 			 {      @include border(1px,solid,$brand-fourth,top);        		}
+.border-fourth-bottom 	 {      @include border(1px,solid,$brand-fourth,bottom);     		}
+
+.border-white-full			 {	    @include border(1px,solid,$white,full);						}
+.border-white-left			 {	    @include border(1px,solid,$white,left);						}
+.border-white-right			 {	    @include border(1px,solid,$white,right);					}
+.border-white-top			   {	    @include border(1px,solid,$white,top);						}
+.border-white-bottom		 {	    @include border(1px,solid,$white,bottom);					}
+
+
+/*
+		========================
+        ====== BACKGROUND ======
+        ========================
+*/
+
+.bg-white		       {	    background:$white;					    }
+.bg-white-opacity  {		  background:$white-opacity;			}
+.bg-black		       {		  background:$black;					    }
+.bg-black-opacity  {		  background:$black-opacity;			}
+
+.bg-primary 	     {      background:$brand-primary;  	  }
+.bg-secondary	     {	    background:$brand-secondary;		}
+.bg-third 	  	   {	    background:$brand-third; 			  }
+.bg-fourth		     {		  background:$brand-fourth;			  }
+
+.bg-lightest-grey {		    background:$lightest-grey;			}
+.bg-light-grey	  {		    background:$light-grey;				  }
+.bg-grey		      {		    background:$grey;					      }
+.bg-darker-grey	  {		    background:$darker-grey;			  }
+.bg-dark-grey	    {		    background:$dark-grey;				  }
+
+.bg-primary-opacity		{		background:$brand-primary-opacity; 				}
+.bg-secondary-opacity	{		background:$brand-secondary-opacity; 			}
+
+
+/*
+		=====================
+        ====== SHADOWS ======
+        =====================
+*/
+
+.sh-light-grey	{		@include shadow(3px,3px,3px,5px,$lightest-grey);		}
+
+
+/*
+		===========================
+        ====== HTML SELECTORS =====
+        ===========================
+*/
+
+* {		outline: none;		}
+
+::-moz-selection {
+    color: $white;
+    background: $brand-secondary;
+}
+
+ection {
+    color: $white;
+    background: $brand-primary;
+}
+
+body {
+    font-family:    $font-family;
+    font-size:      $font-size;
+    font-weight:    $font-weight;
+    line-height:    $line-height;
+    color:          $text-color;
+}
+
+
+/*
+        =============================================
+        ====== WHEN ALL STARTS TO FAINT BLACK  ======
+        =============================================
+*/
+
+.dark {
+
+	color:$dark-text-color;
+
+	form {			@extend form.dark;   		}
+
+	a	 {
+		color:$dark-link-color;
+
+		@include border(1px,dotted,$dark-link-color,bottom);
+
+		&:hover, &:focus, &.active {
+			color:$dark-link-hover-color;
+
+			@include border(1px,solid,$dark-link-hover-color, bottom);
+		}
+	}
+
+}
+
+
+/*
+        =============================================
+        ======   AN ETIQUETTE STYLE ELEMENT    ======
+        =============================================
+*/
+
+.marked {
+
+	a {
+		background: $brand-primary;
+		color: $white;
+		border:none;
+
+		@include padding(10px,left);
+		@include padding(10px,right);
+		@include padding(5px,top);
+		@include padding(5px,bottom);
+
+		&:hover, &:focus, &:active {
+			color: $black;
+			background: $brand-secondary;
+		}
+
+	}
+
+}
+
+a {
+    color:$link-color;
+    text-decoration: none;
+
+	@include animation(0.5s);
+    @include border(1px,dotted,$link-color,bottom);
+
+    &:hover, &:focus, &.active {
+        color:$link-hover-color;
+        text-decoration: none;
+        outline:none;
+
+        @include border(1px,solid,$link-hover-color,bottom);
+    }
+
+    &.cta-primary {
+    	display:inline-block;
+    	text-align:center;
+    	//text-transform:uppercase;
+    	color:$link-color-primary;
+    	background:none;
+		  border:none;
+
+		  @include border($cta-border-thickness,solid, $brand-third,full);
+    	@include border-radius($border-radius);
+    	@include padding(14px, top);
+    	@include padding(14px, bottom);
+    	@include padding(40px, left);
+    	@include padding(40px, right);
+      @extend .f-s-09;
+
+    	&:hover,&:focus,&:active {
+    		//background:$link-color;
+    		color:$link-color-secondary;
+
+    		@include border($cta-border-thickness,solid, $link-color-secondary,full);
+    	}
+
+    	&.very-small {
+	    	@include padding(5px, top);
+			  @include padding(5px, bottom);
+        @include padding(20px, left);
+        @include padding(20px, right);
+    	}
+
+    	&.tiny {
+			  @include padding(5px, left);
+			  @include padding(5px, right);
+			  @include padding(3px, top);
+			  @include padding(3px, bottom);
+		  }
+
+      &.match-input-fields {
+        @include padding(7px, top);
+        @include padding(7px, bottom);
+      }
+
+    }
+
+    &.cta-primary-inverse {
+     	@extend a.cta-primary;
+
+    	color:$white;
+    	background:$link-color-primary;
+
+    	@include border($cta-border-thickness,solid,$link-color-primary,full);
+
+    	&:hover,&:focus,&:active {
+    		background: none;
+    		color: $link-color;
+    	}
+    }
+
+    &.cta-secondary {
+        @extend a.cta-primary;
+
+        color:$link-color-secondary;
+
+        @include border($cta-border-thickness,solid,$link-color-secondary,full);
+
+        &:hover,&:focus,&:active {
+            background: $link-color-secondary;
+            color: $white;
+
+            @include border($cta-border-thickness,solid,$link-color-secondary,full);
+        }
+    }
+
+    &.cta-secondary-inverse {
+        @extend a.cta-primary-inverse;
+
+        background:$link-color-secondary;
+
+        @include border($cta-border-thickness,solid,$link-color-secondary,full);
+
+        &:hover,&:focus,&:active {
+            color:$link-color-secondary;
+
+			@include border($cta-border-thickness,solid,$link-color-secondary,full);
+        }
+    }
+
+    &.cta-third {
+        @extend a.cta-primary;
+
+        color:$link-color-third;
+
+        @include border($cta-border-thickness,solid,$link-color-third,full);
+
+        &:hover,&:focus,&:active {
+          background: $brand-third;
+        	color:$white;
+
+        	@include border($cta-border-thickness,solid,$link-color-third,full);
+        }
+    }
+
+    &.cta-third-inverse {
+        @extend a.cta-primary-inverse;
+
+        background:$link-color-third;
+
+        @include border($cta-border-thickness,solid,$link-color-third,full);
+
+        &:hover,&:focus,&:active {
+            color:$link-color-third;
+
+            @include border($cta-border-thickness,solid,$link-color-third,full);
+        }
+    }
+
+    &.cta-fourth {
+	    @extend a.cta-primary;
+
+        color:$link-color-fourth;
+
+        @include border($cta-border-thickness,solid,$link-color-fourth,full);
+
+        &:hover,&:focus,&:active {
+            background: $brand-fourth;
+        	color:$white;
+
+        	@include border($cta-border-thickness,solid,$link-color-fourth,full);
+        }
+    }
+
+    &.cta-fourth-inverse {
+	    @extend a.cta-primary-inverse;
+
+        background:$link-color-fourth;
+
+        @include border($cta-border-thickness,solid, $link-color-fourth,full);
+
+        &:hover,&:focus,&:active {
+            color:$link-color-fourth;
+
+            @include border($cta-border-thickness,solid,$link-color-fourth,full);
+        }
+    }
+
+    &.cta-white {
+		@extend a.cta-primary;
+
+		color:$white;
+
+		@include border($cta-border-thickness,solid,$white,full);
+
+		&:hover,&:focus,&:active {
+            color:$black;
+			background:$white;
+
+            @include border($cta-border-thickness,solid,$white,full);
+        }
+    }
+
+    &.cta-black {
+	    @extend a.cta-primary;
+
+	    color:$black;
+
+	    @include border($cta-border-thickness,solid,$black,full);
+
+	    &:hover,&:focus,&:active {
+            color:$white;
+			background:$black;
+
+            @include border($cta-border-thickness,solid,$black,full);
+        }
+    }
+
+    &.gallery-item {
+        @extend .p-relative;
+        @extend .block;
+
+		.caption {
+        	@include animation(0.5s);
+
+            background: $brand-primary-opacity;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+
+            -webkit-transform-style: preserve-3d;
+			      -moz-transform-style: preserve-3d;
+			      transform-style: preserve-3d;
+
+			      @extend .p-absolute;
+
+            .caption-content {
+                color: $white;
+			          margin: auto;
+			          top: 50%; left: 50%;
+			          -webkit-transform: translate(-50%,-50%);
+			          -ms-transform: translate(-50%,-50%);
+			          transform: translate(-50%,-50%);
+
+                @extend .full-width;
+                @extend .text-center;
+                @extend .p-absolute;
+            }
+        }
+
+        &:hover,&:focus,&:active {
+
+            .caption {      opacity:1;      }
+
+        }
+    }
+
+    &.gallery-item-non-hover {
+	    @extend a.gallery-item;
+
+	    .caption {		opacity: 1;			}
+    }
+
+    &.gallery-item-no-bg {
+	    @extend a.gallery-item;
+
+	    .caption {
+			background: none;
+			opacity: 1;
+		}
+    }
+
+    &.secondary {
+	    color:$link-color-secondary;
+
+	    &:hover, &:focus, &:active {	color:$link-hover-color-secondary;		}
+    }
+
+    &.transparant-hover {
+    	&:hover,&:focus {	opacity:$opacity;		}
+    }
+
+    &.no-border, &.fancybox-close, &.gallery-item {		border:none;	}
+
+}
+
+form {
+	[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date], textarea, select {
+		background:none;
+		width:100%;
+        border:none;
+        color:$text-color;
+        font-weight: 400;
+
+		@include padding(15px,left);
+		@include padding(15px,right);
+		@include padding(7px,top);
+		@include padding(7px,bottom);
+		@include border(1px,solid,$light-grey,full);
+		@include placeholder($grey);
+
+		&.no-border {		border:none;			}
+		&.no-size	{	 	width: auto;			}
+
+		&.small 	{
+			@include padding(5px,left);
+			@include padding(5px,right);
+			@include padding(5px,top);
+			@include padding(5px,bottom);
+		}
+
+		&:focus {
+			@include border(1px,solid,$text-color,full);
+		}
+	}
+
+	select, option {
+		@include padding(10px,left);
+		@include padding(5px,top);
+		@include padding(5px,bottom);
+
+	}
+
+	option {		background: $white;			}
+
+	input[type=submit],input[type=button],button {
+		@extend a.cta-primary;
+    cursor:pointer;
+
+ 		@include animation(0.5s);
+		@include padding(30px,left);
+		@include padding(40px,right);
+
+		&.small {
+			@include padding(10px,top);
+			@include padding(10px,bottom);
+		}
+
+		&.very-small {
+			@include padding(5px,top);
+			@include padding(5px,bottom);
+
+		}
+
+		&.tiny {
+			width:auto;
+			@include padding(5px,left);
+			@include padding(5px,right);
+			@include padding(3px,top);
+			@include padding(3px,bottom);
+		}
+	}
+
+	textarea 			{			resize: vertical						}
+
+	input[type=submit],
+  input[type=button] 	{			@include padding(30px,right);			}
+
+	label {
+		display:block;
+
+		&.inline {		display: inline;		}
+	}
+
+
+	&.dark {
+		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
+			color: $dark-text-color;
+
+			@include border(2px,solid,$light-grey,full);
+			@include placeholder($white);
+
+			&:focus {
+				@include border(2px,solid,$white,full);
+			}
+		}
+
+		[type=submit], button {
+			@extend a.cta-white;
+
+			&.small {
+				@include padding(10px,top);
+				@include padding(10px,bottom);
+			}
+
+			&.very-small {
+				font-sisze:0.9em;
+
+				@include padding(5px,top);
+				@include padding(5px,bottom);
+
+			}
+		}
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family:$font-family;
+  font-weight: $font-weight;
+	line-height:$line-height;
+  color:$heading-color;
+
+	@include margin(0,all);
+
+	.marked {
+		background:$brand-primary;
+		color:$white;
+
+		@include padding(20px,left);
+		@include padding(20px,right);
+		@include padding(10px,top);
+		@include padding(10px,bottom);
+	}
+}
+
+h1 {
+	font-size:2.2em;
+
+	p {		margin:0;		}
+}
+h2 {        font-size:2em;       }
+h3 {        font-size:1.75em;        }
+h4 {        font-size:1.5em;       }
+h5 {        font-size:1.25em;        }
+h6 {        font-size:1.1em;        	}
+
+ul {
+    &.no-border {
+        a {
+            border:none;
+
+            &:hover,&:focus,&:active {      border:none;        }
+        }
+    }
+
+    &.mm-listview {
+		    font-size:1em;
+
+		    @include margin(20px,top);
+
+		    li {
+			     @include border(1px,$white,solid,bottom);
+
+    			a {
+    				color:$white;
+    				border:none;
+
+    				@include padding(20px,top);
+    				@include padding(20px,bottom);
+
+    				&:hover,&:focus,&.active {
+              background: $white;
+    					color:$link-color;
+    				}
+    			}
+
+          &.current-menu-item {
+
+            a {
+              background: $white;
+              color:$link-color;
+            }
+          }
+
+    			&:not(.mm-divider) {
+    				&::after {
+    					border:none;
+    				}
+    			}
+		    }
+	  }
+
+    li {
+
+	    p {
+		    display:inline;
+		    margin:0;
+		  }
+    }
+}
+
+table {
+	width:100%;
+
+	tr {
+		@include border(1px, solid, $light-grey, bottom);
+
+		td, th {
+			@include padding(10px, top);
+			@include padding(10px, bottom);
+			@include padding(10px, right);
+		}
+
+		&:last-child {		border:none;		}
+	}
+}
+
+
+/*
+		================================
+        ====== RESPONSIVE HELPERS ======
+        ================================
+*/
+
+@media (max-width: $screen-xs-max) {
+	.xs-text-left	  {	text-align:left;				}
+	.xs-text-center {	text-align:center;	    }
+	.xs-text-right	{	text-align:right;				}
+
+  .xs-no-bg		    {	 background: none;			}
+
+  .xs-no-border	  {	 border:none;					  }
+
+  .xs-m-top-40    {  @include margin(40px,top);   }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+	.sm-text-left 	{	text-align:left;	       }
+	.sm-text-center {	text-align:center;	     }
+	.sm-text-right	{	text-align:right;				 }
+
+  .sm-no-bg		    {	background: none;				 }
+
+  .sm-no-border	  {	border:none;					   }
+
+  .sm-m-top-40    {  @include margin(40px,top);   }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+	.row-eq-height{
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: -ms-flexbox;
+	  display: flex;
+	}
+}
+
+@media (min-width: $screen-lg-min) {
+	.row-eq-height{
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: -ms-flexbox;
+	  display: flex;
+	}
+}
+
+.row.is-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+
+/*
+        ==================================================
+        ======  CUSTOM CSS CLASSES (MAINLY FOR WP)  ======
+        ==================================================
+*/
+
+.mm-menu {
+	background: $brand-secondary;
+
+	.mm-next {
+
+		&::before {		border-left:none;			}
+
+	}
+
+	.mm-navbar {
+		a {
+			border-bottom: none;
+
+			&:hover, &:focus, &:active {		border-bottom: none;		}
+		}
+	}
+}
+
+
+.nf-form-wrap {
+  @extend form;
+}
+
+.nf-response-msg   {
+    p {         @include margin(0,all);         }
+}
+
+.nf-response-msg, .mc4wp-success   {
+ 	@extend .alert;
+	@extend .alert-success;
+}
+
+.mc4wp-notice {
+	@extend .alert;
+	@extend .alert-info;
+}
+
+.nf-form-fields-required {
+  @extend .well;
+}
+
+.nf-form-errors {
+  .nf-error-field-errors {
+	   @extend .alert;
+	   @extend .alert-danger;
+  }
+}
+
+.affix {
+	z-index: 99;
+
+	@include padding(15px, top);
+	@include padding(15px, bottom);
+	@include animation(0.5s);
+}

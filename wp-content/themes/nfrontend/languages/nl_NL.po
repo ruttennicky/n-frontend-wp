@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-11-07 18:19+0100\n"
+"PO-Revision-Date: 2017-11-07 18:19+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _e;__;_n\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: languages\n"
+"X-Poedit-SearchPathExcluded-2: src\n"
+
+#: footer.php:26
+msgid "lbl_socialtextprefix"
+msgstr "You’ll find even more on:"
+
+#: footer.php:29
+msgid "lbl_facebooklink"
+msgstr ""
+
+#: footer.php:36
+msgid "lbl_twitterlink"
+msgstr ""
+
+#: footer.php:43
+msgid "lbl_instagramlink"
+msgstr ""
+
+#: footer.php:50
+msgid "lbl_linkedinlink"
+msgstr ""
+
+#: footer.php:57
+msgid "lbl_pinterestlink"
+msgstr ""
+
+#: front-page.php:43
+msgid "lbl_referencelink"
+msgstr ""
+
+#: front-page.php:74
+msgid "lbl_readmore"
+msgstr ""
+
+#: front-page.php:78
+msgid "lbl_allarticlesalt"
+msgstr ""
+
+#: front-page.php:78
+msgid "lbl_allarticleslink"
+msgstr ""
+
+#: front-page.php:88
+msgid "lbl_newslettertitle"
+msgstr ""
+
+#: front-page.php:91
+msgid "lbl_newsletterbaseline"
+msgstr ""
+
+#: functions.php:77
+msgid "Main menu"
+msgstr ""
+
+#: functions.php:78
+msgid "Footer menu"
+msgstr ""
+
+#: functions.php:79
+msgid "Mobile menu"
+msgstr ""
+
+#: functions.php:80
+msgid "Meta menu"
+msgstr ""
+
+#: functions.php:81
+msgid "Language menu"
+msgstr ""
+
+#: header.php:12
+msgid "lbl_homelink"
+msgstr ""
+
+#: header.php:13
+msgid "lbl_logoalt"
+msgstr ""
+
+#: header.php:26
+msgid "lbl_menutitle"
+msgstr ""
+
+#: header.php:26
+msgid "lbl_menulink"
+msgstr ""

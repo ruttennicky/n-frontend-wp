@@ -1,0 +1,21 @@
+/*
+Theme Name: N digital studio
+Theme URI: https://wwww.n-digital.be
+Author: Nicky Rutten
+Author URI: https://www.n-digital.be
+Description: The Wordpress template for n-digital.be
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: ndigital
+*/
+/*
+        ==========================
+        ======  INCLUDES  ========
+        ==========================
+*/
+
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "_variables";
+@import "_helpers";
+@import "_frontend";

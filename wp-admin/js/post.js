@@ -2,7 +2,9 @@
 /* global theList:true, theExtraList:true, getUserSetting, setUserSetting, commentReply */
 
 /**
- * @file Contains all dynamic functionality needed on post and term pages.
+ * Contains all dynamic functionality needed on post and term pages.
+ *
+ * @file Control page and term functionality.
  */
 
 var commentsBox, WPSetThumbnailHTML, WPSetThumbnailID, WPRemoveThumbnail, wptitlehint, makeSlugeditClickable, editPermalink;
@@ -932,8 +934,9 @@ jQuery(document).ready( function($) {
 	}
 
 	/**
-	 * Handle the editing of the post_name. Create the required HTML elements and
-	 * update the changes via AJAX.
+	 * Handle the editing of the post_name. Create the required HTML elements and update the changes via AJAX.
+	 *
+	 * @summary Permalink aka slug aka post_name editing
 	 *
 	 * @global
 	 *
@@ -1038,7 +1041,9 @@ jQuery(document).ready( function($) {
 	});
 
 	/**
-	 * Adds screen reader text to the title prompt when needed.
+	 * Add screen reader text to the title prompt when needed.
+	 *
+	 * @summary Title screen reader text handler.
 	 *
 	 * @param {string} id Optional. HTML ID to add the screen reader helper text to.
 	 *
