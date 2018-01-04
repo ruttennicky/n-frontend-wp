@@ -43,35 +43,31 @@
   }
 
   function load_ga() {
-      echo "
-					<script async src='https://www.googletagmanager.com/gtag/js?id=". get_option('ga_id') ."'></script>
+      echo "<script async src='//www.googletagmanager.com/gtag/js?id=". get_option('ga_id') ."'></script>
 					<script>
 					  window.dataLayer = window.dataLayer || [];
 					  function gtag(){dataLayer.push(arguments);}
 					  gtag('js', new Date());
 
 					  gtag('config', '". get_option('ga_id') ."');
-					</script>
-      ";
+					</script>";
   }
 
   function load_ga_tagmanager() {
-    echo "
-    			<noscript><iframe src='//www.googletagmanager.com/ns.html?id=GTM-WZLLPM'
+    echo "<noscript><iframe src='//www.googletagmanager.com/ns.html?id=". get_option('ga_id') ."'
     			height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
     			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     			'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    			})(window,document,'script','dataLayer','GTM-WZLLPM');</script>
-    ";
+    			})(window,document,'script','dataLayer','". get_option('ga_id') ."');</script>";
   }
 
 	function load_fb_graph() {
 		echo "<script>
 		  window.fbAsyncInit = function() {
 		    FB.init({
-		      appId            : '1343550709023583',
+		      appId            : '". get_option('fb_app_id') ."',
 		      autoLogAppEvents : true,
 		      xfbml            : true,
 		      version          : 'v2.11'
@@ -82,7 +78,7 @@
 		     var js, fjs = d.getElementsByTagName(s)[0];
 		     if (d.getElementById(id)) {return;}
 		     js = d.createElement(s); js.id = id;
-		     js.src = 'https://connect.facebook.net/en_US/sdk.js';
+		     js.src = 'https://connect.facebook.net/". get_locale() ."/sdk.js';
 		     fjs.parentNode.insertBefore(js, fjs);
 		   }(document, 'script', 'facebook-jssdk'));
 		</script>";
@@ -90,7 +86,7 @@
 
 
 	function load_theme_setup() {
-		load_theme_textdomain( 'ndigital', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'nfrontend', get_template_directory() . '/languages' );
 	}
 
 	function load_theme_blocks() {
@@ -134,6 +130,9 @@
 			register_setting('general','portfolio_url');
 		  register_setting('general','address');
 		  register_setting('general','ga_id');
+			register_setting('general','gtm_id');
+			register_setting('general','fb_app_id');
+			register_setting('general','fb_page_id');
 		  register_setting('general','g_api');
 		  register_setting('general','notice');
 	    add_settings_field('contact_form_id','<label for="cfid">Contact form ID</label>','custom_field_cfid','general');
@@ -148,8 +147,11 @@
 	    add_settings_field('pinterest_url','<label for="p_url">Pinterest URL</label>','custom_field_purl','general');
 			add_settings_field('portfolio_url','<label for="pf_url">Portfolio URL</label>','custom_field_pfurl','general');
 	    add_settings_field('address','<label for="address">Adres</label>','custom_field_addr','general');
-	    add_settings_field('ga_id','<label for="ga_id">Google UA ID</label>','custom_field_gaid','general');
+	    add_settings_field('ga_id','<label for="ga_id">Google Analytics ID</label>','custom_field_gaid','general');
+			add_settings_field('gtm_id','<label for="ga_id">Google Tag Manager ID</label>','custom_field_gtmid','general');
 	    add_settings_field('g_api','<label for="g_api">Google API key</label>','custom_field_gapi','general');
+			add_settings_field('fb_app_id','<label for="fb_app_id">Facebook app ID</label>','custom_field_fbid','general');
+			add_settings_field('fb_page_id','<label for="fb_page_id">Facebook page ID</label>','custom_field_fbpid','general');
 		  add_settings_field('notice','<label for="notice">Melding</label>','custom_field_notice','general');
 	}
 
@@ -166,7 +168,10 @@
 	function custom_field_pfurl() {		echo '<input type="text" id="pf_url" name="portfolio_url" value="' . get_option( 'portfolio_url') . '" />';				}
 	function custom_field_addr()	{		wp_editor( get_option( 'address'), 'address', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
 	function custom_field_gapi() 	{		echo '<input type="text" id="g_api" name="g_api" value="' . get_option( 'g_api') . '" />';												}
+	function custom_field_fbid() 	{		echo '<input type="text" id="fb_app_id" name="fb_app_id" value="' . get_option( 'fb_app_id') . '" />';						}
 	function custom_field_gaid() 	{		echo '<input type="text" id="ga_id" name="ga_id" value="' . get_option( 'ga_id'). '" />';													}
+	function custom_field_fbpid() {		echo '<input type="text" id="fb_page_id" name="fb_page_id" value="' . get_option( 'fb_page_id') . '" />';					}
+	function custom_field_gtmid() {		echo '<input type="text" id="gtm_id" name="gtm_id" value="' . get_option( 'gtm_id'). '" />';											}
 	function custom_field_notice(){		wp_editor( get_option( 'notice'), 'notice', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
 
 	function load_custom_login_logo() {
