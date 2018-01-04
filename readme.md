@@ -23,10 +23,10 @@ Setup a virtual host if you're working on a local machine
 
 ### Step 7
 Using your command line interface, navigate to the: wp-content > themes > ndigital and execute:
-```sh
-npm install
 ```
-> Note: for this you'll need Node JS first. Download it on http://nodesjs.org
+yarn install
+```
+> Note: for this you'll need Node JS and Yarn (and Homebrew possibly)
 
 ### Step 8
 Rename the theme's folder to the clients name (don't use spaces or weird chars in your folder name).
@@ -39,4 +39,4 @@ gulp serve
 
 ### Step 10
 Sit back, enjoy and smile, you've just installed a brand new -up to date- copy of wordpress.
-You can now start developing. All css and js changes will compile automatically.
+You can now start developing. All css and javascript changes will compile automatically.
