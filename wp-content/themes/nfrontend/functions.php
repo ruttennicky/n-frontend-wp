@@ -190,9 +190,8 @@
 		return $src;
 	}
 
-	function load_google_map_api($api){
-		$api['key'] = get_option('g_api');
-		return $api;
+	function load_acf_google_api() {
+		acf_update_setting('google_api_key', get_option('g_api'));
 	}
 
 	add_action('wp_enqueue_scripts','load_js');
@@ -203,8 +202,8 @@
 	add_action('init','load_theme_blocks');
   add_action('login_enqueue_scripts','load_custom_login_logo');
   add_action('after_setup_theme','load_theme_setup');
+	add_action('acf/init', 'my_acf_init');
 
-  add_filter('acf/fields/google_map/api','load_google_map_api');
   add_filter('style_loader_src','remove_verions_js_css',9999);
   add_filter('script_loader_src','remove_verions_js_css',9999);
   add_filter('admin_init','load_custom_options');
