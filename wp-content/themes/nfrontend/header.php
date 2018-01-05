@@ -15,7 +15,7 @@
 					  </nav>
   				 	<div class="col-md-3 m-0 visible-md visible-lg">
   				 		<a href="<?php echo home_url(); ?>" title="<?php _e('lbl_tohomepage','nfrontend'); ?>">
-  				 			<img src="<?php echo get_template_directory_uri(); ?>/images/logo_ndigital.jpg" alt="<?php bloginfo('sitename'); ?>" class="img-responsive" width="100" />
+  				 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_ndigital.jpg" alt="<?php bloginfo('sitename'); ?>" class="img-responsive" width="100" />
   				 		</a>
   				 	</div>
   				 	<div class="col-md-9 visible-md visible-lg">

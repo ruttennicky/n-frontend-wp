@@ -41,7 +41,7 @@ $(document).ready(function() {
 		  var markersContainer = new Array;
 			var markers = new Array;
 			var map;
-			var zoomLevel = $("#google-maps").data( "zoom");
+			var zoomLevel = $("#google-maps").data("zoom");
 
 			function initialize() {
 
@@ -56,8 +56,8 @@ $(document).ready(function() {
 
 				map = new google.maps.Map( document.getElementById('google-maps'), {
 					zoom: zoomLevel,
-				    mapTypeControl: false,
-				    scrollwheel: false,
+				  mapTypeControl: false,
+				  scrollwheel: false,
 		 			disableDoubleClickZoom: true,
 		 			mapTypeId: MY_MAPTYPE_ID
 				} );

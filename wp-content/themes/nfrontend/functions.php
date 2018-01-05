@@ -34,10 +34,10 @@
       echo '
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		      <link rel="apple-touch-icon" sizes="180x180" href="'. get_template_directory_uri() .'/images/favicons/apple-touch-icon.png">
-		      <link rel="icon" type="image/png" href="'. get_template_directory_uri() .'/images/favicons/favicon-32x32.png" sizes="32x32">
-		      <link rel="icon" type="image/png" href="'. get_template_directory_uri() .'/images/favicons/favicon-16x16.png" sizes="16x16">
-		      <link rel="mask-icon" href="'. get_template_directory_uri() .'/images/favicons/safari-pinned-tab.svg">
+		      <link rel="apple-touch-icon" sizes="180x180" href="'. get_stylesheet_directory_uri() .'/images/favicons/apple-touch-icon.png">
+		      <link rel="icon" type="image/png" href="'. get_stylesheet_directory_uri() .'/images/favicons/favicon-32x32.png" sizes="32x32">
+		      <link rel="icon" type="image/png" href="'. get_stylesheet_directory_uri() .'/images/favicons/favicon-16x16.png" sizes="16x16">
+		      <link rel="mask-icon" href="'. get_stylesheet_directory_uri() .'/images/favicons/safari-pinned-tab.svg">
 		      <meta name="theme-color" content="#ffffff">
       ';
   }
