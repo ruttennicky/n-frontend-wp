@@ -202,7 +202,7 @@
 	add_action('init','load_theme_blocks');
   add_action('login_enqueue_scripts','load_custom_login_logo');
   add_action('after_setup_theme','load_theme_setup');
-	add_action('acf/init', 'my_acf_init');
+	add_action('acf/init', 'load_acf_google_api');
 
   add_filter('style_loader_src','remove_verions_js_css',9999);
   add_filter('script_loader_src','remove_verions_js_css',9999);
