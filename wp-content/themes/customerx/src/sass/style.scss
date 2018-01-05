@@ -1,0 +1,23 @@
+/*!
+ Theme Name:   Customer X
+ Theme URI:    https://www.customerx.be
+ Description:  A wordpress template for Customer X
+ Author:       You
+ Author URI:   https://www.n-digital.be
+ Template:     nfrontend
+ Version:      1.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  customerx
+*/
+/*
+        ==========================
+        ======  INCLUDES  ========
+        ==========================
+*/
+
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../../../nfrontend/src/sass/_variables";
+@import "../../../nfrontend/src/sass/_helpers";
+@import "_custom_variables";
+@import "_custom_frontend";

@@ -1,0 +1,28 @@
+{
+  "name": "nfrontend",
+  "description": "N frontend framework",
+  "author": "Nicky Rutten",
+  "license": "GPL-3.0",
+  "repository": "git://github.com/ruttennicky/n-frontend.git",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-concat": "latest",
+    "gulp-filesize": "latest",
+    "gulp-html-minifier": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-jshint": "latest",
+    "gulp-minify-html": "latest",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "gulp-webserver": "latest",
+    "imagemin-pngquant": "latest",
+    "jshint": "latest",
+    "opn": "latest"
+  },
+  "devDependencies": {},
+  "version": "1.0.0",
+  "main": "index.js"
+}
