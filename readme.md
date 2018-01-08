@@ -22,17 +22,17 @@ sh wp-install.sh
 Setup a virtual host if you're working on a local machine
 
 ### Step 7
-Using your command line interface, navigate to the: wp-content > themes > ndigital and execute:
+Navigate to wp-content > themes > customerx and duplicate and rename the folder to your customer's name (don't use spaces or weird chars in your folder name).
+
+### Step 8
+Using your command line interface, execute in the new theme folder:
 ```
 yarn install
 ```
 > Note: for this you'll need Node JS and Yarn (and Homebrew possibly)
 
-### Step 8
-Rename the theme's folder to the clients name (don't use spaces or weird chars in your folder name).
-
 ## Step 9
-Using your command line interface, execute in the theme folder:
+Use Gulp to compile CSS, JS and optimize images.
 ```
 gulp serve
 ```
@@ -40,3 +40,6 @@ gulp serve
 ### Step 10
 Sit back, enjoy and smile, you've just installed a brand new -up to date- copy of wordpress.
 You can now start developing. All css and javascript changes will compile automatically.
+
+### Step 11
+If the CSS file of your new theme doesn't get loaded, activate another theme and reactivate your own theme back again.
