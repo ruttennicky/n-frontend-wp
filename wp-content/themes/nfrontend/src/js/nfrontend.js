@@ -43,7 +43,7 @@ $(document).ready(function() {
 			var map;
 			var zoomLevel = $("#google-maps").data("zoom");
 			var bounds = new google.maps.LatLngBounds();
-			
+
 			function initialize() {
 
 				$( "#google-maps .google-maps-marker" ).each( function(index,element) {
@@ -98,6 +98,8 @@ $(document).ready(function() {
 		      		})(marker, i));
 
 				}
+
+				map.setZoom(zoomLevel);
 			}
 
 			google.maps.event.addDomListener(window, "load", initialize);
