@@ -65,7 +65,18 @@ $(document).ready(function() {
 				} );
 
 				map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
-
+				map.initialZoom = true;
+				google.maps.event.addListener(map, 'zoom_changed', function() {
+				    zoomChangeBoundsListener =
+				        google.maps.event.addListener(map, 'bounds_changed', function(event) {
+				            if (this.getZoom() > zoomLevel && this.initialZoom == true) {
+				                // Change max/min zoom here
+				                this.setZoom(zoomLevel);
+				                this.initialZoom = false;
+				            }
+				        google.maps.event.removeListener(zoomChangeBoundsListener);
+				    });
+				});
 				showMarkers(map,markers);
 
 			}
@@ -87,7 +98,6 @@ $(document).ready(function() {
 
 					bounds.extend(marker.position);
 					map.fitBounds(bounds);
-
 					markersContainer.push(marker);
 
 					google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -98,8 +108,6 @@ $(document).ready(function() {
 		      		})(marker, i));
 
 				}
-
-				map.setZoom(zoomLevel);
 			}
 
 			google.maps.event.addDomListener(window, "load", initialize);
