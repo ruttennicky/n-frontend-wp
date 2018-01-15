@@ -69,7 +69,10 @@
           </ul>
         </div>
       </div>
-    <?php  endif;         ?>
+    <?php
+          endif;
+          if (get_option('fb_app_id') !== 0):
+    ?>
     <div class="p-fixed a-b-0 a-r-0 p-right-30 p-bottom-30">
       <div class="fb-messengermessageus"
         messenger_app_id="<?php echo get_option('fb_app_id'); ?>"
@@ -78,6 +81,9 @@
         size="large">
       </div>
     </div>
+    <?php
+          endif;
+    ?>
     </footer>
   </div>
   <nav id="mobile-menu-wrapper">

@@ -1,14 +1,5 @@
 /*
         ==========================
-        ======    FONTS    =======
-        ==========================
-*/
-
-@import url(https://fonts.googleapis.com/css?family=Merriweather:400,400i|Nunito+Sans:300,400,400i,700,700i);
-
-
-/*
-        ==========================
         ======  VARIABLES  =======
         ==========================
 */
@@ -40,8 +31,8 @@ $text-color:        		  $brand-primary;
 $dark-text-color:				  $white;
 $heading-color:           lighten($text-color,10%);
 
-$font-family:        			"Nunito Sans",sans-serif;
-$font-family-secondary:   "Merriweather",serif;
+$font-family:        			"Helvetica",sans-serif;
+$font-family-secondary:   "Helvetica",serif;
 $font-family-third:				"Times", serif;
 
 $font-size:         			15px;
@@ -52,16 +43,16 @@ $link-color:        			$brand-secondary;
 $link-hover-color:  			darken($brand-secondary,20%);
 
 $link-color-primary:			$brand-primary;
-$link-hover-color-primary:		darken($brand-primary,30%);
+$link-hover-color-primary:darken($brand-primary,30%);
 
 $link-color-secondary: 		$brand-secondary;
 $link-hover-color-secondary:  	darken($brand-secondary,30%);
 
 $link-color-third: 				$brand-third;
-$link-hover-color-third:  		darken($brand-third,30%);
+$link-hover-color-third:  darken($brand-third,30%);
 
 $link-color-fourth:				$brand-fourth;
-$link-hover-color-fourth:		darken($brand-fourth,30%);
+$link-hover-color-fourth:	darken($brand-fourth,30%);
 
 $dark-link-color:				  $white;
 $dark-link-hover-color: 	darken($white,10%);
