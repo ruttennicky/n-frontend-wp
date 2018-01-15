@@ -71,7 +71,7 @@
       </div>
     <?php
           endif;
-          if (get_option('fb_app_id') !== 0):
+          if (get_option('fb_app_id') != ''):
     ?>
     <div class="p-fixed a-b-0 a-r-0 p-right-30 p-bottom-30">
       <div class="fb-messengermessageus"
