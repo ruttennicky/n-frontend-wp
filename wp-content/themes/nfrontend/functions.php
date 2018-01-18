@@ -216,6 +216,7 @@
 
   add_theme_support('yoast-seo-breadcrumbs');
 	add_theme_support('post-thumbnails');
+	add_theme_support('title-tag');
 
 	remove_action('wp_head','wp_generator');
 	remove_action('wp_head','print_emoji_detection_script',7);
