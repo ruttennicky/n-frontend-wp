@@ -22,7 +22,7 @@ sh wp-install.sh
 Setup a virtual host if you're working on a local machine
 
 ### Step 7
-Navigate to wp-content > themes > customerx, duplicate and rename the folder to your customer's name (don't use spaces or weird chars in your folder name).
+Navigate to wp-content > themes > customer_base, duplicate and rename the folder to your customer's name (don't use spaces or weird chars in your folder name).
 
 ### Step 8
 Using your command line interface, execute in the new theme folder:
