@@ -43,8 +43,23 @@
       ';
   }
 
+	function load_hj() {
+		if (get_option('hj_id') != '') {
+			echo "<script>
+		    		(function(h,o,t,j,a,r){
+		        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+		        h._hjSettings={hjid:". get_option('hj_id').",hjsv:6};
+		        a=o.getElementsByTagName('head')[0];
+		        r=o.createElement('script');r.async=1;
+		        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+		        a.appendChild(r);
+		    		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+						</script>";
+		}
+	}
+
   function load_ga() {
-		if (get_option('ga_id') != ''){
+		if (get_option('ga_id') != '') {
 	    echo "<script async src='//www.googletagmanager.com/gtag/js?id=". get_option('ga_id') ."'></script>
 						<script>
 						  window.dataLayer = window.dataLayer || [];
@@ -57,7 +72,7 @@
   }
 
   function load_gtm() {
-		if (get_option('gtm_id') != ''){
+		if (get_option('gtm_id') != '') {
 	    echo "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 						new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 						j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -67,7 +82,7 @@
 	}
 
 	function load_fb_graph() {
-		if (get_option('fb_app_id') != ''){
+		if (get_option('fb_app_id') != '') {
 			echo "<script>
 			  window.fbAsyncInit = function() {
 			    FB.init({
@@ -136,6 +151,7 @@
 		  register_setting('general','address');
 		  register_setting('general','ga_id');
 			register_setting('general','gtm_id');
+			register_setting('general','hj_id');
 			register_setting('general','fb_app_id');
 			register_setting('general','fb_page_id');
 		  register_setting('general','g_api');
@@ -153,6 +169,7 @@
 			add_settings_field('portfolio_url','<label for="pf_url">Portfolio URL</label>','custom_field_pfurl','general');
 	    add_settings_field('address','<label for="address">Adres</label>','custom_field_addr','general');
 	    add_settings_field('ga_id','<label for="ga_id">Google Analytics ID</label>','custom_field_gaid','general');
+			add_settings_field('hj_id','<label for="hj_id">Hotjar ID</label>','custom_field_hjid','general');
 			add_settings_field('gtm_id','<label for="ga_id">Google Tag Manager ID</label>','custom_field_gtmid','general');
 	    add_settings_field('g_api','<label for="g_api">Google API key</label>','custom_field_gapi','general');
 			add_settings_field('fb_app_id','<label for="fb_app_id">Facebook app ID</label>','custom_field_fbid','general');
@@ -174,6 +191,7 @@
 	function custom_field_addr()	{		wp_editor( get_option( 'address'), 'address', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
 	function custom_field_gapi() 	{		echo '<input type="text" id="g_api" name="g_api" value="' . get_option( 'g_api') . '" />';												}
 	function custom_field_fbid() 	{		echo '<input type="text" id="fb_app_id" name="fb_app_id" value="' . get_option( 'fb_app_id') . '" />';						}
+	function custom_field_hjid() 	{		echo '<input type="text" id="hj_id" name="hj_id" value="' . get_option( 'hj_id'). '" />';													}
 	function custom_field_gaid() 	{		echo '<input type="text" id="ga_id" name="ga_id" value="' . get_option( 'ga_id'). '" />';													}
 	function custom_field_fbpid() {		echo '<input type="text" id="fb_page_id" name="fb_page_id" value="' . get_option( 'fb_page_id') . '" />';					}
 	function custom_field_gtmid() {		echo '<input type="text" id="gtm_id" name="gtm_id" value="' . get_option( 'gtm_id'). '" />';											}
@@ -204,7 +222,8 @@
   add_action('wp_head','load_metas',10);
 	add_action('wp_footer','load_ga',40);
 	add_action('wp_footer','load_gtm',50);
-	add_action('wp_footer','load_fb_graph',60);
+	add_action('wp_footer','load_hj',60);
+	add_action('wp_footer','load_fb_graph',70);
 	add_action('init','load_theme_blocks');
   add_action('login_enqueue_scripts','load_custom_login_logo');
   add_action('after_setup_theme','load_theme_setup');
