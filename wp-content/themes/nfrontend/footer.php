@@ -73,13 +73,9 @@
           endif;
           if (get_option('fb_app_id') != ''):
     ?>
-    <div class="p-fixed a-b-0 a-r-0 p-right-30 p-bottom-30">
-      <div class="fb-messengermessageus"
-        messenger_app_id="<?php echo get_option('fb_app_id'); ?>"
-        page_id="<?php echo get_option('fb_page_id'); ?>"
-        color="blue"
-        size="large">
-      </div>
+    <div class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="<?php echo get_option('fb_app_id'); ?>">
     </div>
     <?php
           endif;

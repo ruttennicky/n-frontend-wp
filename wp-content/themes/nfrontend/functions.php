@@ -83,24 +83,14 @@
 
 	function load_fb_graph() {
 		if (get_option('fb_app_id') != '') {
-			echo "<script>
-			  window.fbAsyncInit = function() {
-			    FB.init({
-			      appId            : '". get_option('fb_app_id') ."',
-			      autoLogAppEvents : true,
-			      xfbml            : true,
-			      version          : 'v2.11'
-			    });
-			  };
-
-			  (function(d, s, id){
-			     var js, fjs = d.getElementsByTagName(s)[0];
-			     if (d.getElementById(id)) {return;}
-			     js = d.createElement(s); js.id = id;
-			     js.src = 'https://connect.facebook.net/". get_locale() ."/sdk.js';
-			     fjs.parentNode.insertBefore(js, fjs);
-			   }(document, 'script', 'facebook-jssdk'));
-			</script>";
+			echo "<div id='fb-root'></div>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>";
 		}
 	}
 
