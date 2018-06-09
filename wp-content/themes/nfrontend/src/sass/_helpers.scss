@@ -1171,10 +1171,10 @@ form {
 
 
 	&.dark {
-		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
+		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date], textarea, select {
 			color: $dark-text-color;
 
-			@include border(2px,solid,$light-grey,full);
+			@include border(2px,solid,$white,full);
 			@include placeholder($white);
 
 			&:focus {
