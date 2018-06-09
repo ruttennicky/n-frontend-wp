@@ -163,20 +163,20 @@
 }
 
 @mixin placeholder($color) {
-	::-webkit-input-placeholder {
-	    color:    $color;
-	}
-	:-moz-placeholder {
-	   color:    $color;
-	   opacity:  $opacity;
-	}
-	::-moz-placeholder {
-	   color:    $color;
-	   opacity:  $opacity;
-	}
-	:-ms-input-placeholder {
-	   color:    $color;
-	}
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+  &::-moz-placeholder {
+    color: $color;
+    opacity: $opacity;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
 }
 
 @mixin shadow($hor,$ver,$blur,$width,$color) {
