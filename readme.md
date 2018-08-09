@@ -28,7 +28,7 @@ yarn install
 ```
 > Note: for this you'll need Node JS and Yarn (and Homebrew possibly)
 
-## Step 7
+### Step 7
 Use Gulp to compile CSS, JS and optimize images.
 ```
 gulp serve
