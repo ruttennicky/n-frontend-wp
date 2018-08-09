@@ -17,12 +17,12 @@ read adminpass
 echo "What is the emailaddress of the website administrator?"
 read adminemail
 
-php wp-cli.phar core config --dbname="$dbname" --dbuser="$dbuser" --dbpass="$dbpass" --dbhost="$dbhost" --locale=nl_NL
+php wp-cli.phar config create --dbname="$dbname" --dbuser="$dbuser" --dbpass="$dbpass" --dbhost="$dbhost" --locale=nl_NL
 php wp-cli.phar db create
 php wp-cli.phar core install --url="$sitehost" --title="$sitetitle"  --admin_user="$adminuser" --admin_password="$adminpass" --admin_email="$adminemail"
 php wp-cli.phar theme activate nfrontend
 #php wp-cli.phar plugin delete hello akismet
-php wp-cli.phar plugin install wordpress-seo wp-smtp-mail ninja-forms mailchimp-for-wp regenerate-thumbnails wp-email-templates
+php wp-cli.phar plugin install wordpress-seo wp-html-email ninja-forms mailchimp-for-wp regenerate-thumbnails postmark-approved-wordpress-plugin
 php wp-cli.phar core update
 php wp-cli.phar core update-db
 php wp-cli.phar plugin update --all
