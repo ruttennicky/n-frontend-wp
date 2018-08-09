@@ -4,7 +4,7 @@ echo "What is the username of the database user?"
 read dbuser
 echo "What is the password of the database user?"
 read dbpass
-echo "What is the hostnmae of the database server?"
+echo "What is the hostname of the database server?"
 read dbhost
 echo "What is the hostame of the website?"
 read sitehost
@@ -14,7 +14,7 @@ echo "What is the username of the website administrator?"
 read adminuser
 echo "What is the password of the website administrator?"
 read adminpass
-echo "What is the emailaddress of the website administrator?"
+echo "What is the email address of the website administrator?"
 read adminemail
 
 php wp-cli.phar config create --dbname="$dbname" --dbuser="$dbuser" --dbpass="$dbpass" --dbhost="$dbhost" --locale=nl_NL
