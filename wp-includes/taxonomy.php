@@ -152,7 +152,7 @@ function create_initial_taxonomies() {
 			'public'            => true,
 			'hierarchical'      => false,
 			'labels'            => array(
-				'name'          => _x( 'Format', 'post format' ),
+				'name'          => _x( 'Formats', 'post format' ),
 				'singular_name' => _x( 'Format', 'post format' ),
 			),
 			'query_var'         => true,
@@ -178,7 +178,7 @@ function create_initial_taxonomies() {
  * @param string $operator Optional. The logical operation to perform. Accepts 'and' or 'or'. 'or' means only
  *                         one element from the array needs to match; 'and' means all elements must match.
  *                         Default 'and'.
- * @return array A list of taxonomy names or objects.
+ * @return string[]|WP_Taxonomy[] An array of taxonomy names or objects.
  */
 function get_taxonomies( $args = array(), $output = 'names', $operator = 'and' ) {
 	global $wp_taxonomies;
@@ -259,9 +259,13 @@ function get_taxonomy( $taxonomy ) {
 }
 
 /**
- * Checks that the taxonomy name exists.
+ * Determines whether the taxonomy name exists.
  *
  * Formerly is_taxonomy(), introduced in 2.3.0.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 3.0.0
  *
@@ -277,12 +281,16 @@ function taxonomy_exists( $taxonomy ) {
 }
 
 /**
- * Whether the taxonomy object is hierarchical.
+ * Determines whether the taxonomy object is hierarchical.
  *
  * Checks to make sure that the taxonomy is an object first. Then Gets the
  * object, and finally returns the hierarchical value in the object.
  *
  * A false return value might also mean that the taxonomy does not exist.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.3.0
  *
@@ -605,6 +613,16 @@ function register_taxonomy_for_object_type( $taxonomy, $object_type ) {
 	// Filter out empties.
 	$wp_taxonomies[ $taxonomy ]->object_type = array_filter( $wp_taxonomies[ $taxonomy ]->object_type );
 
+	/**
+	 * Fires after a taxonomy is registered for an object type.
+	 *
+	 * @since 5.0.0
+	 *
+	 * @param string $taxonomy    Taxonomy name.
+	 * @param string $object_type Name of the object type.
+	 */
+	do_action( 'registered_taxonomy_for_object_type', $taxonomy, $object_type );
+
 	return true;
 }
 
@@ -636,6 +654,17 @@ function unregister_taxonomy_for_object_type( $taxonomy, $object_type ) {
 	}
 
 	unset( $wp_taxonomies[ $taxonomy ]->object_type[ $key ] );
+
+	/**
+	 * Fires after a taxonomy is unregistered for an object type.
+	 *
+	 * @since 5.0.0
+	 *
+	 * @param string $taxonomy    Taxonomy name.
+	 * @param string $object_type Name of the object type.
+	 */
+	do_action( 'unregistered_taxonomy_for_object_type', $taxonomy, $object_type );
+
 	return true;
 }
 
@@ -802,27 +831,27 @@ function get_term( $term, $taxonomy = '', $output = OBJECT, $filter = 'raw' ) {
 	}
 
 	/**
-	 * Filters a term.
+	 * Filters a taxonomy term object.
 	 *
 	 * @since 2.3.0
-	 * @since 4.4.0 `$_term` can now also be a WP_Term object.
+	 * @since 4.4.0 `$_term` is now a `WP_Term` object.
 	 *
-	 * @param int|WP_Term $_term    Term object or ID.
-	 * @param string      $taxonomy The taxonomy slug.
+	 * @param WP_Term $_term    Term object.
+	 * @param string  $taxonomy The taxonomy slug.
 	 */
 	$_term = apply_filters( 'get_term', $_term, $taxonomy );
 
 	/**
-	 * Filters a taxonomy.
+	 * Filters a taxonomy term object.
 	 *
 	 * The dynamic portion of the filter name, `$taxonomy`, refers
-	 * to the taxonomy slug.
+	 * to the slug of the term's taxonomy.
 	 *
 	 * @since 2.3.0
-	 * @since 4.4.0 `$_term` can now also be a WP_Term object.
+	 * @since 4.4.0 `$_term` is now a `WP_Term` object.
 	 *
-	 * @param int|WP_Term $_term    Term object or ID.
-	 * @param string      $taxonomy The taxonomy slug.
+	 * @param WP_Term $_term    Term object.
+	 * @param string  $taxonomy The taxonomy slug.
 	 */
 	$_term = apply_filters( "get_{$taxonomy}", $_term, $taxonomy );
 
@@ -1315,9 +1344,46 @@ function has_term_meta( $term_id ) {
 }
 
 /**
- * Check if Term exists.
+ * Registers a meta key for terms.
+ *
+ * @since 4.9.8
+ *
+ * @param string $taxonomy Taxonomy to register a meta key for. Pass an empty string
+ *                         to register the meta key across all existing taxonomies.
+ * @param string $meta_key The meta key to register.
+ * @param array  $args     Data used to describe the meta key when registered. See
+ *                         {@see register_meta()} for a list of supported arguments.
+ * @return bool True if the meta key was successfully registered, false if not.
+ */
+function register_term_meta( $taxonomy, $meta_key, array $args ) {
+	$args['object_subtype'] = $taxonomy;
+
+	return register_meta( 'term', $meta_key, $args );
+}
+
+/**
+ * Unregisters a meta key for terms.
+ *
+ * @since 4.9.8
+ *
+ * @param string $taxonomy Taxonomy the meta key is currently registered for. Pass
+ *                         an empty string if the meta key is registered across all
+ *                         existing taxonomies.
+ * @param string $meta_key The meta key to unregister.
+ * @return bool True on success, false if the meta key was not previously registered.
+ */
+function unregister_term_meta( $taxonomy, $meta_key ) {
+	return unregister_meta_key( 'term', $meta_key, $taxonomy );
+}
+
+/**
+ * Determines whether a term exists.
  *
  * Formerly is_term(), introduced in 2.3.0.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 3.0.0
  *
@@ -1328,7 +1394,7 @@ function has_term_meta( $term_id ) {
  * @param int        $parent   Optional. ID of parent term under which to confine the exists search.
  * @return mixed Returns null if the term does not exist. Returns the term ID
  *               if no taxonomy is specified and the term ID exists. Returns
- *               an array of the term ID and the term taxonomy ID the taxonomy
+ *               an array of the term ID and the term taxonomy ID if the taxonomy
  *               is specified and the pairing exists.
  */
 function term_exists( $term, $taxonomy = '', $parent = null ) {
@@ -2147,9 +2213,10 @@ function wp_insert_term( $term, $taxonomy, $args = array() ) {
 	 */
 	$name_matches = get_terms(
 		$taxonomy, array(
-			'name'       => $name,
-			'hide_empty' => false,
-			'parent'     => $args['parent'],
+			'name'                   => $name,
+			'hide_empty'             => false,
+			'parent'                 => $args['parent'],
+			'update_term_meta_cache' => false,
 		)
 	);
 
@@ -2173,8 +2240,9 @@ function wp_insert_term( $term, $taxonomy, $args = array() ) {
 			if ( is_taxonomy_hierarchical( $taxonomy ) ) {
 				$siblings = get_terms(
 					$taxonomy, array(
-						'get'    => 'all',
-						'parent' => $parent,
+						'get'                    => 'all',
+						'parent'                 => $parent,
+						'update_term_meta_cache' => false,
 					)
 				);
 
@@ -2364,8 +2432,9 @@ function wp_set_object_terms( $object_id, $terms, $taxonomy, $append = false ) {
 	if ( ! $append ) {
 		$old_tt_ids = wp_get_object_terms(
 			$object_id, $taxonomy, array(
-				'fields'  => 'tt_ids',
-				'orderby' => 'none',
+				'fields'                 => 'tt_ids',
+				'orderby'                => 'none',
+				'update_term_meta_cache' => false,
 			)
 		);
 	} else {
@@ -2454,7 +2523,14 @@ function wp_set_object_terms( $object_id, $terms, $taxonomy, $append = false ) {
 	if ( ! $append && isset( $t->sort ) && $t->sort ) {
 		$values       = array();
 		$term_order   = 0;
-		$final_tt_ids = wp_get_object_terms( $object_id, $taxonomy, array( 'fields' => 'tt_ids' ) );
+		$final_tt_ids = wp_get_object_terms(
+			$object_id,
+			$taxonomy,
+			array(
+				'fields'                 => 'tt_ids',
+				'update_term_meta_cache' => false,
+			)
+		);
 		foreach ( $tt_ids as $tt_id ) {
 			if ( in_array( $tt_id, $final_tt_ids ) ) {
 				$values[] = $wpdb->prepare( '(%d, %d, %d)', $object_id, $tt_id, ++$term_order );
@@ -2827,7 +2903,7 @@ function wp_update_term( $term_id, $taxonomy, $args = array() ) {
 		if ( $empty_slug || ( $parent != $term['parent'] ) ) {
 			$slug = wp_unique_term_slug( $slug, (object) $args );
 		} else {
-			/* translators: 1: Taxonomy term slug */
+			/* translators: %s: taxonomy term slug */
 			return new WP_Error( 'duplicate_term_slug', sprintf( __( 'The slug &#8220;%s&#8221; is already in use by another term.' ), $slug ) );
 		}
 	}
@@ -3220,7 +3296,7 @@ function clean_taxonomy_cache( $taxonomy ) {
  * function only fetches relationship data that is already in the cache.
  *
  * @since 2.3.0
- * @since 4.7.0 Returns a WP_Error object if get_term() returns an error for
+ * @since 4.7.0 Returns a `WP_Error` object if `get_term()` returns an error for
  *              any of the matched terms.
  *
  * @param int    $id       Term object ID.
@@ -3382,9 +3458,10 @@ function _get_term_hierarchy( $taxonomy ) {
 	$children = array();
 	$terms    = get_terms(
 		$taxonomy, array(
-			'get'     => 'all',
-			'orderby' => 'id',
-			'fields'  => 'id=>parent',
+			'get'                    => 'all',
+			'orderby'                => 'id',
+			'fields'                 => 'id=>parent',
+			'update_term_meta_cache' => false,
 		)
 	);
 	foreach ( $terms as $term_id => $parent ) {
@@ -4491,4 +4568,23 @@ function wp_check_term_hierarchy_for_loops( $parent, $term_id, $taxonomy ) {
 	}
 
 	return $parent;
+}
+
+/**
+ * Determines whether a taxonomy is considered "viewable".
+ *
+ * @since 5.0.0
+ *
+ * @param string|WP_Taxonomy $taxonomy Taxonomy name or object.
+ * @return bool Whether the taxonomy should be considered viewable.
+ */
+function is_taxonomy_viewable( $taxonomy ) {
+	if ( is_scalar( $taxonomy ) ) {
+		$taxonomy = get_taxonomy( $taxonomy );
+		if ( ! $taxonomy ) {
+			return false;
+		}
+	}
+
+	return $taxonomy->publicly_queryable;
 }

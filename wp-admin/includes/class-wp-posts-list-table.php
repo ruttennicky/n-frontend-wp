@@ -233,9 +233,9 @@ class WP_Posts_List_Table extends WP_List_Table {
 	 *
 	 * @since 4.4.0
 	 *
-	 * @param array  $args  URL parameters for the link.
-	 * @param string $label Link text.
-	 * @param string $class Optional. Class attribute. Default empty string.
+	 * @param string[] $args  Associative array of URL parameters for the link.
+	 * @param string   $label Link text.
+	 * @param string   $class Optional. Class attribute. Default empty string.
 	 * @return string The formatted link string.
 	 */
 	protected function get_edit_link( $args, $label, $class = '' ) {
@@ -557,8 +557,8 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 		 *
 		 * @since 3.5.0
 		 *
-		 * @param array  $taxonomies Array of taxonomies to show columns for.
-		 * @param string $post_type  The post type.
+		 * @param string[] $taxonomies Array of taxonomy names to show columns for.
+		 * @param string   $post_type  The post type.
 		 */
 		$taxonomies = apply_filters( "manage_taxonomies_for_{$post_type}_columns", $taxonomies, $post_type );
 		$taxonomies = array_filter( $taxonomies, 'taxonomy_exists' );
@@ -589,7 +589,7 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 			 *
 			 * @since 2.5.0
 			 *
-			 * @param array $post_columns An array of column names.
+			 * @param string[] $post_columns An associative array of column headings.
 			 */
 			$posts_columns = apply_filters( 'manage_pages_columns', $posts_columns );
 		} else {
@@ -599,8 +599,8 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 			 *
 			 * @since 1.5.0
 			 *
-			 * @param array  $posts_columns An array of column names.
-			 * @param string $post_type     The post type slug.
+			 * @param string[] $post_columns An associative array of column headings.
+			 * @param string   $post_type    The post type slug.
 			 */
 			$posts_columns = apply_filters( 'manage_posts_columns', $posts_columns, $post_type );
 		}
@@ -612,7 +612,7 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 		 *
 		 * @since 3.0.0
 		 *
-		 * @param array $post_columns An array of column names.
+		 * @param string[] $post_columns An associative array of column headings.
 		 */
 		return apply_filters( "manage_{$post_type}_posts_columns", $posts_columns );
 	}
@@ -656,6 +656,8 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 	 * @param int $level
 	 */
 	private function _display_rows( $posts, $level = 0 ) {
+		$post_type = $this->screen->post_type;
+
 		// Create array of post IDs.
 		$post_ids = array();
 
@@ -663,7 +665,9 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 			$post_ids[] = $a_post->ID;
 		}
 
-		$this->comment_pending_count = get_pending_comments_num( $post_ids );
+		if ( post_type_supports( $post_type, 'comments' ) ) {
+			$this->comment_pending_count = get_pending_comments_num( $post_ids );
+		}
 
 		foreach ( $posts as $post ) {
 			$this->single_row( $post, $level );
@@ -1263,7 +1267,7 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 				__( 'Edit' )
 			);
 			$actions['inline hide-if-no-js'] = sprintf(
-				'<a href="#" class="editinline" aria-label="%s">%s</a>',
+				'<button type="button" class="button-link editinline" aria-label="%s" aria-expanded="false">%s</button>',
 				/* translators: %s: post title */
 				esc_attr( sprintf( __( 'Quick edit &#8220;%s&#8221; inline' ), $title ) ),
 				__( 'Quick&nbsp;Edit' )
@@ -1331,10 +1335,10 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 			 *
 			 * @since 2.8.0
 			 *
-			 * @param array $actions An array of row action links. Defaults are
-			 *                         'Edit', 'Quick Edit', 'Restore', 'Trash',
-			 *                         'Delete Permanently', 'Preview', and 'View'.
-			 * @param WP_Post $post The post object.
+			 * @param string[] $actions An array of row action links. Defaults are
+			 *                          'Edit', 'Quick Edit', 'Restore', 'Trash',
+			 *                          'Delete Permanently', 'Preview', and 'View'.
+			 * @param WP_Post  $post    The post object.
 			 */
 			$actions = apply_filters( 'page_row_actions', $actions, $post );
 		} else {
@@ -1346,10 +1350,10 @@ if ( $this->is_trash && current_user_can( get_post_type_object( $this->screen->p
 			 *
 			 * @since 2.8.0
 			 *
-			 * @param array $actions An array of row action links. Defaults are
-			 *                         'Edit', 'Quick Edit', 'Restore', 'Trash',
-			 *                         'Delete Permanently', 'Preview', and 'View'.
-			 * @param WP_Post $post The post object.
+			 * @param string[] $actions An array of row action links. Defaults are
+			 *                          'Edit', 'Quick Edit', 'Restore', 'Trash',
+			 *                          'Delete Permanently', 'Preview', and 'View'.
+			 * @param WP_Post  $post    The post object.
 			 */
 			$actions = apply_filters( 'post_row_actions', $actions, $post );
 		}

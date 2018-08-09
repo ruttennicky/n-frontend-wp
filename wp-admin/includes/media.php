@@ -348,7 +348,7 @@ function media_handle_upload( $file_id, $post_id, $post_data = array(), $overrid
 		}
 
 		if ( ! empty( $meta['year'] ) ) {
-			/* translators: Audio file track information. 1: Year of audio track release */
+			/* translators: Audio file track information. %d: Year of audio track release */
 			$content .= ' ' . sprintf( __( 'Released: %d.' ), $meta['year'] );
 		}
 
@@ -358,18 +358,18 @@ function media_handle_upload( $file_id, $post_id, $post_data = array(), $overrid
 				/* translators: Audio file track information. 1: Audio track number, 2: Total audio tracks */
 				$content .= ' ' . sprintf( __( 'Track %1$s of %2$s.' ), number_format_i18n( $track_number[0] ), number_format_i18n( $track_number[1] ) );
 			} else {
-				/* translators: Audio file track information. 1: Audio track number */
-				$content .= ' ' . sprintf( __( 'Track %1$s.' ), number_format_i18n( $track_number[0] ) );
+				/* translators: Audio file track information. %s: Audio track number */
+				$content .= ' ' . sprintf( __( 'Track %s.' ), number_format_i18n( $track_number[0] ) );
 			}
 		}
 
 		if ( ! empty( $meta['genre'] ) ) {
-			/* translators: Audio file genre information. 1: Audio genre name */
+			/* translators: Audio file genre information. %s: Audio genre name */
 			$content .= ' ' . sprintf( __( 'Genre: %s.' ), $meta['genre'] );
 		}
 
-		// Use image exif/iptc data for title and caption defaults if possible.
-	} elseif ( 0 === strpos( $type, 'image/' ) && $image_meta = @wp_read_image_metadata( $file ) ) {
+	// Use image exif/iptc data for title and caption defaults if possible.
+	} elseif ( 0 === strpos( $type, 'image/' ) && $image_meta = wp_read_image_metadata( $file ) ) {
 		if ( trim( $image_meta['title'] ) && ! is_numeric( sanitize_title( $image_meta['title'] ) ) ) {
 			$title = $image_meta['title'];
 		}
@@ -437,7 +437,7 @@ function media_handle_sideload( $file_array, $post_id, $desc = null, $post_data 
 	$content = '';
 
 	// Use image exif/iptc data for title and caption defaults if possible.
-	if ( $image_meta = @wp_read_image_metadata( $file ) ) {
+	if ( $image_meta = wp_read_image_metadata( $file ) ) {
 		if ( trim( $image_meta['title'] ) && ! is_numeric( sanitize_title( $image_meta['title'] ) ) ) {
 			$title = $image_meta['title'];
 		}
@@ -1656,7 +1656,6 @@ function get_media_item( $attachment_id, $args = null ) {
 
 		$required      = $field['required'] ? '<span class="required">*</span>' : '';
 		$required_attr = $field['required'] ? ' required' : '';
-		$aria_required = $field['required'] ? " aria-required='true'" : '';
 		$class         = $id;
 		$class        .= $field['required'] ? ' form-required' : '';
 
@@ -1669,9 +1668,9 @@ function get_media_item( $attachment_id, $args = null ) {
 				$field['value'] = htmlspecialchars( $field['value'], ENT_QUOTES );
 			}
 			// Post_excerpt is already escaped by sanitize_post() in get_attachment_fields_to_edit().
-			$item .= "<textarea id='$name' name='$name'{$required_attr}{$aria_required}>" . $field['value'] . '</textarea>';
+			$item .= "<textarea id='$name' name='$name'{$required_attr}>" . $field['value'] . '</textarea>';
 		} else {
-			$item .= "<input type='text' class='text' id='$name' name='$name' value='" . esc_attr( $field['value'] ) . "'{$required_attr}{$aria_required} />";
+			$item .= "<input type='text' class='text' id='$name' name='$name' value='" . esc_attr( $field['value'] ) . "'{$required_attr} />";
 		}
 		if ( ! empty( $field['helps'] ) ) {
 			$item .= "<p class='help'>" . join( "</p>\n<p class='help'>", array_unique( (array) $field['helps'] ) ) . '</p>';
@@ -1829,7 +1828,6 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 		$readonly      = ! $user_can_edit && ! empty( $field['taxonomy'] ) ? " readonly='readonly' " : '';
 		$required      = $field['required'] ? '<span class="required">*</span>' : '';
 		$required_attr = $field['required'] ? ' required' : '';
-		$aria_required = $field['required'] ? " aria-required='true'" : '';
 		$class         = 'compat-field-' . $id;
 		$class        .= $field['required'] ? ' form-required' : '';
 
@@ -1844,9 +1842,9 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 				// sanitize_post() skips the post_content when user_can_richedit.
 				$field['value'] = htmlspecialchars( $field['value'], ENT_QUOTES );
 			}
-			$item .= "<textarea id='$id_attr' name='$name'{$required_attr}{$aria_required}>" . $field['value'] . '</textarea>';
+			$item .= "<textarea id='$id_attr' name='$name'{$required_attr}>" . $field['value'] . '</textarea>';
 		} else {
-			$item .= "<input type='text' class='text' id='$id_attr' name='$name' value='" . esc_attr( $field['value'] ) . "' $readonly{$required_attr}{$aria_required} />";
+			$item .= "<input type='text' class='text' id='$id_attr' name='$name' value='" . esc_attr( $field['value'] ) . "' $readonly{$required_attr} />";
 		}
 		if ( ! empty( $field['helps'] ) ) {
 			$item .= "<p class='help'>" . join( "</p>\n<p class='help'>", array_unique( (array) $field['helps'] ) ) . '</p>';
@@ -2611,7 +2609,7 @@ foreach ( $post_mime_types as $mime_type => $label ) {
  *
  * @since 3.1.0
  *
- * @param array $type_links An array of list items containing mime type link HTML.
+ * @param string[] $type_links An array of list items containing mime type link HTML.
  */
 echo implode( ' | </li>', apply_filters( 'media_upload_mime_type_links', $type_links ) ) . '</li>';
 unset( $type_links );
@@ -2753,14 +2751,14 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 				<label for="src"><span class="alignleft">' . __( 'URL' ) . '</span> <span class="required">*</span></label>
 				<span class="alignright" id="status_img"></span>
 			</th>
-			<td class="field"><input id="src" name="src" value="" type="text" required aria-required="true" onblur="addExtImage.getImageData()" /></td>
+			<td class="field"><input id="src" name="src" value="" type="text" required onblur="addExtImage.getImageData()" /></td>
 		</tr>
 
 		<tr>
 			<th scope="row" class="label">
 				<label for="title"><span class="alignleft">' . __( 'Title' ) . '</span> <span class="required">*</span></label>
 			</th>
-			<td class="field"><input id="title" name="title" value="" type="text" required aria-required="true" /></td>
+			<td class="field"><input id="title" name="title" value="" type="text" required /></td>
 		</tr>
 
 		<tr class="not-image"><td></td><td><p class="help">' . __( 'Link text, e.g. &#8220;Ransom Demands (PDF)&#8221;' ) . '</p></td></tr>
@@ -2769,7 +2767,7 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 			<th scope="row" class="label">
 				<label for="alt"><span class="alignleft">' . __( 'Alternative Text' ) . '</span></label>
 			</th>
-			<td class="field"><input id="alt" name="alt" value="" type="text" aria-required="true" />
+			<td class="field"><input id="alt" name="alt" value="" type="text" required />
 			<p class="help">' . __( 'Alt text for the image, e.g. &#8220;The Mona Lisa&#8221;' ) . '</p></td>
 		</tr>
 		' . $caption . '
@@ -2874,7 +2872,7 @@ function media_upload_max_image_resize() {
 <p class="hide-if-no-js"><label>
 <input name="image_resize" type="checkbox" id="image_resize" value="true"<?php echo $checked; ?> />
 <?php
-	/* translators: %1$s is link start tag, %2$s is link end tag, %3$d is width, %4$d is height*/
+	/* translators: 1: link start tag, 2: link end tag, 3: width, 4: height */
 	printf( __( 'Scale images to match the large size selected in %1$simage options%2$s (%3$d &times; %4$d).' ), $a, $end, (int) get_option( 'large_size_w', '1024' ), (int) get_option( 'large_size_h', '1024' ) );
 ?>
 </label></p>

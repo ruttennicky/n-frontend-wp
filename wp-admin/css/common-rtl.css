@@ -1116,7 +1116,6 @@ th.action-links {
 .wp-filter .button.drawer-toggle:active {
 	background: transparent;
 	box-shadow: none;
-	-webkit-transform: none;
 	transform: none;
 }
 
@@ -1188,9 +1187,17 @@ th.action-links {
 
 .filter-drawer .filter-group-feature input,
 .filter-drawer .filter-group-feature label {
-	display: inline-block;
-	margin: 7px 0 7px 4px;
 	line-height: 16px;
+}
+
+.filter-drawer .filter-group-feature input {
+	position: absolute;
+	margin: 0;
+}
+
+.filter-group .filter-group-feature label {
+	display: block;
+	margin: 14px 23px 14px 0px;
 }
 
 .filter-drawer .buttons {
@@ -1499,7 +1506,6 @@ div.error {
 .import-php .updating-message:before,
 .button.updating-message:before,
 .button.installing:before {
-	-webkit-animation: rotation 2s infinite linear;
 	animation: rotation 2s infinite linear;
 }
 
@@ -1508,7 +1514,7 @@ div.error {
 .installed p:before,
 .button.updated-message:before {
 	color: #79ba49;
-	content: '\f147';
+	content: "\f147";
 }
 
 /* Error icon. */
@@ -1538,6 +1544,15 @@ div.error {
 
 ul#dismissed-updates {
 	display: none;
+}
+
+#dismissed-updates li > p {
+	margin-top: 0;
+}
+
+#dismiss,
+#undismiss {
+	margin-right: 0.5em;
 }
 
 form.upgrade {
@@ -1672,7 +1687,6 @@ form.upgrade .hint {
 
 #screen-meta-links .show-settings:active {
 	box-shadow: none;
-	-webkit-transform: none;
 	transform: none;
 }
 
@@ -1700,7 +1714,7 @@ form.upgrade .hint {
 
 .toggle-arrow {
 	background-repeat: no-repeat;
-	background-position: top left;
+	background-position: top right;
 	background-color: transparent;
 	height: 22px;
 	line-height: 22px;
@@ -1708,7 +1722,7 @@ form.upgrade .hint {
 }
 
 .toggle-arrow-active {
-	background-position: bottom left;
+	background-position: bottom right;
 }
 
 #screen-options-wrap h5, /* Back-compat for old plugins */
@@ -2447,7 +2461,7 @@ div.star-holder .star-rating {
 	font-weight: 400;
 	font-style: normal;
 	vertical-align: top;
-	transition: color .1s ease-in 0;
+	transition: color .1s ease-in;
 	text-align: center;
 	color: #ffb900;
 }
@@ -2461,7 +2475,6 @@ div.star-holder .star-rating {
 }
 
 .rtl .star-rating .star-half {
-	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
@@ -2910,7 +2923,6 @@ div.action-links {
 	margin: -10px -10px 0 0;
 	background: #fcfcfc url(../images/spinner.gif) no-repeat center;
 	background-size: 20px 20px;
-	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
 
@@ -2973,7 +2985,8 @@ img {
 /* Metabox collapse arrow indicators */
 .sidebar-name .toggle-indicator:before,
 .js .meta-box-sortables .postbox .toggle-indicator:before,
-.bulk-action-notice .toggle-indicator:before {
+.bulk-action-notice .toggle-indicator:before,
+.privacy-text-box .toggle-indicator:before {
 	content: "\f142";
 	display: inline-block;
 	font: normal 20px/1 dashicons;
@@ -2985,7 +2998,8 @@ img {
 
 .js .widgets-holder-wrap.closed .toggle-indicator:before,
 .js .meta-box-sortables .postbox.closed .handlediv .toggle-indicator:before,
-.bulk-action-notice .bulk-action-errors-collapsed .toggle-indicator:before {
+.bulk-action-notice .bulk-action-errors-collapsed .toggle-indicator:before,
+.privacy-text-box.closed .toggle-indicator:before {
 	content: "\f140";
 }
 
@@ -3126,7 +3140,7 @@ img {
 
 /* Styles for folder indicators/depth */
 .tree-folder .tree-folder::after {
-	content: ' ';
+	content: "";
 	display: block;
 	position: absolute;
 	right: 2px;
@@ -3135,7 +3149,7 @@ img {
 	bottom: 10px;
 }
 .tree-folder > li::before {
-	content: ' ';
+	content: "";
 	position: absolute;
 	display: block;
 	border-right: 1px solid #ccc;
@@ -3146,7 +3160,7 @@ img {
 	border-bottom: 1px solid #ccc;
 }
 .tree-folder > li::after {
-	content: ' ';
+	content: "";
 	position: absolute;
 	display: block;
 	border-right: 1px solid #ccc;
@@ -3351,7 +3365,8 @@ img {
 .control-section.open .accordion-section-title:after,
 #customize-info.open .accordion-section-title:after,
 .nav-menus-php .menu-item-edit-active .item-edit:before,
-.widget.open .widget-top .widget-action .toggle-indicator:before {
+.widget.open .widget-top .widget-action .toggle-indicator:before,
+.widget.widget-in-question .widget-top .widget-action .toggle-indicator:before  {
 	content: "\f142";
 }
 
@@ -3686,8 +3701,7 @@ img {
 	}
 
 	/* Hidden Elements */
-	#screen-meta,
-	#screen-meta-links,
+	#contextual-help-link-wrap,
 	#collapse-menu,
 	.post-format-select {
 		display: none !important;
@@ -3889,6 +3903,10 @@ img {
 		line-height: 25px;
 	}
 
+	.filter-drawer .filter-group-feature label {
+		margin-right: 32px;
+	}
+
 	.wp-filter .button.drawer-toggle {
 		font-size: 13px;
 		line-height: 26px;
@@ -3928,23 +3946,6 @@ img {
 	h3 .nav-tab {
 		margin: 10px 0 0 10px;
 		border-bottom: 1px solid #ccc;
-	}
-}
-
-.options-media-php br {
-	display: none;
-}
-
-@media screen and (max-width: 375px) {
-	.options-media-php input[type="number"][name*="_size_"] {
-		margin: 5px 0;
-	}
-	.options-media-php label[for*="_size_h"]:before {
-		content: '';
-		display: block;
-	}
-	.options-media-php br {
-		display: block;
 	}
 }
 

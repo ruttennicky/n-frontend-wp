@@ -131,7 +131,6 @@ final class WP_Taxonomy {
 	 * The callback function for sanitizing taxonomy data saved from a meta box.
 	 *
 	 * @since 5.0.0
-	 * @access public
 	 * @var callable
 	 */
 	public $meta_box_sanitize_cb = null;
@@ -148,7 +147,7 @@ final class WP_Taxonomy {
 	 * Capabilities for this taxonomy.
 	 *
 	 * @since 4.7.0
-	 * @var array
+	 * @var object
 	 */
 	public $cap;
 
@@ -247,9 +246,9 @@ final class WP_Taxonomy {
 		 *
 		 * @since 4.4.0
 		 *
-		 * @param array  $args        Array of arguments for registering a taxonomy.
-		 * @param string $taxonomy    Taxonomy key.
-		 * @param array  $object_type Array of names of object types for the taxonomy.
+		 * @param array    $args        Array of arguments for registering a taxonomy.
+		 * @param string   $taxonomy    Taxonomy key.
+		 * @param string[] $object_type Array of names of object types for the taxonomy.
 		 */
 		$args = apply_filters( 'register_taxonomy_args', $args, $this->name, (array) $object_type );
 

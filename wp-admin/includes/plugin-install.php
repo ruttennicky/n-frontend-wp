@@ -99,17 +99,25 @@
  *         for more information on the make-up of possible return values depending on the value of `$action`.
  */
 function plugins_api( $action, $args = array() ) {
+	// include an unmodified $wp_version
+	include( ABSPATH . WPINC . '/version.php' );
 
 	if ( is_array( $args ) ) {
 		$args = (object) $args;
 	}
 
-	if ( ! isset( $args->per_page ) ) {
-		$args->per_page = 24;
+	if ( 'query_plugins' == $action ) {
+		if ( ! isset( $args->per_page ) ) {
+			$args->per_page = 24;
+		}
 	}
 
 	if ( ! isset( $args->locale ) ) {
 		$args->locale = get_user_locale();
+	}
+
+	if ( ! isset( $args->wp_version ) ) {
+		$args->wp_version = substr( $wp_version, 0, 3 ); // X.y
 	}
 
 	/**
@@ -141,10 +149,17 @@ function plugins_api( $action, $args = array() ) {
 	$res = apply_filters( 'plugins_api', false, $action, $args );
 
 	if ( false === $res ) {
-		// include an unmodified $wp_version
-		include( ABSPATH . WPINC . '/version.php' );
 
-		$url = $http_url = 'http://api.wordpress.org/plugins/info/1.0/';
+		$url = 'http://api.wordpress.org/plugins/info/1.2/';
+		$url = add_query_arg(
+			array(
+				'action'  => $action,
+				'request' => $args,
+			),
+			$url
+		);
+
+		$http_url = $url;
 		if ( $ssl = wp_http_supports( array( 'ssl' ) ) ) {
 			$url = set_url_scheme( $url, 'https' );
 		}
@@ -152,12 +167,8 @@ function plugins_api( $action, $args = array() ) {
 		$http_args = array(
 			'timeout'    => 15,
 			'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' ),
-			'body'       => array(
-				'action'  => $action,
-				'request' => serialize( $args ),
-			),
 		);
-		$request   = wp_remote_post( $url, $http_args );
+		$request   = wp_remote_get( $url, $http_args );
 
 		if ( $ssl && is_wp_error( $request ) ) {
 			trigger_error(
@@ -168,7 +179,7 @@ function plugins_api( $action, $args = array() ) {
 				) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' ),
 				headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
 			);
-			$request = wp_remote_post( $http_url, $http_args );
+			$request = wp_remote_get( $http_url, $http_args );
 		}
 
 		if ( is_wp_error( $request ) ) {
@@ -182,8 +193,11 @@ function plugins_api( $action, $args = array() ) {
 				$request->get_error_message()
 			);
 		} else {
-			$res = maybe_unserialize( wp_remote_retrieve_body( $request ) );
-			if ( ! is_object( $res ) && ! is_array( $res ) ) {
+			$res = json_decode( wp_remote_retrieve_body( $request ), true );
+			if ( is_array( $res ) ) {
+				// Object casting is required in order to match the info/1.0 format.
+				$res = (object) $res;
+			} elseif ( null === $res ) {
 				$res = new WP_Error(
 					'plugins_api_failed',
 					sprintf(
@@ -193,6 +207,10 @@ function plugins_api( $action, $args = array() ) {
 					),
 					wp_remote_retrieve_body( $request )
 				);
+			}
+
+			if ( isset( $res->error ) ) {
+				$res = new WP_Error( 'plugins_api_failed', $res->error );
 			}
 		}
 	} elseif ( ! is_wp_error( $res ) ) {
@@ -485,13 +503,6 @@ function install_plugin_information() {
 	$api = plugins_api(
 		'plugin_information', array(
 			'slug'   => wp_unslash( $_REQUEST['plugin'] ),
-			'is_ssl' => is_ssl(),
-			'fields' => array(
-				'banners'         => true,
-				'reviews'         => true,
-				'downloaded'      => false,
-				'active_installs' => true,
-			),
 		)
 	);
 
@@ -631,17 +642,29 @@ function install_plugin_information() {
 				<li>
 					<strong><?php _e( 'Requires WordPress Version:' ); ?></strong>
 					<?php
-					/* translators: %s: WordPress version */
+					/* translators: %s: version number */
 					printf( __( '%s or higher' ), $api->requires );
 					?>
 				</li>
 			<?php } if ( ! empty( $api->tested ) ) { ?>
 				<li><strong><?php _e( 'Compatible up to:' ); ?></strong> <?php echo $api->tested; ?></li>
+			<?php } if ( ! empty( $api->requires_php ) ) { ?>
+				<li>
+					<strong><?php _e( 'Requires PHP Version:' ); ?></strong>
+					<?php
+					/* translators: %s: version number */
+					printf( __( '%s or higher' ), $api->requires_php );
+					?>
+				</li>
 			<?php } if ( isset( $api->active_installs ) ) { ?>
-				<li><strong><?php _e( 'Active Installations:' ); ?></strong> 
+				<li><strong><?php _e( 'Active Installations:' ); ?></strong>
 										<?php
 										if ( $api->active_installs >= 1000000 ) {
-											_ex( '1+ Million', 'Active plugin installations' );
+											$active_installs_millions = floor( $api->active_installs / 1000000 );
+											printf(
+												_nx( '%s+ Million', '%s+ Million', $active_installs_millions, 'Active plugin installations' ),
+												number_format_i18n( $active_installs_millions )
+											);
 										} elseif ( 0 == $api->active_installs ) {
 											_ex( 'Less Than 10', 'Active plugin installations' );
 										} else {
@@ -683,7 +706,7 @@ if ( ! empty( $api->ratings ) && array_sum( (array) $api->ratings ) > 0 ) {
 				/* translators: 1: number of stars (used to determine singular/plural), 2: number of reviews */
 				$aria_label = esc_attr(
 					sprintf(
-						_n( 'Reviews with %1$d star: %2$s. Opens in a new window.', 'Reviews with %1$d stars: %2$s. Opens in a new window.', $key ),
+						_n( 'Reviews with %1$d star: %2$s. Opens in a new tab.', 'Reviews with %1$d stars: %2$s. Opens in a new tab.', $key ),
 						$key,
 						number_format_i18n( $ratecount )
 					)
@@ -691,7 +714,7 @@ if ( ! empty( $api->ratings ) && array_sum( (array) $api->ratings ) > 0 ) {
 				?>
 				<div class="counter-container">
 						<span class="counter-label">
-							<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $api->slug; ?>?filter=<?php echo $key; ?>"
+							<a href="https://wordpress.org/support/plugin/<?php echo $api->slug; ?>/reviews/?filter=<?php echo $key; ?>"
 								target="_blank" aria-label="<?php echo $aria_label; ?>"><?php printf( _n( '%d star', '%d stars', $key ), $key ); ?></a>
 						</span>
 						<span class="counter-back">
@@ -707,19 +730,17 @@ if ( ! empty( $api->contributors ) ) {
 			<h3><?php _e( 'Contributors' ); ?></h3>
 			<ul class="contributors">
 				<?php
-				foreach ( (array) $api->contributors as $contrib_username => $contrib_profile ) {
-					if ( empty( $contrib_username ) && empty( $contrib_profile ) ) {
-						continue;
+				foreach ( (array) $api->contributors as $contrib_username => $contrib_details ) {
+					$contrib_name = $contrib_details['display_name'];
+					if ( ! $contrib_name ) {
+						$contrib_name = $contrib_username;
 					}
-					if ( empty( $contrib_username ) ) {
-						$contrib_username = preg_replace( '/^.+\/(.+)\/?$/', '\1', $contrib_profile );
-					}
-					$contrib_username = sanitize_user( $contrib_username );
-					if ( empty( $contrib_profile ) ) {
-						echo "<li><img src='https://wordpress.org/grav-redirect.php?user={$contrib_username}&amp;s=36' width='18' height='18' alt='' />{$contrib_username}</li>";
-					} else {
-						echo "<li><a href='{$contrib_profile}' target='_blank'><img src='https://wordpress.org/grav-redirect.php?user={$contrib_username}&amp;s=36' width='18' height='18' alt='' />{$contrib_username}</a></li>";
-					}
+					$contrib_name = esc_html( $contrib_name );
+
+					$contrib_profile = esc_url( $contrib_details['profile'] );
+					$contrib_avatar = esc_url( add_query_arg( 's', '36', $contrib_details['avatar'] ) );
+
+					echo "<li><a href='{$contrib_profile}' target='_blank'><img src='{$contrib_avatar}' width='18' height='18' alt='' />{$contrib_name}</a></li>";
 				}
 				?>
 			</ul>
@@ -732,10 +753,35 @@ if ( ! empty( $api->contributors ) ) {
 	<?php
 	$wp_version = get_bloginfo( 'version' );
 
-	if ( ! empty( $api->tested ) && version_compare( substr( $wp_version, 0, strlen( $api->tested ) ), $api->tested, '>' ) ) {
-		echo '<div class="notice notice-warning notice-alt"><p>' . __( '<strong>Warning:</strong> This plugin has <strong>not been tested</strong> with your current version of WordPress.' ) . '</p></div>';
-	} elseif ( ! empty( $api->requires ) && version_compare( substr( $wp_version, 0, strlen( $api->requires ) ), $api->requires, '<' ) ) {
-		echo '<div class="notice notice-warning notice-alt"><p>' . __( '<strong>Warning:</strong> This plugin has <strong>not been marked as compatible</strong> with your version of WordPress.' ) . '</p></div>';
+	$compatible_php = ( empty( $api->requires_php ) || version_compare( substr( phpversion(), 0, strlen( $api->requires_php ) ), $api->requires_php, '>=' ) );
+	$tested_wp      = ( empty( $api->tested ) || version_compare( substr( $wp_version, 0, strlen( $api->tested ) ), $api->tested, '<=' ) );
+	$compatible_wp  = ( empty( $api->requires ) || version_compare( substr( $wp_version, 0, strlen( $api->requires ) ), $api->requires, '>=' ) );
+
+	if ( ! $compatible_php ) {
+		echo '<div class="notice notice-error notice-alt"><p>';
+		printf(
+			/* translators: "Updating PHP" page URL */
+			__( '<strong>Error:</strong> This plugin <strong>requires a newer version of PHP</strong>, so unfortunately you cannot install it. <a href="%s" target="_blank">Click here to learn more about updating PHP</a>.' ),
+			esc_url( __( 'https://wordpress.org/support/upgrade-php/' ) )
+		);
+		echo '</p></div>';
+	}
+
+	if ( ! $tested_wp ) {
+		echo '<div class="notice notice-warning notice-alt"><p>';
+		_e( '<strong>Warning:</strong> This plugin <strong>has not been tested</strong> with your current version of WordPress.' );
+		echo '</p></div>';
+	} elseif ( ! $compatible_wp ) {
+		echo '<div class="notice notice-error notice-alt"><p>';
+		_e( '<strong>Error:</strong> This plugin <strong>requires a newer version of WordPress</strong>.' );
+		if ( current_user_can( 'update_core' ) ) {
+			printf(
+				/* translators: %s: "Update WordPress" screen URL */
+				' ' . __( '<a href="%s" target="_parent">Click here to update WordPress</a>.' ),
+				self_admin_url( 'update-core.php' )
+			);
+		}
+		echo '</p></div>';
 	}
 
 	foreach ( (array) $api->sections as $section_name => $content ) {
@@ -759,7 +805,14 @@ if ( ! empty( $api->contributors ) ) {
 		switch ( $status['status'] ) {
 			case 'install':
 				if ( $status['url'] ) {
-					echo '<a data-slug="' . esc_attr( $api->slug ) . '" id="plugin_install_from_iframe" class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Now' ) . '</a>';
+					if ( $compatible_php && $compatible_wp ) {
+						echo '<a data-slug="' . esc_attr( $api->slug ) . '" id="plugin_install_from_iframe" class="button button-primary right" href="' . $status['url'] . '" target="_parent">' . __( 'Install Now' ) . '</a>';
+					} else {
+						printf(
+							'<button type="button" class="button button-primary button-disabled right" disabled="disabled">%s</button>',
+							_x( 'Cannot Install', 'plugin' )
+						);
+					}
 				}
 				break;
 			case 'update_available':

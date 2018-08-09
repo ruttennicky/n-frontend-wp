@@ -101,7 +101,6 @@ class WP_User {
 	private $site_id = 0;
 
 	/**
-	 * @static
 	 * @since 3.3.0
 	 * @var array
 	 */
@@ -113,8 +112,6 @@ class WP_User {
 	 * Retrieves the userdata and passes it to WP_User::init().
 	 *
 	 * @since 2.0.0
-	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
 	 * @param int|string|stdClass|WP_User $id User's ID, a WP_User object, or a user object from the DB.
 	 * @param string $name Optional. User's username
@@ -179,8 +176,6 @@ class WP_User {
 	 *
 	 * @since 3.3.0
 	 * @since 4.4.0 Added 'ID' as an alias of 'id' for the `$field` parameter.
-	 *
-	 * @static
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
@@ -481,9 +476,9 @@ class WP_User {
 	 * Retrieve all of the role capabilities and merge with individual capabilities.
 	 *
 	 * All of the capabilities of the roles the user belongs to are merged with
-	 * the users individual roles. This also means that the user can be denied
-	 * specific roles that their role might have, but the specific user isn't
-	 * granted permission to.
+	 * user's individual capabilities. This also means that the user can be denied
+	 * specific capabilities that their role might have, but the user isn't granted
+	 * permission to.
 	 *
 	 * @since 2.0.0
 	 *
@@ -499,12 +494,12 @@ class WP_User {
 
 		$wp_roles = wp_roles();
 
-		//Filter out caps that are not role names and assign to $this->roles
+		// Filter out caps that are not role names and assign to $this->roles.
 		if ( is_array( $this->caps ) ) {
 			$this->roles = array_filter( array_keys( $this->caps ), array( $wp_roles, 'is_role' ) );
 		}
 
-		//Build $allcaps from role caps, overlay user's $caps
+		// Build $allcaps from role caps, overlay user's $caps.
 		$this->allcaps = array();
 		foreach ( (array) $this->roles as $role ) {
 			$the_role      = $wp_roles->get_role( $role );
@@ -613,9 +608,9 @@ class WP_User {
 		 * @since 2.9.0
 		 * @since 3.6.0 Added $old_roles to include an array of the user's previous roles.
 		 *
-		 * @param int    $user_id   The user ID.
-		 * @param string $role      The new role.
-		 * @param array  $old_roles An array of the user's previous roles.
+		 * @param int      $user_id   The user ID.
+		 * @param string   $role      The new role.
+		 * @param string[] $old_roles An array of the user's previous roles.
 		 */
 		do_action( 'set_user_role', $this->ID, $role, $old_roles );
 	}
@@ -753,10 +748,10 @@ class WP_User {
 		 * @since 2.0.0
 		 * @since 3.7.0 Added the user object.
 		 *
-		 * @param array   $allcaps An array of all the user's capabilities.
-		 * @param array   $caps    Actual capabilities for meta capability.
-		 * @param array   $args    Optional parameters passed to has_cap(), typically object ID.
-		 * @param WP_User $user    The user object.
+		 * @param bool[]   $allcaps An array of all the user's capabilities.
+		 * @param string[] $caps    Actual capabilities for meta capability.
+		 * @param array    $args    Optional parameters passed to has_cap(), typically object ID.
+		 * @param WP_User  $user    The user object.
 		 */
 		$capabilities = apply_filters( 'user_has_cap', $this->allcaps, $caps, $args, $this );
 
@@ -795,8 +790,6 @@ class WP_User {
 	 *
 	 * @since 3.0.0
 	 * @deprecated 4.9.0 Use WP_User::for_site()
-	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
 	 * @param int $blog_id Optional. Site ID, defaults to current site.
 	 */

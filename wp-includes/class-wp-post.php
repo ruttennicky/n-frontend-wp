@@ -222,7 +222,6 @@ final class WP_Post {
 	 * Retrieve WP_Post instance.
 	 *
 	 * @since 3.5.0
-	 * @static
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
@@ -353,7 +352,7 @@ final class WP_Post {
 	 * @since 3.5.0
 	 *
 	 * @param string $filter Filter.
-	 * @return self|array|bool|object|WP_Post
+	 * @return array|bool|object|WP_Post
 	 */
 	public function filter( $filter ) {
 		if ( $this->filter == $filter ) {

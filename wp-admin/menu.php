@@ -203,7 +203,7 @@ if ( ! is_multisite() ) {
  */
 function _add_themes_utility_last() {
 	// Must use API on the admin_menu hook, direct modification is only possible on/before the _admin_menu hook
-	add_submenu_page( 'themes.php', _x( 'Editor', 'theme editor' ), _x( 'Editor', 'theme editor' ), 'edit_themes', 'theme-editor.php' );
+	add_submenu_page( 'themes.php', __( 'Theme Editor' ), __( 'Theme Editor' ), 'edit_themes', 'theme-editor.php' );
 }
 
 $count = '';
@@ -221,7 +221,7 @@ $submenu['plugins.php'][5] = array( __( 'Installed Plugins' ), 'activate_plugins
 if ( ! is_multisite() ) {
 	/* translators: add new plugin */
 	$submenu['plugins.php'][10] = array( _x( 'Add New', 'plugin' ), 'install_plugins', 'plugin-install.php' );
-	$submenu['plugins.php'][15] = array( _x( 'Editor', 'plugin editor' ), 'edit_plugins', 'plugin-editor.php' );
+	$submenu['plugins.php'][15] = array( __( 'Plugin Editor' ), 'edit_plugins', 'plugin-editor.php' );
 }
 
 unset( $update_data );
@@ -263,13 +263,21 @@ if ( ! is_multisite() && defined( 'WP_ALLOW_MULTISITE' ) && WP_ALLOW_MULTISITE )
 	$submenu['tools.php'][50] = array( __( 'Network Setup' ), 'setup_network', 'network.php' );
 }
 
-$menu[80]                               = array( __( 'Settings' ), 'manage_options', 'options-general.php', '', 'menu-top menu-icon-settings', 'menu-settings', 'dashicons-admin-settings' );
+$change_notice = '';
+if ( current_user_can( 'manage_privacy_options' ) && WP_Privacy_Policy_Content::text_change_check() ) {
+	$change_notice = ' <span class="update-plugins 1"><span class="plugin-count">' . number_format_i18n( 1 ) . '</span></span>';
+}
+
+// translators: %s is the update notification bubble, if updates are available.
+$menu[80]                               = array( sprintf( __( 'Settings %s' ), $change_notice ), 'manage_options', 'options-general.php', '', 'menu-top menu-icon-settings', 'menu-settings', 'dashicons-admin-settings' );
 	$submenu['options-general.php'][10] = array( _x( 'General', 'settings screen' ), 'manage_options', 'options-general.php' );
 	$submenu['options-general.php'][15] = array( __( 'Writing' ), 'manage_options', 'options-writing.php' );
 	$submenu['options-general.php'][20] = array( __( 'Reading' ), 'manage_options', 'options-reading.php' );
 	$submenu['options-general.php'][25] = array( __( 'Discussion' ), 'manage_options', 'options-discussion.php' );
 	$submenu['options-general.php'][30] = array( __( 'Media' ), 'manage_options', 'options-media.php' );
 	$submenu['options-general.php'][40] = array( __( 'Permalinks' ), 'manage_options', 'options-permalink.php' );
+	// translators: %s is the update notification bubble, if updates are available.
+	$submenu['options-general.php'][45] = array( sprintf( __( 'Privacy %s' ), $change_notice ), 'manage_privacy_options', 'privacy.php' );
 
 $_wp_last_utility_menu = 80; // The index of the last top-level menu in the utility menu group
 

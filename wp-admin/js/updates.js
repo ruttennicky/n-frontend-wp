@@ -2,6 +2,7 @@
  * Functions for ajaxified updates, deletions and installs inside the WordPress admin.
  *
  * @version 4.2.0
+ * @output wp-admin/js/updates.js
  */
 
 /* global pagenow */
@@ -167,7 +168,9 @@
 	 *
 	 */
 	wp.updates.addAdminNotice = function( data ) {
-		var $notice = $( data.selector ), $adminNotice;
+		var $notice = $( data.selector ),
+			$headerEnd = $( '.wp-header-end' ),
+			$adminNotice;
 
 		delete data.selector;
 		$adminNotice = wp.updates.adminNotice( data );
@@ -179,6 +182,8 @@
 
 		if ( $notice.length ) {
 			$notice.replaceWith( $adminNotice );
+		} else if ( $headerEnd.length ) {
+			$headerEnd.after( $adminNotice );
 		} else {
 			if ( 'customize' === pagenow ) {
 				$( '.customize-themes-notifications' ).append( $adminNotice );
@@ -2318,14 +2323,14 @@
 			$( 'input.wp-filter-search' ).trigger( 'input' );
 		} );
 
-		/** 
-		 * Trigger a search event when the "Try Again" button is clicked. 
-		 * 
+		/**
+		 * Trigger a search event when the "Try Again" button is clicked.
+		 *
 		 * @since 4.9.0
-		 */ 
-		$document.on( 'click', '.try-again', function( event ) { 
-			event.preventDefault(); 
-			$pluginInstallSearch.trigger( 'input' ); 
+		 */
+		$document.on( 'click', '.try-again', function( event ) {
+			event.preventDefault();
+			$pluginInstallSearch.trigger( 'input' );
 		} );
 
 		/**
@@ -2423,7 +2428,7 @@
 				return;
 			}
 
-			if ( 'undefined' === typeof message.action ) {
+			if ( ! message || 'undefined' === typeof message.action ) {
 				return;
 			}
 

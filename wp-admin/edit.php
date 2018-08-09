@@ -38,7 +38,7 @@ if ( ! $post_type_object ) {
 
 if ( ! current_user_can( $post_type_object->cap->edit_posts ) ) {
 	wp_die(
-		'<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
+		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
 		'<p>' . __( 'Sorry, you are not allowed to edit posts in this post type.' ) . '</p>',
 		403
 	);
@@ -329,9 +329,9 @@ $bulk_messages['page'] = array(
  *
  * @since 3.7.0
  *
- * @param array $bulk_messages Arrays of messages, each keyed by the corresponding post type. Messages are
- *                             keyed with 'updated', 'locked', 'deleted', 'trashed', and 'untrashed'.
- * @param array $bulk_counts   Array of item counts for each message, used to build internationalized strings.
+ * @param array[] $bulk_messages Arrays of messages, each keyed by the corresponding post type. Messages are
+ *                               keyed with 'updated', 'locked', 'deleted', 'trashed', and 'untrashed'.
+ * @param int[]   $bulk_counts   Array of item counts for each message, used to build internationalized strings.
  */
 $bulk_messages = apply_filters( 'bulk_post_updated_messages', $bulk_messages, $bulk_counts );
 $bulk_counts   = array_filter( $bulk_counts );

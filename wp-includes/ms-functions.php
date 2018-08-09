@@ -76,12 +76,12 @@ function get_active_blog_for_user( $user_id ) {
 				}
 				$details = get_site( $blog_id );
 				if ( is_object( $details ) && $details->archived == 0 && $details->spam == 0 && $details->deleted == 0 ) {
-					$ret = $blog;
+					$ret = $details;
 					if ( get_user_meta( $user_id, 'primary_blog', true ) != $blog_id ) {
 						update_user_meta( $user_id, 'primary_blog', $blog_id );
 					}
 					if ( ! get_user_meta( $user_id, 'source_domain', true ) ) {
-						update_user_meta( $user_id, 'source_domain', $blog->domain );
+						update_user_meta( $user_id, 'source_domain', $details->domain );
 					}
 					break;
 				}
@@ -101,7 +101,7 @@ function get_active_blog_for_user( $user_id ) {
  * The count is cached and updated twice daily. This is not a live count.
  *
  * @since MU (3.0.0)
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  * @return int Number of active users on the network.
@@ -116,8 +116,8 @@ function get_user_count( $network_id = null ) {
  * The count is cached and updated twice daily. This is not a live count.
  *
  * @since MU (3.0.0)
- * @since 3.7.0 The $network_id parameter has been deprecated.
- * @since 4.8.0 The $network_id parameter is now being used.
+ * @since 3.7.0 The `$network_id` parameter has been deprecated.
+ * @since 4.8.0 The `$network_id` parameter is now being used.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  * @return int Number of active sites on the network.
@@ -497,8 +497,9 @@ function wpmu_validate_user_signup( $user_name, $user_email ) {
 
 	$limited_email_domains = get_site_option( 'limited_email_domains' );
 	if ( is_array( $limited_email_domains ) && ! empty( $limited_email_domains ) ) {
-		$emaildomain = substr( $user_email, 1 + strpos( $user_email, '@' ) );
-		if ( ! in_array( $emaildomain, $limited_email_domains ) ) {
+		$limited_email_domains = array_map( 'strtolower', $limited_email_domains );
+		$emaildomain = strtolower( substr( $user_email, 1 + strpos( $user_email, '@' ) ) );
+		if ( ! in_array( $emaildomain, $limited_email_domains, true ) ) {
 			$errors->add( 'user_email', __( 'Sorry, that email address is not allowed!' ) );
 		}
 	}
@@ -1272,18 +1273,8 @@ function wpmu_create_blog( $domain, $path, $title, $user_id, $meta = array(), $n
 	);
 	$meta     = wp_parse_args( $meta, $defaults );
 
-	$domain = preg_replace( '/\s+/', '', sanitize_user( $domain, true ) );
-
-	if ( is_subdomain_install() ) {
-		$domain = str_replace( '@', '', $domain );
-	}
-
 	$title   = strip_tags( $title );
 	$user_id = (int) $user_id;
-
-	if ( empty( $path ) ) {
-		$path = '/';
-	}
 
 	// Check if the domain has been used already. We should return an error message.
 	if ( domain_exists( $domain, $path, $network_id ) ) {
@@ -1294,8 +1285,28 @@ function wpmu_create_blog( $domain, $path, $title, $user_id, $meta = array(), $n
 		wp_installing( true );
 	}
 
-	if ( ! $blog_id = insert_blog( $domain, $path, $network_id ) ) {
-		return new WP_Error( 'insert_blog', __( 'Could not create site.' ) );
+	$site_data_whitelist = array( 'public', 'archived', 'mature', 'spam', 'deleted', 'lang_id' );
+
+	$site_data = array_merge(
+		array(
+			'domain'     => $domain,
+			'path'       => $path,
+			'network_id' => $network_id,
+		),
+		array_intersect_key(
+			$meta,
+			array_flip( $site_data_whitelist )
+		)
+	);
+
+	$meta = array_diff_key( $meta, array_flip( $site_data_whitelist ) );
+
+	remove_action( 'update_blog_public', 'wp_update_blog_public_option_on_site_update', 1 );
+	$blog_id = wp_insert_site( $site_data );
+	add_action( 'update_blog_public', 'wp_update_blog_public_option_on_site_update', 1, 2 );
+
+	if ( is_wp_error( $blog_id ) ) {
+		return $blog_id;
 	}
 
 	switch_to_blog( $blog_id );
@@ -1305,20 +1316,19 @@ function wpmu_create_blog( $domain, $path, $title, $user_id, $meta = array(), $n
 	add_user_to_blog( $blog_id, $user_id, 'administrator' );
 
 	foreach ( $meta as $key => $value ) {
-		if ( in_array( $key, array( 'public', 'archived', 'mature', 'spam', 'deleted', 'lang_id' ) ) ) {
-			update_blog_status( $blog_id, $key, $value );
-		} else {
-			update_option( $key, $value );
-		}
+		update_option( $key, $value );
 	}
 
-	update_option( 'blog_public', (int) $meta['public'] );
+	update_option( 'blog_public', (int) $site_data['public'] );
 
 	if ( ! is_super_admin( $user_id ) && ! get_user_meta( $user_id, 'primary_blog', true ) ) {
 		update_user_meta( $user_id, 'primary_blog', $blog_id );
 	}
 
 	restore_current_blog();
+
+	$site = get_site( $blog_id );
+
 	/**
 	 * Fires immediately after a new site is created.
 	 *
@@ -1331,7 +1341,7 @@ function wpmu_create_blog( $domain, $path, $title, $user_id, $meta = array(), $n
 	 * @param int    $network_id Network ID. Only relevant on multi-network installations.
 	 * @param array  $meta       Meta data. Used to set initial site options.
 	 */
-	do_action( 'wpmu_new_blog', $blog_id, $user_id, $domain, $path, $network_id, $meta );
+	do_action( 'wpmu_new_blog', $blog_id, $user_id, $site->domain, $site->path, $site->network_id, $meta );
 
 	wp_cache_set( 'last_changed', microtime(), 'sites' );
 
@@ -1485,47 +1495,6 @@ function domain_exists( $domain, $path, $network_id = 1 ) {
 }
 
 /**
- * Store basic site info in the blogs table.
- *
- * This function creates a row in the wp_blogs table and returns
- * the new blog's ID. It is the first step in creating a new blog.
- *
- * @since MU (3.0.0)
- *
- * @global wpdb $wpdb WordPress database abstraction object.
- *
- * @param string $domain     The domain of the new site.
- * @param string $path       The path of the new site.
- * @param int    $network_id Unless you're running a multi-network installation, be sure to set this value to 1.
- * @return int|false The ID of the new row
- */
-function insert_blog( $domain, $path, $network_id ) {
-	global $wpdb;
-
-	$path       = trailingslashit( $path );
-	$network_id = (int) $network_id;
-
-	$result = $wpdb->insert(
-		$wpdb->blogs, array(
-			'site_id'    => $network_id,
-			'domain'     => $domain,
-			'path'       => $path,
-			'registered' => current_time( 'mysql' ),
-		)
-	);
-	if ( ! $result ) {
-		return false;
-	}
-
-	$blog_id = $wpdb->insert_id;
-	clean_blog_cache( $blog_id );
-
-	wp_maybe_update_network_site_counts( $network_id );
-
-	return $blog_id;
-}
-
-/**
  * Install an empty blog.
  *
  * Creates the new blog tables and options. If calling this function
@@ -1537,7 +1506,7 @@ function insert_blog( $domain, $path, $network_id ) {
  * @global wpdb     $wpdb
  * @global WP_Roles $wp_roles
  *
- * @param int    $blog_id    The value returned by insert_blog().
+ * @param int    $blog_id    The value returned by wp_insert_site().
  * @param string $blog_title The title of the new site.
  */
 function install_blog( $blog_id, $blog_title = '' ) {
@@ -2161,7 +2130,8 @@ function upload_is_file_too_big( $upload ) {
 	}
 
 	if ( strlen( $upload['bits'] ) > ( KB_IN_BYTES * get_site_option( 'fileupload_maxk', 1500 ) ) ) {
-		return sprintf( __( 'This file is too big. Files must be less than %d KB in size.' ) . '<br />', get_site_option( 'fileupload_maxk', 1500 ) );
+		/* translators: %s: maximum allowed file size in kilobytes */
+		return sprintf( __( 'This file is too big. Files must be less than %s KB in size.' ) . '<br />', get_site_option( 'fileupload_maxk', 1500 ) );
 	}
 
 	return $upload;
@@ -2191,8 +2161,8 @@ function signup_nonce_check( $result ) {
 		return $result;
 	}
 
-	if ( wp_create_nonce( 'signup_form_' . $_POST['signup_form_id'] ) != $_POST['_signup_form'] ) {
-		wp_die( __( 'Please try again.' ) );
+	if ( ! wp_verify_nonce( $_POST['_signup_form'], 'signup_form_' . $_POST['signup_form_id'] ) ) {
+		$result['errors']->add( 'invalid_nonce', __( 'Unable to submit this form, please try again.' ) );
 	}
 
 	return $result;
@@ -2463,7 +2433,7 @@ function wp_schedule_update_network_counts() {
  * Update the network-wide counts for the current network.
  *
  * @since 3.1.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  */
@@ -2479,7 +2449,7 @@ function wp_update_network_counts( $network_id = null ) {
  * on a network when a site is created or its status is updated.
  *
  * @since 3.7.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  */
@@ -2510,7 +2480,7 @@ function wp_maybe_update_network_site_counts( $network_id = null ) {
  * on a network when a user is created or its status is updated.
  *
  * @since 3.7.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  */
@@ -2529,7 +2499,7 @@ function wp_maybe_update_network_user_counts( $network_id = null ) {
  * Update the network-wide site count.
  *
  * @since 3.7.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param int|null $network_id ID of the network. Default is the current network.
  */
@@ -2556,7 +2526,7 @@ function wp_update_network_site_counts( $network_id = null ) {
  * Update the network-wide user count.
  *
  * @since 3.7.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @global wpdb $wpdb WordPress database abstraction object.
  *
@@ -2685,7 +2655,7 @@ function upload_size_limit_filter( $size ) {
  * Plugins can alter this criteria using the {@see 'wp_is_large_network'} filter.
  *
  * @since 3.3.0
- * @since 4.8.0 The $network_id parameter has been added.
+ * @since 4.8.0 The `$network_id` parameter has been added.
  *
  * @param string   $using      'sites or 'users'. Default is 'sites'.
  * @param int|null $network_id ID of the network. Default is the current network.
@@ -2703,7 +2673,7 @@ function wp_is_large_network( $using = 'sites', $network_id = null ) {
 		 * Filters whether the network is considered large.
 		 *
 		 * @since 3.3.0
-		 * @since 4.8.0 The $network_id parameter has been added.
+		 * @since 4.8.0 The `$network_id` parameter has been added.
 		 *
 		 * @param bool   $is_large_network Whether the network has more than 10000 users or sites.
 		 * @param string $component        The component to count. Accepts 'users', or 'sites'.
@@ -2842,6 +2812,13 @@ All at ###SITENAME###
  * @param int    $network_id  ID of the network.
  */
 function wp_network_admin_email_change_notification( $option_name, $new_email, $old_email, $network_id ) {
+	$send = true;
+
+	// Don't send the notification to the default 'admin_email' value.
+	if ( 'you@example.com' === $old_email ) {
+		$send = false;
+	}
+
 	/**
 	 * Filters whether to send the network admin email change notification email.
 	 *
@@ -2852,7 +2829,7 @@ function wp_network_admin_email_change_notification( $option_name, $new_email, $
 	 * @param string $new_email  The new network admin email address.
 	 * @param int    $network_id ID of the network.
 	 */
-	$send = apply_filters( 'send_network_admin_email_change_email', true, $old_email, $new_email, $network_id );
+	$send = apply_filters( 'send_network_admin_email_change_email', $send, $old_email, $new_email, $network_id );
 
 	if ( ! $send ) {
 		return;

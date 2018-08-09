@@ -1,11 +1,11 @@
-/* global postL10n, ajaxurl, wpAjax, setPostThumbnailL10n, postboxes, pagenow, tinymce, alert, deleteUserSetting */
-/* global theList:true, theExtraList:true, getUserSetting, setUserSetting, commentReply */
-
 /**
- * Contains all dynamic functionality needed on post and term pages.
+ * @file Contains all dynamic functionality needed on post and term pages.
  *
- * @file Control page and term functionality.
+ * @output wp-admin/js/post.js
  */
+
+ /* global postL10n, ajaxurl, wpAjax, setPostThumbnailL10n, postboxes, pagenow, tinymce, alert, deleteUserSetting */
+ /* global theList:true, theExtraList:true, getUserSetting, setUserSetting, commentReply */
 
 var commentsBox, WPSetThumbnailHTML, WPSetThumbnailID, WPRemoveThumbnail, wptitlehint, makeSlugeditClickable, editPermalink;
 // Backwards compatibility: prevent fatal errors.
@@ -934,9 +934,8 @@ jQuery(document).ready( function($) {
 	}
 
 	/**
-	 * Handle the editing of the post_name. Create the required HTML elements and update the changes via AJAX.
-	 *
-	 * @summary Permalink aka slug aka post_name editing
+	 * Handle the editing of the post_name. Create the required HTML elements and
+	 * update the changes via AJAX.
 	 *
 	 * @global
 	 *
@@ -1041,9 +1040,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/**
-	 * Add screen reader text to the title prompt when needed.
-	 *
-	 * @summary Title screen reader text handler.
+	 * Adds screen reader text to the title prompt when needed.
 	 *
 	 * @param {string} id Optional. HTML ID to add the screen reader helper text to.
 	 *
@@ -1272,4 +1269,5 @@ jQuery(document).ready( function($) {
 
 		update();
 	} );
+
 } )( jQuery, new wp.utils.WordCounter() );

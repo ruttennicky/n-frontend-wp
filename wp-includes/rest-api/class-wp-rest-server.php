@@ -459,7 +459,6 @@ class WP_REST_Server {
 	 * direct output.
 	 *
 	 * @since 4.4.0
-	 * @static
 	 *
 	 * @param WP_REST_Response $response Response to extract links from.
 	 * @return array Map of link relation to list of link hashes.
@@ -492,7 +491,6 @@ class WP_REST_Server {
 	 * direct output.
 	 *
 	 * @since 4.5.0
-	 * @static
 	 *
 	 * @param WP_REST_Response $response Response to extract links from.
 	 * @return array Map of link relation to list of link hashes.
@@ -915,7 +913,7 @@ class WP_REST_Server {
 						if ( is_wp_error( $permission ) ) {
 							$response = $permission;
 						} elseif ( false === $permission || null === $permission ) {
-							$response = new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to do that.' ), array( 'status' => 403 ) );
+							$response = new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to do that.' ), array( 'status' => rest_authorization_required_code() ) );
 						}
 					}
 				}
@@ -1024,16 +1022,15 @@ class WP_REST_Server {
 	public function get_index( $request ) {
 		// General site data.
 		$available = array(
-			'name'                => get_option( 'blogname' ),
-			'description'         => get_option( 'blogdescription' ),
-			'url'                 => get_option( 'siteurl' ),
-			'home'                => home_url(),
-			'gmt_offset'          => get_option( 'gmt_offset' ),
-			'timezone_string'     => get_option( 'timezone_string' ),
-			'permalink_structure' => get_option( 'permalink_structure' ),
-			'namespaces'          => array_keys( $this->namespaces ),
-			'authentication'      => array(),
-			'routes'              => $this->get_data_for_routes( $this->get_routes(), $request['context'] ),
+			'name'            => get_option( 'blogname' ),
+			'description'     => get_option( 'blogdescription' ),
+			'url'             => get_option( 'siteurl' ),
+			'home'            => home_url(),
+			'gmt_offset'      => get_option( 'gmt_offset' ),
+			'timezone_string' => get_option( 'timezone_string' ),
+			'namespaces'      => array_keys( $this->namespaces ),
+			'authentication'  => array(),
+			'routes'          => $this->get_data_for_routes( $this->get_routes(), $request['context'] ),
 		);
 
 		$response = new WP_REST_Response( $available );

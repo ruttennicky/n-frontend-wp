@@ -226,6 +226,23 @@ function create_initial_post_types() {
 		)
 	);
 
+	register_post_type(
+		'user_request', array(
+			'labels'           => array(
+				'name'          => __( 'User Requests' ),
+				'singular_name' => __( 'User Request' ),
+			),
+			'public'           => false,
+			'_builtin'         => true, /* internal use only. don't use this when registering your own post type. */
+			'hierarchical'     => false,
+			'rewrite'          => false,
+			'query_var'        => false,
+			'can_export'       => false,
+			'delete_with_user' => false,
+			'supports'         => array(),
+		)
+	);
+
 	register_post_status(
 		'publish', array(
 			'label'       => _x( 'Published', 'post status' ),
@@ -292,6 +309,42 @@ function create_initial_post_types() {
 	register_post_status(
 		'inherit', array(
 			'label'               => 'inherit',
+			'internal'            => true,
+			'_builtin'            => true, /* internal use only. */
+			'exclude_from_search' => false,
+		)
+	);
+
+	register_post_status(
+		'request-pending', array(
+			'label'               => _x( 'Pending', 'request status' ),
+			'internal'            => true,
+			'_builtin'            => true, /* internal use only. */
+			'exclude_from_search' => false,
+		)
+	);
+
+	register_post_status(
+		'request-confirmed', array(
+			'label'               => _x( 'Confirmed', 'request status' ),
+			'internal'            => true,
+			'_builtin'            => true, /* internal use only. */
+			'exclude_from_search' => false,
+		)
+	);
+
+	register_post_status(
+		'request-failed', array(
+			'label'               => _x( 'Failed', 'request status' ),
+			'internal'            => true,
+			'_builtin'            => true, /* internal use only. */
+			'exclude_from_search' => false,
+		)
+	);
+
+	register_post_status(
+		'request-completed', array(
+			'label'               => _x( 'Completed', 'request status' ),
 			'internal'            => true,
 			'_builtin'            => true, /* internal use only. */
 			'exclude_from_search' => false,
@@ -783,6 +836,22 @@ function get_page_statuses() {
 }
 
 /**
+ * Return statuses for privacy requests.
+ *
+ * @since 5.0.0
+ *
+ * @return array
+ */
+function _wp_privacy_statuses() {
+	return array(
+		'request-pending'   => __( 'Pending' ),      // Pending confirmation from user.
+		'request-confirmed' => __( 'Confirmed' ),    // User has confirmed the action.
+		'request-failed'    => __( 'Failed' ),       // User failed to confirm the action.
+		'request-completed' => __( 'Completed' ),    // Admin has handled the request.
+	);
+}
+
+/**
  * Register a post status. Do not use before init.
  *
  * A simple function for creating or modifying a post status based on the
@@ -971,7 +1040,11 @@ function is_post_type_hierarchical( $post_type ) {
 }
 
 /**
- * Check if a post type is registered.
+ * Determines whether a post type is registered.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 3.0.0
  *
@@ -1004,7 +1077,7 @@ function get_post_type( $post = null ) {
  * Retrieves a post type object by name.
  *
  * @since 3.0.0
- * @since 4.6.0 Object returned is now an instance of WP_Post_Type.
+ * @since 4.6.0 Object returned is now an instance of `WP_Post_Type`.
  *
  * @global array $wp_post_types List of post types.
  *
@@ -1039,7 +1112,7 @@ function get_post_type_object( $post_type ) {
  * @param string       $operator Optional. The logical operation to perform. 'or' means only one
  *                               element from the array needs to match; 'and' means all elements
  *                               must match; 'not' means no elements may match. Default 'and'.
- * @return array A list of post type names or objects.
+ * @return string[]|WP_Post_Type[] An array of post type names or objects.
  */
 function get_post_types( $args = array(), $output = 'names', $operator = 'and' ) {
 	global $wp_post_types;
@@ -1067,8 +1140,8 @@ function get_post_types( $args = array(), $output = 'names', $operator = 'and' )
  * @since 3.0.0 The `show_ui` argument is now enforced on the new post screen.
  * @since 4.4.0 The `show_ui` argument is now enforced on the post type listing
  *              screen and post editing screen.
- * @since 4.6.0 Post type object returned is now an instance of WP_Post_Type.
- * @since 4.7.0 Introduced `show_in_rest`, 'rest_base' and 'rest_controller_class'
+ * @since 4.6.0 Post type object returned is now an instance of `WP_Post_Type`.
+ * @since 4.7.0 Introduced `show_in_rest`, `rest_base` and `rest_controller_class`
  *              arguments to register the post type in REST API.
  *
  * @global array $wp_post_types List of post types.
@@ -1214,7 +1287,7 @@ function register_post_type( $post_type, $args = array() ) {
 	 * Fires after a post type is registered.
 	 *
 	 * @since 3.3.0
-	 * @since 4.6.0 Converted the `$post_type` parameter to accept a WP_Post_Type object.
+	 * @since 4.6.0 Converted the `$post_type` parameter to accept a `WP_Post_Type` object.
 	 *
 	 * @param string       $post_type        Post type.
 	 * @param WP_Post_Type $post_type_object Arguments used to register the post type.
@@ -1443,7 +1516,7 @@ function _post_type_meta_capabilities( $capabilities = null ) {
  *              and `use_featured_image` labels.
  * @since 4.4.0 Added the `archives`, `insert_into_item`, `uploaded_to_this_item`, `filter_items_list`,
  *              `items_list_navigation`, and `items_list` labels.
- * @since 4.6.0 Converted the `$post_type` parameter to accept a WP_Post_Type object.
+ * @since 4.6.0 Converted the `$post_type` parameter to accept a `WP_Post_Type` object.
  * @since 4.7.0 Added the `view_items` and `attributes` labels.
  *
  * @access private
@@ -1712,7 +1785,7 @@ function set_post_type( $post_id = 0, $post_type = 'post' ) {
  *
  * @since 4.4.0
  * @since 4.5.0 Added the ability to pass a post type name in addition to object.
- * @since 4.6.0 Converted the `$post_type` parameter to accept a WP_Post_Type object.
+ * @since 4.6.0 Converted the `$post_type` parameter to accept a `WP_Post_Type` object.
  *
  * @param string|WP_Post_Type $post_type Post type name or object.
  * @return bool Whether the post type should be considered viewable.
@@ -1917,6 +1990,39 @@ function delete_post_meta_by_key( $post_meta_key ) {
 }
 
 /**
+ * Registers a meta key for posts.
+ *
+ * @since 4.9.8
+ *
+ * @param string $post_type Post type to register a meta key for. Pass an empty string
+ *                          to register the meta key across all existing post types.
+ * @param string $meta_key  The meta key to register.
+ * @param array  $args      Data used to describe the meta key when registered. See
+ *                          {@see register_meta()} for a list of supported arguments.
+ * @return bool True if the meta key was successfully registered, false if not.
+ */
+function register_post_meta( $post_type, $meta_key, array $args ) {
+	$args['object_subtype'] = $post_type;
+
+	return register_meta( 'post', $meta_key, $args );
+}
+
+/**
+ * Unregisters a meta key for posts.
+ *
+ * @since 4.9.8
+ *
+ * @param string $post_type Post type the meta key is currently registered for. Pass
+ *                          an empty string if the meta key is registered across all
+ *                          existing post types.
+ * @param string $meta_key  The meta key to unregister.
+ * @return bool True on success, false if the meta key was not previously registered.
+ */
+function unregister_post_meta( $post_type, $meta_key ) {
+	return unregister_meta_key( 'post', $meta_key, $post_type );
+}
+
+/**
  * Retrieve post meta fields, based on post ID.
  *
  * The post meta fields are retrieved from the cache where possible,
@@ -1981,10 +2087,14 @@ function get_post_custom_values( $key = '', $post_id = 0 ) {
 }
 
 /**
- * Check if post is sticky.
+ * Determines whether a post is sticky.
  *
  * Sticky posts should remain at the top of The Loop. If the post ID is not
  * given, then The Loop ID for the current post will be used.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.7.0
  *
@@ -3689,12 +3799,26 @@ function wp_insert_post( $postarr, $wp_error = false ) {
 		/**
 		 * Fires once an existing post has been updated.
 		 *
+		 * The dynamic portion of the hook name, `$post->post_type`, refers to
+		 * the post type slug.
+		 *
+		 * @since 5.0.0
+		 *
+		 * @param int     $post_ID Post ID.
+		 * @param WP_Post $post    Post object.
+		 */
+		do_action( "edit_post_{$post->post_type}", $post_ID, $post );
+
+		/**
+		 * Fires once an existing post has been updated.
+		 *
 		 * @since 1.2.0
 		 *
 		 * @param int     $post_ID Post ID.
 		 * @param WP_Post $post    Post object.
 		 */
 		do_action( 'edit_post', $post_ID, $post );
+
 		$post_after = get_post( $post_ID );
 
 		/**
@@ -3841,6 +3965,9 @@ function wp_publish_post( $post ) {
 	wp_transition_post_status( 'publish', $old_status, $post );
 
 	/** This action is documented in wp-includes/post.php */
+	do_action( "edit_post_{$post->post_type}", $post->ID, $post );
+
+	/** This action is documented in wp-includes/post.php */
 	do_action( 'edit_post', $post->ID, $post );
 
 	/** This action is documented in wp-includes/post.php */
@@ -3903,7 +4030,7 @@ function check_and_publish_future_post( $post_id ) {
  * @return string Unique slug for the post, based on $post_name (with a -1, -2, etc. suffix)
  */
 function wp_unique_post_slug( $slug, $post_ID, $post_status, $post_type, $post_parent ) {
-	if ( in_array( $post_status, array( 'draft', 'pending', 'auto-draft' ) ) || ( 'inherit' == $post_status && 'revision' == $post_type ) ) {
+	if ( in_array( $post_status, array( 'draft', 'pending', 'auto-draft' ) ) || ( 'inherit' == $post_status && 'revision' == $post_type ) || 'user_request' === $post_type ) {
 		return $slug;
 	}
 
@@ -4099,7 +4226,9 @@ function wp_set_post_tags( $post_id = 0, $tags = '', $append = false ) {
  *
  * @param int          $post_id  Optional. The Post ID. Does not default to the ID of the global $post.
  * @param string|array $tags     Optional. An array of terms to set for the post, or a string of terms
- *                               separated by commas. Default empty.
+ *                               separated by commas. Hierarchical taxonomies must always pass IDs rather
+ *                               than names so that children with the same names but different parents
+ *                               aren't confused. Default empty.
  * @param string       $taxonomy Optional. Taxonomy name. Default 'post_tag'.
  * @param bool         $append   Optional. If true, don't delete existing terms, just add on. If false,
  *                               replace the terms with the new terms. Default false.
@@ -4246,8 +4375,8 @@ function wp_transition_post_status( $new_status, $old_status, $post ) {
  * Add a URL to those already pinged.
  *
  * @since 1.5.0
- * @since 4.7.0 $post_id can be a WP_Post object.
- * @since 4.7.0 $uri can be an array of URIs.
+ * @since 4.7.0 `$post_id` can be a WP_Post object.
+ * @since 4.7.0 `$uri` can be an array of URIs.
  *
  * @global wpdb $wpdb WordPress database abstraction object.
  *
@@ -4328,10 +4457,10 @@ function get_enclosed( $post_id ) {
  *
  * @since 1.5.0
  *
- * @since 4.7.0 $post_id can be a WP_Post object.
+ * @since 4.7.0 `$post_id` can be a WP_Post object.
  *
  * @param int|WP_Post $post_id Post ID or object.
- * @return array
+ * @return bool|string[] Array of URLs already pinged for the given post, false if the post is not found.
  */
 function get_pung( $post_id ) {
 	$post = get_post( $post_id );
@@ -4347,7 +4476,7 @@ function get_pung( $post_id ) {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param array $pung Array of URLs already pinged for the given post.
+	 * @param string[] $pung Array of URLs already pinged for the given post.
 	 */
 	return apply_filters( 'get_pung', $pung );
 }
@@ -4356,7 +4485,7 @@ function get_pung( $post_id ) {
  * Retrieve URLs that need to be pinged.
  *
  * @since 1.5.0
- * @since 4.7.0 $post_id can be a WP_Post object.
+ * @since 4.7.0 `$post_id` can be a WP_Post object.
  *
  * @param int|WP_Post $post_id Post Object or ID
  * @return array
@@ -5043,7 +5172,11 @@ function get_pages( $args = array() ) {
 //
 
 /**
- * Check if the attachment URI is local one and is really an attachment.
+ * Determines whether an attachment URI is local and really an attachment.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.0.0
  *
@@ -5195,42 +5328,79 @@ function wp_delete_attachment( $post_id, $force_delete = false ) {
 	/** This action is documented in wp-includes/post.php */
 	do_action( 'deleted_post', $post_id );
 
+	wp_delete_attachment_files( $post_id, $meta, $backup_sizes, $file );
+
+	clean_post_cache( $post );
+
+	return $post;
+}
+
+/**
+ * Deletes all files that belong to the given attachment.
+ *
+ * @since 4.9.7
+ *
+ * @param int    $post_id      Attachment ID.
+ * @param array  $meta         The attachment's meta data.
+ * @param array  $backup_sizes The meta data for the attachment's backup images.
+ * @param string $file         Absolute path to the attachment's file.
+ * @return bool True on success, false on failure.
+ */
+function wp_delete_attachment_files( $post_id, $meta, $backup_sizes, $file ) {
+	global $wpdb;
+
 	$uploadpath = wp_get_upload_dir();
+	$deleted    = true;
 
 	if ( ! empty( $meta['thumb'] ) ) {
 		// Don't delete the thumb if another attachment uses it.
 		if ( ! $wpdb->get_row( $wpdb->prepare( "SELECT meta_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attachment_metadata' AND meta_value LIKE %s AND post_id <> %d", '%' . $wpdb->esc_like( $meta['thumb'] ) . '%', $post_id ) ) ) {
 			$thumbfile = str_replace( basename( $file ), $meta['thumb'], $file );
-			/** This filter is documented in wp-includes/functions.php */
-			$thumbfile = apply_filters( 'wp_delete_file', $thumbfile );
-			@ unlink( path_join( $uploadpath['basedir'], $thumbfile ) );
+			if ( ! empty( $thumbfile ) ) {
+				$thumbfile = path_join( $uploadpath['basedir'], $thumbfile );
+				$thumbdir  = path_join( $uploadpath['basedir'], dirname( $file ) );
+
+				if ( ! wp_delete_file_from_directory( $thumbfile, $thumbdir ) ) {
+					$deleted = false;
+				}
+			}
 		}
 	}
 
 	// Remove intermediate and backup images if there are any.
 	if ( isset( $meta['sizes'] ) && is_array( $meta['sizes'] ) ) {
+		$intermediate_dir = path_join( $uploadpath['basedir'], dirname( $file ) );
 		foreach ( $meta['sizes'] as $size => $sizeinfo ) {
 			$intermediate_file = str_replace( basename( $file ), $sizeinfo['file'], $file );
-			/** This filter is documented in wp-includes/functions.php */
-			$intermediate_file = apply_filters( 'wp_delete_file', $intermediate_file );
-			@ unlink( path_join( $uploadpath['basedir'], $intermediate_file ) );
+			if ( ! empty( $intermediate_file ) ) {
+				$intermediate_file = path_join( $uploadpath['basedir'], $intermediate_file );
+
+				if ( ! wp_delete_file_from_directory( $intermediate_file, $intermediate_dir ) ) {
+					$deleted = false;
+				}
+			}
 		}
 	}
 
 	if ( is_array( $backup_sizes ) ) {
+		$del_dir = path_join( $uploadpath['basedir'], dirname( $meta['file'] ) );
 		foreach ( $backup_sizes as $size ) {
 			$del_file = path_join( dirname( $meta['file'] ), $size['file'] );
-			/** This filter is documented in wp-includes/functions.php */
-			$del_file = apply_filters( 'wp_delete_file', $del_file );
-			@ unlink( path_join( $uploadpath['basedir'], $del_file ) );
+			if ( ! empty( $del_file ) ) {
+				$del_file = path_join( $uploadpath['basedir'], $del_file );
+
+				if ( ! wp_delete_file_from_directory( $del_file, $del_dir ) ) {
+					$deleted = false;
+				}
+			}
 		}
 	}
 
-	wp_delete_file( $file );
+	if ( ! wp_delete_file_from_directory( $file, $uploadpath['basedir'] ) ) {
+		$deleted = false;
+	}
 
-	clean_post_cache( $post );
-
-	return $post;
+	return $deleted;
 }
 
 /**
@@ -5518,7 +5688,11 @@ function wp_attachment_is( $type, $post = null ) {
 }
 
 /**
- * Checks if the attachment is an image.
+ * Determines whether an attachment is an image.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.1.0
  * @since 4.2.0 Modified into wrapper for wp_attachment_is() and
@@ -5720,7 +5894,7 @@ function wp_check_for_changed_slugs( $post_id, $post, $post_before ) {
  * The most logically usage of this function is redirecting changed post objects, so
  * that those that linked to an changed post will be redirected to the new post.
  *
- * @since 4.9.2
+ * @since 4.9.3
  *
  * @param int     $post_id     Post ID.
  * @param WP_Post $post        The Post Object

@@ -30,7 +30,6 @@ class WP_oEmbed {
 	 * A list of an early oEmbed providers.
 	 *
 	 * @since 4.0.0
-	 * @static
 	 * @var array
 	 */
 	public static $early_providers = array();
@@ -216,7 +215,7 @@ class WP_oEmbed {
 		 *
 		 * @since 2.9.0
 		 *
-		 * @param array $providers An array of popular oEmbed providers.
+		 * @param array[] $providers An array of arrays containing data about popular oEmbed providers.
 		 */
 		$this->providers = apply_filters( 'oembed_providers', $providers );
 
@@ -290,7 +289,6 @@ class WP_oEmbed {
 	 *
 	 * The just-in-time addition is for the benefit of the {@see 'oembed_providers'} filter.
 	 *
-	 * @static
 	 * @since 4.0.0
 	 *
 	 * @see wp_oembed_add_provider()
@@ -318,7 +316,6 @@ class WP_oEmbed {
 	 * The just-in-time removal is for the benefit of the {@see 'oembed_providers'} filter.
 	 *
 	 * @since 4.0.0
-	 * @static
 	 *
 	 * @see wp_oembed_remove_provider()
 	 *
@@ -449,9 +446,9 @@ class WP_oEmbed {
 			 *
 			 * @since 2.9.0
 			 *
-			 * @param array $format Array of oEmbed link types. Accepts 'application/json+oembed',
-			 *                      'text/xml+oembed', and 'application/xml+oembed' (incorrect,
-			 *                      used by at least Vimeo).
+			 * @param string[] $format Array of oEmbed link types. Accepts 'application/json+oembed',
+			 *                         'text/xml+oembed', and 'application/xml+oembed' (incorrect,
+			 *                         used by at least Vimeo).
 			 */
 			$linktypes = apply_filters(
 				'oembed_linktypes', array(

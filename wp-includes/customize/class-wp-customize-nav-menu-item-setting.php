@@ -468,10 +468,10 @@ class WP_Customize_Nav_Menu_Item_Setting extends WP_Customize_Setting {
 	 *
 	 * @see wp_get_nav_menu_items()
 	 *
-	 * @param array  $items An array of menu item post objects.
-	 * @param object $menu  The menu object.
-	 * @param array  $args  An array of arguments used to retrieve menu item objects.
-	 * @return array Array of menu items,
+	 * @param WP_Post[] $items An array of menu item post objects.
+	 * @param WP_Term   $menu  The menu object.
+	 * @param array     $args  An array of arguments used to retrieve menu item objects.
+	 * @return WP_Post[] Array of menu item objects.
 	 */
 	public function filter_wp_get_nav_menu_items( $items, $menu, $args ) {
 		$this_item                = $this->value();
@@ -538,14 +538,13 @@ class WP_Customize_Nav_Menu_Item_Setting extends WP_Customize_Setting {
 	 * Re-apply the tail logic also applied on $items by wp_get_nav_menu_items().
 	 *
 	 * @since 4.3.0
-	 * @static
 	 *
 	 * @see wp_get_nav_menu_items()
 	 *
-	 * @param array  $items An array of menu item post objects.
-	 * @param object $menu  The menu object.
-	 * @param array  $args  An array of arguments used to retrieve menu item objects.
-	 * @return array Array of menu items,
+	 * @param WP_Post[] $items An array of menu item post objects.
+	 * @param WP_Term   $menu  The menu object.
+	 * @param array     $args  An array of arguments used to retrieve menu item objects.
+	 * @return WP_Post[] Array of menu item objects.
 	 */
 	public static function sort_wp_get_nav_menu_items( $items, $menu, $args ) {
 		// @todo We should probably re-apply some constraints imposed by $args.

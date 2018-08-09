@@ -728,7 +728,7 @@ function wp_admin_bar_edit_menu( $wp_admin_bar ) {
 		} elseif ( 'term' == $current_screen->base
 			&& isset( $tag ) && is_object( $tag ) && ! is_wp_error( $tag )
 			&& ( $tax = get_taxonomy( $tag->taxonomy ) )
-			&& $tax->public ) {
+			&& is_taxonomy_viewable( $tax ) ) {
 			$wp_admin_bar->add_menu(
 				array(
 					'id'    => 'view',
@@ -1117,7 +1117,11 @@ function show_admin_bar( $show ) {
 }
 
 /**
- * Determine whether the admin bar should be showing.
+ * Determines whether the admin bar should be showing.
+ *
+ * For more information on this and similar theme functions, check out
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 3.1.0
  *
