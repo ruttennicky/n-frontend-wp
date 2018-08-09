@@ -21,7 +21,6 @@ php wp-cli.phar config create --dbname="$dbname" --dbuser="$dbuser" --dbpass="$d
 php wp-cli.phar db create
 php wp-cli.phar core install --url="$sitehost" --title="$sitetitle"  --admin_user="$adminuser" --admin_password="$adminpass" --admin_email="$adminemail"
 php wp-cli.phar theme activate nfrontend
-#php wp-cli.phar plugin delete hello akismet
 php wp-cli.phar plugin install wordpress-seo wp-html-mail ninja-forms mailchimp-for-wp regenerate-thumbnails postmark-approved-wordpress-plugin
 php wp-cli.phar core update
 php wp-cli.phar core update-db
