@@ -1,6 +1,7 @@
 *.log
 *.lock
 .DS_Store
+package-lock.json
 wp-config.php
 wp-content/advanced-cache.php
 wp-content/backup-db/
