@@ -5,8 +5,8 @@
   "license": "GPL-3.0",
   "repository": "git://github.com/ruttennicky/n-frontend.git",
   "dependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "gulp": "^3.9.1",
+    "bootstrap": "^4.0.0",
+    "gulp": "latest",
     "gulp-concat": "latest",
     "gulp-filesize": "latest",
     "gulp-html-minifier": "latest",

@@ -15,7 +15,7 @@ Template: nfrontend
         ==========================
 */
 
-@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../../nfrontend/src/sass/_variables";
 @import "_custom_variables";
 @import "../../../nfrontend/src/sass/_helpers";

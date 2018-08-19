@@ -5,52 +5,19 @@
 */
 
 header {
-
-	h1 {
-
+	
+	/* 	====== FOR DEMO PURPOSE ====== */
+	
+	.bg-jumbotron {
+		background:url(https://unsplash.it/200/300/?blur) top left no-repeat;
+		background-size:cover;
 	}
 
-	nav {
-
-		ul {
-			@extend .list-inline;
-			@extend .pull-right;
-
-			li {
-
-				a {
-					@extend .cta-primary;
-					@extend .very-small;
-				}
-
-				&:last-child {
-
-					a {
-						@extend .f-bold;
-						@extend .cta-secondary-inverse;
-					}
-
-					&.current-menu-item {
-
-						a {
-							background: none;
-						}
-					}
-				}
-
-				&.current-menu-item {
-					a {
-						color:$brand-secondary;
-						@include border(1px,solid,$brand-secondary,full);
-					}
-				}
-			}
-		}
-	}
 }
 
 
 main {
+	
 
 
 }
@@ -59,25 +26,4 @@ main {
 footer {
 
 
-}
-
-#services {
-		background: url(images/swirl_vector.svg) no-repeat center left;
-  	background-size: 100% auto;
-}
-
-.col-xs-05 						{			@include make-sm-column(0.5, 0);				}
-.col-md-offset-05			{			@include make-md-column-offset(0.5);		}
-
-.col-md-offset-15			{			@include make-md-column-offset(1.5);		}
-
-@media (max-width: $screen-xs-max) {
-	.xs-text-left 	{		text-align:left;		}
-
-	.xs-p-top-20		{		@include padding(20px,top);	}
-}
-
-@media (min-width: $screen-md-min) {
-		.md-text-left		{		text-align:left;		}
-		.md-text-right 	{		text-align:right;		}
 }

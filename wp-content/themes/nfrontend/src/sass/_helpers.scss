@@ -7,55 +7,55 @@
 @mixin margin($value,$side)
 {
     @if $side == left {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             margin-left:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             margin-left:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             margin-left:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             margin-left:$value;
         }
     } @else if $side == right {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             margin-right:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             margin-right:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             margin-right:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             margin-right:$value;
         }
     } @else if $side == top {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             margin-top:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             margin-top:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             margin-top:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             margin-top:$value;
         }
     } @else if $side == bottom {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             margin-bottom:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             margin-bottom:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             margin-bottom:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             margin-bottom:$value;
         }
     } @else {     margin:0;       }
@@ -64,55 +64,55 @@
 @mixin padding($value,$side)
 {
     @if $side == left {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             padding-left:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             padding-left:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             padding-left:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             padding-left:$value;
         }
     } @else if $side == right {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             padding-right:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             padding-right:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             padding-right:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             padding-right:$value;
         }
     } @else if $side == top {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             padding-top:$value*0.75;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             padding-top:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             padding-top:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             padding-top:$value;
         }
     } @else if $side == bottom {
-        @media (max-width: $screen-xs-max) {
+        @include media-breakpoint-between(xs, sm) {
             padding-bottom:$value*0.6;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-breakpoint-between(sm, md) {
             padding-bottom:$value*0.75;
         }
-        @media (min-width: $screen-md-min) {
+        @include media-breakpoint-between(md, lg) {
             padding-bottom:$value;
         }
-        @media (min-width: $screen-lg-min) {
+        @include media-breakpoint-up(lg) {
             padding-bottom:$value;
         }
     } @else {     padding:0;       }
@@ -140,16 +140,16 @@
 }
 
 @mixin height($value) {
-    @media (max-width: $screen-xs-max) {
+    @include media-breakpoint-between(xs, sm) {
         height:$value*0.6;
     }
-    @media (min-width: $screen-sm-min) {
+    @include media-breakpoint-between(sm, md) {
         height:$value*0.85;
     }
-    @media (min-width: $screen-md-min) {
+    @include media-breakpoint-between(md, lg) {
         height:$value;
     }
-    @media (min-width: $screen-lg-min) {
+    @include media-breakpoint-up(lg) {
         height:$value;
     }
 }
@@ -163,20 +163,20 @@
 }
 
 @mixin placeholder($color) {
-  &::-webkit-input-placeholder {
-    color: $color;
-  }
-  &:-moz-placeholder {
-    color: $color;
-    opacity: $opacity;
-  }
-  &::-moz-placeholder {
-    color: $color;
-    opacity: $opacity;
-  }
-  &:-ms-input-placeholder {
-    color: $color;
-  }
+	::-webkit-input-placeholder {
+	    color:    $color;
+	}
+	:-moz-placeholder {
+	   color:    $color;
+	   opacity:  $opacity;
+	}
+	::-moz-placeholder {
+	   color:    $color;
+	   opacity:  $opacity;
+	}
+	:-ms-input-placeholder {
+	   color:    $color;
+	}
 }
 
 @mixin shadow($hor,$ver,$blur,$width,$color) {
@@ -206,17 +206,9 @@
     }
 }
 
-@mixin vertical-align($position: relative) {
-  position: $position;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
 
 /*
-		    ==========================
+		==========================
         ======   PADDINGS   ======
         ==========================
 */
@@ -534,41 +526,39 @@
 .f-s-3	{	font-size:3em;	  }
 .f-s-5  {  font-size:5em;     }
 
-.f-bold      {   font-weight: 700;     		  }
-.f-non-bold  {   font-weight: 300;     		  }
-.f-italic	   {	 font-style: italic;   		  }
-.f-upper	   {	 text-transform: uppercase;	}
+.f-bold      {   font-weight: 700;     		}
+.f-non-bold  {   font-weight: 300;     		}
+.f-italic	 {	 font-style: italic;   		}
+.f-upper	 {	 text-transform: uppercase;	}
 
 
-.f-white    	   {  	color:$white;   			  }
+.f-white    	 {  	color:$white;   			}
 .f-white-opacity {		color:$white-opacity;		}
-.f-black    	   {  	color:$black;   			  }
-.f-grey     	   {  	color:$grey;    			  }
-.f-darker-grey   {    color:$darker-grey;     }
-.f-red			     {  	color:$red;					    }
-.f-green		     {		color:$green;				    }
+.f-black    	 {  	color:$black;   			}
+.f-grey     	 {  	color:$grey;    			}
+.f-red			 {  	color:$red;					}
+.f-green		 {		color:$green;				}
 
-.f-primary 		   {  	color:$brand-primary;		}
-.f-secondary 	   {		color:$brand-secondary;	}
-.f-third		     { 		color:$brand-third;			}
-.f-fourth		     {		color:$brand-fourth;		}
+.f-primary 		 {  	color:$brand-primary;		}
+.f-secondary 	 {		color:$brand-secondary;		}
+.f-third		 { 		color:$brand-third;			}
+.f-fourth		 {		color:$brand-fourth;		}
 
-.f-grey			     {		color:$grey;				    }
-.f-light-grey	   {		color:$light-grey;			}
-.f-lightest-grey {		color:$lightest-grey;			}
+.f-grey			 {		color:$grey;				}
+.f-light-grey	 {		color:$light-grey;			}
 
-.f-f-primary 	   {   	font-family: $font-family       			}
-.f-f-secondary 	 {		font-family: $font-family-secondary;	}
-.f-f-third		   {		font-family: $font-family-third;			}
+.f-f-primary 	 {   	font-family: $font-family       			}
+.f-f-secondary 	 {		font-family: $font-family-secondary;		}
+.f-f-third		 {		font-family: $font-family-third;			}
 
-.l-h-1		{	line-height:1em;		  }
+.l-h-1		{	line-height:1em;		}
 .l-h-125	{	line-height:1.25em;		}
 .l-h-15		{	line-height:1.5em;		}
-.l-h-2		{	line-height:2em;		  }
+.l-h-2		{	line-height:2em;		}
 .l-h-25		{	line-height:2.5em;		}
-.l-h-3		{	line-height:3em;		  }
+.l-h-3		{	line-height:3em;		}
 .l-h-35		{	line-height:3.5em;		}
-.l-h-4		{	line-height:4em;		  }
+.l-h-4		{	line-height:4em;		}
 
 .transparant	{			opacity:$opacity;			}
 
@@ -596,24 +586,20 @@
 
 .js-hide        {       visibility: hidden;              }
 
-.h-1       	{       @include height(1px);        }
-.h-3       	{       @include height(3px);        }
-.h-5        {       @include height(5px);        }
-.h-10       {       @include height(10px);       }
-.h-35       {       @include height(35px);       }
-.h-50       {       @include height(50px);       }
-.h-100			{		    @include height(100px);		   }
-.h-125			{		    @include height(125px);		   }
-.h-150			{		    @include height(150px);		   }
-.h-300      {       @include height(300px);      }
-.h-400			{       @include height(400px);      }
-.h-500			{       @include height(500px);      }
+.h-1p       {       @include height(1px);        }
+.h-3p       {       @include height(3px);        }
+.h-5p       {       @include height(5px);        }
+.h-10p      {       @include height(10px);       }
+.h-50p      {       @include height(50px);       }
+.h-100p			{	    	@include height(100px);	     }
+.h-300p     {       @include height(300px);      }
+.h-400p			{       @include height(400px);      }
+.h-500p			{       @include height(500px);      }
 
 .h-2em			{		height:2em;					 }
 .h-3em			{		height:3em;					 }
 .h-4em			{		height:4em;					 }
 
-.h-100p			{		height:100%;				 }
 .h-auto			{		height:auto;				 }
 
 .w-15p			{		width:15%;					 }
@@ -622,8 +608,6 @@
 .w-35p			{		width:35%;					 }
 .w-50p			{		width:50%;					 }
 .w-65p      {   width:65%;           }
-
-.w-3em      {   width:3em;           }
 
 .a-l-0			{		left:0;						 }
 
@@ -636,16 +620,6 @@
 .a-b-0			{ 		bottom:0;					 }
 
 .block			{		display: block;				 }
-
-.v-text-center    {
-    p       {    @include vertical-align();    }
-}
-
-.resp-container {
-
-  img {  @extend .img-responsive;  }
-
-}
 
 
 /*
@@ -660,60 +634,60 @@
 .border-lightest-grey-left   {      @include border(1px,solid,$light-grey,left);        		}
 .border-lightest-grey-right  {      @include border(1px,solid,$light-grey,right);        		}
 .border-lightest-grey-top    {      @include border(1px,solid,$light-grey,top);        			}
-.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        	}
+.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        		}
 
 .border-light-grey-full    	 {      @include border(1px,solid,$light-grey,full);        		}
 .border-light-grey-left    	 {      @include border(1px,solid,$light-grey,left);        		}
 .border-light-grey-right   	 {      @include border(1px,solid,$light-grey,right);        		}
 .border-light-grey-top    	 {      @include border(1px,solid,$light-grey,top);        			}
-.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        	}
+.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        		}
 
-.border-grey-full    	 	 {      @include border(1px,solid,$grey,full);        				  }
-.border-grey-left    		 {      @include border(1px,solid,$grey,left);        				  }
-.border-grey-right   	 	 {	    @include border(1px,solid,$grey,right);        				  }
-.border-grey-top    	 	 {      @include border(1px,solid,$grey,top);        				    }
-.border-grey-bottom 	 	 {      @include border(1px,solid,$grey,bottom);        			  }
+.border-grey-full    	 	 {      @include border(1px,solid,$grey,full);        				}
+.border-grey-left    		 {      @include border(1px,solid,$grey,left);        				}
+.border-grey-right   	 	 {	    @include border(1px,solid,$grey,right);        				}
+.border-grey-top    	 	 {      @include border(1px,solid,$grey,top);        				}
+.border-grey-bottom 	 	 {      @include border(1px,solid,$grey,bottom);        			}
 
-.border-darker-grey-full	 {		@include border(1px,solid,$darker-grey,full);				    }
-.border-darker-grey-left	 {		@include border(1px,solid,$darker-grey,left);				    }
-.border-darker-grey-right	 {		@include border(1px,solid,$darker-grey,right);				  }
-.border-darker-grey-top	 	 {		@include border(1px,solid,$darker-grey,top);				    }
+.border-darker-grey-full	 {		@include border(1px,solid,$darker-grey,full);				}
+.border-darker-grey-left	 {		@include border(1px,solid,$darker-grey,left);				}
+.border-darker-grey-right	 {		@include border(1px,solid,$darker-grey,right);				}
+.border-darker-grey-top	 	 {		@include border(1px,solid,$darker-grey,top);				}
 .border-darker-grey-bottom	 {		@include border(1px,solid,$darker-grey,bottom);				}
 
 .border-dark-grey-full		 {		@include border(1px,solid,$dark-grey,full);					}
 .border-dark-grey-left	 	 {		@include border(1px,solid,$dark-grey,left);					}
 .border-dark-grey-right	 	 {		@include border(1px,solid,$dark-grey,right);				}
-.border-dark-grey-top	 	   {		@include border(1px,solid,$dark-grey,top);					}
+.border-dark-grey-top	 	 {		@include border(1px,solid,$dark-grey,top);					}
 .border-dark-grey-bottom 	 {		@include border(1px,solid,$dark-grey,bottom);				}
 
-.border-primary-full 		   {      @include border(1px,solid,$brand-primary,full);         }
-.border-primary-left 		   {      @include border(1px,solid,$brand-primary,left);        	}
-.border-primary-right 		 {      @include border(1px,solid,$brand-primary,right);        }
-.border-primary-top 		   {      @include border(1px,solid,$brand-primary,top);        	}
-.border-primary-bottom 		 {      @include border(1px,solid,$brand-primary,bottom);     	}
+.border-primary-full 		 {      @include border(1px,solid,$brand-primary,full);          	}
+.border-primary-left 		 {      @include border(1px,solid,$brand-primary,left);        		}
+.border-primary-right 		 {      @include border(1px,solid,$brand-primary,right);        	}
+.border-primary-top 		 {      @include border(1px,solid,$brand-primary,top);        		}
+.border-primary-bottom 		 {      @include border(1px,solid,$brand-primary,bottom);     		}
 
-.border-secondary-full 		 {      @include border(1px,solid,$brand-secondary,full);       }
-.border-secondary-left 		 {      @include border(1px,solid,$brand-secondary,left);       }
-.border-secondary-right 	 {      @include border(1px,solid,$brand-secondary,right);      }
-.border-secondary-top 		 {      @include border(1px,solid,$brand-secondary,top);        }
-.border-secondary-bottom 	 {      @include border(1px,solid,$brand-secondary,bottom);     }
+.border-secondary-full 		 {      @include border(1px,solid,$brand-secondary,full);        	}
+.border-secondary-left 		 {      @include border(1px,solid,$brand-secondary,left);        	}
+.border-secondary-right 	 {      @include border(1px,solid,$brand-secondary,right);        	}
+.border-secondary-top 		 {      @include border(1px,solid,$brand-secondary,top);        	}
+.border-secondary-bottom 	 {      @include border(1px,solid,$brand-secondary,bottom);     	}
 
 .border-third-full 			 {      @include border(1px,solid,$brand-third,full);        		}
 .border-third-left 			 {      @include border(1px,solid,$brand-third,left);        		}
-.border-third-right 		 {      @include border(1px,solid,$brand-third,right);        	}
+.border-third-right 		 {      @include border(1px,solid,$brand-third,right);        		}
 .border-third-top 			 {      @include border(1px,solid,$brand-third,top);        		}
 .border-third-bottom 		 {      @include border(1px,solid,$brand-third,bottom);     		}
 
-.border-fourth-full 		 {      @include border(1px,solid,$brand-fourth,full);        	}
-.border-fourth-left 		 {      @include border(1px,solid,$brand-fourth,left);        	}
-.border-fourth-right 		 {      @include border(1px,solid,$brand-fourth,right);        	}
+.border-fourth-full 		 {      @include border(1px,solid,$brand-fourth,full);        		}
+.border-fourth-left 		 {      @include border(1px,solid,$brand-fourth,left);        		}
+.border-fourth-right 		 {      @include border(1px,solid,$brand-fourth,right);        		}
 .border-fourth-top 			 {      @include border(1px,solid,$brand-fourth,top);        		}
-.border-fourth-bottom 	 {      @include border(1px,solid,$brand-fourth,bottom);     		}
+.border-fourth-bottom 		 {      @include border(1px,solid,$brand-fourth,bottom);     		}
 
 .border-white-full			 {	    @include border(1px,solid,$white,full);						}
 .border-white-left			 {	    @include border(1px,solid,$white,left);						}
 .border-white-right			 {	    @include border(1px,solid,$white,right);					}
-.border-white-top			   {	    @include border(1px,solid,$white,top);						}
+.border-white-top			 {	    @include border(1px,solid,$white,top);						}
 .border-white-bottom		 {	    @include border(1px,solid,$white,bottom);					}
 
 
@@ -723,21 +697,21 @@
         ========================
 */
 
-.bg-white		       {	    background:$white;					    }
-.bg-white-opacity  {		  background:$white-opacity;			}
-.bg-black		       {		  background:$black;					    }
-.bg-black-opacity  {		  background:$black-opacity;			}
+.bg-white		  {	    background:$white;					}
+.bg-white-opacity {		background:$white-opacity;			}
+.bg-black		  {		background:$black;					}
+.bg-black-opacity {		background:$black-opacity;			}
 
-.bg-primary 	     {      background:$brand-primary;  	  }
-.bg-secondary	     {	    background:$brand-secondary;		}
-.bg-third 	  	   {	    background:$brand-third; 			  }
-.bg-fourth		     {		  background:$brand-fourth;			  }
+.bg-primary 	  {     background:$brand-primary;  	    }
+.bg-secondary	  {	    background:$brand-secondary;		}
+.bg-third 	  	  {	    background:$brand-third; 			}
+.bg-fourth		  {		background:$brand-fourth;			}
 
-.bg-lightest-grey {		    background:$lightest-grey;			}
-.bg-light-grey	  {		    background:$light-grey;				  }
-.bg-grey		      {		    background:$grey;					      }
-.bg-darker-grey	  {		    background:$darker-grey;			  }
-.bg-dark-grey	    {		    background:$dark-grey;				  }
+.bg-lightest-grey {		background:$lightest-grey;			}
+.bg-light-grey	  {		background:$light-grey;				}
+.bg-grey		  {		background:$grey;					}
+.bg-darker-grey	  {		background:$darker-grey;			}
+.bg-dark-grey	  {		background:$dark-grey;				}
 
 .bg-primary-opacity		{		background:$brand-primary-opacity; 				}
 .bg-secondary-opacity	{		background:$brand-secondary-opacity; 			}
@@ -762,10 +736,10 @@
 
 ::-moz-selection {
     color: $white;
-    background: $brand-secondary;
+    background: $brand-primary;
 }
 
-ection {
+::selection {
     color: $white;
     background: $brand-primary;
 }
@@ -773,7 +747,6 @@ ection {
 body {
     font-family:    $font-family;
     font-size:      $font-size;
-    font-weight:    $font-weight;
     line-height:    $line-height;
     color:          $text-color;
 }
@@ -851,45 +824,36 @@ a {
     &.cta-primary {
     	display:inline-block;
     	text-align:center;
-    	//text-transform:uppercase;
+    	text-transform:uppercase;
     	color:$link-color-primary;
     	background:none;
-		  border:none;
+		border:none;
 
-		  @include border($cta-border-thickness,solid, $brand-third,full);
+		@include border(3px,solid, $link-color-primary,full);
     	@include border-radius($border-radius);
-    	@include padding(14px, top);
-    	@include padding(14px, bottom);
+    	@include padding(10px, top);
+    	@include padding(10px, bottom);
     	@include padding(40px, left);
     	@include padding(40px, right);
-      @extend .f-s-09;
 
     	&:hover,&:focus,&:active {
-    		//background:$link-color;
-    		color:$link-color-secondary;
+    		background:$link-color;
+    		color:$white;
 
-    		@include border($cta-border-thickness,solid, $link-color-secondary,full);
+    		@include border(3px,solid, $link-color-primary,full);
     	}
 
     	&.very-small {
 	    	@include padding(5px, top);
-			  @include padding(5px, bottom);
-        @include padding(20px, left);
-        @include padding(20px, right);
+			@include padding(5px, bottom);
     	}
 
     	&.tiny {
-			  @include padding(5px, left);
-			  @include padding(5px, right);
-			  @include padding(3px, top);
-			  @include padding(3px, bottom);
-		  }
-
-      &.match-input-fields {
-        @include padding(7px, top);
-        @include padding(7px, bottom);
-      }
-
+			@include padding(5px,left);
+			@include padding(5px,right);
+			@include padding(3px,top);
+			@include padding(3px,bottom);
+		}
     }
 
     &.cta-primary-inverse {
@@ -898,7 +862,7 @@ a {
     	color:$white;
     	background:$link-color-primary;
 
-    	@include border($cta-border-thickness,solid,$link-color-primary,full);
+    	@include border(3px,solid,$link-color-primary,full);
 
     	&:hover,&:focus,&:active {
     		background: none;
@@ -911,13 +875,13 @@ a {
 
         color:$link-color-secondary;
 
-        @include border($cta-border-thickness,solid,$link-color-secondary,full);
+        @include border(3px,solid,$link-color-secondary,full);
 
         &:hover,&:focus,&:active {
             background: $link-color-secondary;
             color: $white;
 
-            @include border($cta-border-thickness,solid,$link-color-secondary,full);
+            @include border(3px,solid,$link-color-secondary,full);
         }
     }
 
@@ -926,12 +890,12 @@ a {
 
         background:$link-color-secondary;
 
-        @include border($cta-border-thickness,solid,$link-color-secondary,full);
+        @include border(3px,solid,$link-color-secondary,full);
 
         &:hover,&:focus,&:active {
             color:$link-color-secondary;
 
-			@include border($cta-border-thickness,solid,$link-color-secondary,full);
+			@include border(3px,solid,$link-color-secondary,full);
         }
     }
 
@@ -940,13 +904,13 @@ a {
 
         color:$link-color-third;
 
-        @include border($cta-border-thickness,solid,$link-color-third,full);
+        @include border(3px,solid,$link-color-third,full);
 
         &:hover,&:focus,&:active {
-          background: $brand-third;
+            background: $brand-third;
         	color:$white;
 
-        	@include border($cta-border-thickness,solid,$link-color-third,full);
+        	@include border(3px,solid,$link-color-third,full);
         }
     }
 
@@ -955,12 +919,12 @@ a {
 
         background:$link-color-third;
 
-        @include border($cta-border-thickness,solid,$link-color-third,full);
+        @include border(3px,solid, $link-color-third,full);
 
         &:hover,&:focus,&:active {
             color:$link-color-third;
 
-            @include border($cta-border-thickness,solid,$link-color-third,full);
+            @include border(3px,solid, $link-color-third,full);
         }
     }
 
@@ -969,13 +933,13 @@ a {
 
         color:$link-color-fourth;
 
-        @include border($cta-border-thickness,solid,$link-color-fourth,full);
+        @include border(3px,solid,$link-color-fourth,full);
 
         &:hover,&:focus,&:active {
             background: $brand-fourth;
         	color:$white;
 
-        	@include border($cta-border-thickness,solid,$link-color-fourth,full);
+        	@include border(3px,solid,$link-color-fourth,full);
         }
     }
 
@@ -984,12 +948,12 @@ a {
 
         background:$link-color-fourth;
 
-        @include border($cta-border-thickness,solid, $link-color-fourth,full);
+        @include border(3px,solid, $link-color-fourth,full);
 
         &:hover,&:focus,&:active {
             color:$link-color-fourth;
 
-            @include border($cta-border-thickness,solid,$link-color-fourth,full);
+            @include border(3px,solid,$link-color-fourth,full);
         }
     }
 
@@ -998,13 +962,13 @@ a {
 
 		color:$white;
 
-		@include border($cta-border-thickness,solid,$white,full);
+		@include border(3px,solid,$white,full);
 
 		&:hover,&:focus,&:active {
             color:$black;
 			background:$white;
 
-            @include border($cta-border-thickness,solid,$white,full);
+            @include border(3px,solid,$white,full);
         }
     }
 
@@ -1013,13 +977,13 @@ a {
 
 	    color:$black;
 
-	    @include border($cta-border-thickness,solid,$black,full);
+	    @include border(3px,solid,$black,full);
 
 	    &:hover,&:focus,&:active {
             color:$white;
 			background:$black;
 
-            @include border($cta-border-thickness,solid,$black,full);
+            @include border(3px,solid,$black,full);
         }
     }
 
@@ -1036,22 +1000,21 @@ a {
             opacity: 0;
 
             -webkit-transform-style: preserve-3d;
-			      -moz-transform-style: preserve-3d;
-			      transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			transform-style: preserve-3d;
 
-			      @extend .p-absolute;
+			@extend .p-absolute;
 
             .caption-content {
                 color: $white;
-			          margin: auto;
-			          top: 50%; left: 50%;
-			          -webkit-transform: translate(-50%,-50%);
-			          -ms-transform: translate(-50%,-50%);
-			          transform: translate(-50%,-50%);
-
-                @extend .full-width;
-                @extend .text-center;
-                @extend .p-absolute;
+                text-align: center;
+			    width: 100%;
+			    margin: auto;
+			    position: absolute;
+			    top: 50%; left: 50%;
+			    -webkit-transform: translate(-50%,-50%);
+			    -ms-transform: translate(-50%,-50%);
+			    transform: translate(-50%,-50%);
             }
         }
 
@@ -1130,9 +1093,8 @@ form {
 
 	option {		background: $white;			}
 
-	input[type=submit],input[type=button],button {
-		@extend a.cta-primary;
-    cursor:pointer;
+	input[type=submit],button {
+		@extend a.cta-primary-inverse;
 
  		@include animation(0.5s);
 		@include padding(30px,left);
@@ -1160,8 +1122,7 @@ form {
 
 	textarea 			{			resize: vertical						}
 
-	input[type=submit],
-  input[type=button] 	{			@include padding(30px,right);			}
+	input[type=submit] 	{			@include padding(30px,right);			}
 
 	label {
 		display:block;
@@ -1171,10 +1132,10 @@ form {
 
 
 	&.dark {
-		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date], textarea, select {
+		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
 			color: $dark-text-color;
 
-			@include border(2px,solid,$white,full);
+			@include border(2px,solid,$light-grey,full);
 			@include placeholder($white);
 
 			&:focus {
@@ -1203,9 +1164,7 @@ form {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family:$font-family;
-  font-weight: $font-weight;
 	line-height:$line-height;
-  color:$heading-color;
 
 	@include margin(0,all);
 
@@ -1221,15 +1180,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size:2.2em;
+	font-size:2em;
 
 	p {		margin:0;		}
 }
-h2 {        font-size:2em;       }
-h3 {        font-size:1.75em;        }
-h4 {        font-size:1.5em;       }
-h5 {        font-size:1.25em;        }
-h6 {        font-size:1.1em;        	}
+h2 {        font-size:1.75em;       }
+h3 {        font-size:1.5em;        }
+h4 {        font-size:1.25em;       }
+h5 {        font-size:1.1em;        }
+h6 {        font-size:1em;        	}
 
 ul {
     &.no-border {
@@ -1241,48 +1200,46 @@ ul {
     }
 
     &.mm-listview {
-		    font-size:1em;
+		font-size:1em;
 
-		    @include margin(20px,top);
+		@include margin(20px,top);
 
-		    li {
-			     @include border(1px,$white,solid,bottom);
+		li {
+			@include border(1px,$grey,solid,bottom);
 
-    			a {
-    				color:$white;
-    				border:none;
+			a {
+				color:$link-color;
+				border:none;
 
-    				@include padding(20px,top);
-    				@include padding(20px,bottom);
+				@include padding(40px,top);
+				@include padding(40px,bottom);
 
-    				&:hover,&:focus,&.active {
-              background: $white;
-    					color:$link-color;
-    				}
-    			}
 
-          &.current-menu-item {
+				&:hover,&:focus,&.active {
+					color:$link-hover-color;
+				}
+			}
 
-            a {
-              background: $white;
-              color:$link-color;
-            }
-          }
+			&:not(.mm-divider) {
 
-    			&:not(.mm-divider) {
-    				&::after {
-    					border:none;
-    				}
-    			}
-		    }
-	  }
+				&::after {
+					border:none;
+				}
+
+			}
+		}
+	}
 
     li {
 
 	    p {
 		    display:inline;
 		    margin:0;
-		  }
+		}
+
+	    &.current_page_item, &.current-page-ancestor, &.menu-item-home {
+		    a {		@extend a.active;  	}
+	    }
     }
 }
 
@@ -1304,73 +1261,29 @@ table {
 
 
 /*
-		================================
+		    ================================
         ====== RESPONSIVE HELPERS ======
         ================================
 */
 
-@media (max-width: $screen-xs-max) {
+@include media-breakpoint-between(xs, sm) {
 	.xs-text-left	  {	text-align:left;				}
 	.xs-text-center {	text-align:center;	    }
 	.xs-text-right	{	text-align:right;				}
 
-  .xs-no-bg		    {	 background: none;			}
+    .xs-no-bg		  {	background: none;				}
 
-  .xs-no-border	  {	 border:none;					  }
-
-  .xs-m-top-40    {  @include margin(40px,top);   }
+    .xs-no-border	{	border:none;					  }
 }
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+@include media-breakpoint-between(sm, md) {
 	.sm-text-left 	{	text-align:left;	       }
 	.sm-text-center {	text-align:center;	     }
 	.sm-text-right	{	text-align:right;				 }
 
-  .sm-no-bg		    {	background: none;				 }
+  .sm-no-bg	  	{	  background: none;				 }
 
-  .sm-no-border	  {	border:none;					   }
-
-  .sm-m-top-40    {  @include margin(40px,top);   }
-}
-
-@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-	.row-eq-height{
-	  display: -webkit-box;
-	  display: -webkit-flex;
-	  display: -ms-flexbox;
-	  display: flex;
-	}
-}
-
-@media (min-width: $screen-lg-min) {
-	.row-eq-height{
-	  display: -webkit-box;
-	  display: -webkit-flex;
-	  display: -ms-flexbox;
-	  display: flex;
-	}
-}
-
-.row.is-flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-.row.is-flex > [class*='col-'] {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  .sm-no-border	{	  border:none;					   }
 }
 
 
@@ -1381,7 +1294,7 @@ table {
 */
 
 .mm-menu {
-	background: $brand-secondary;
+	background: $lightest-grey;
 
 	.mm-next {
 
@@ -1398,16 +1311,11 @@ table {
 	}
 }
 
-
-.nf-form-wrap {
-  @extend form;
-}
-
-.nf-response-msg   {
+.ninja-forms-response-msg   {
     p {         @include margin(0,all);         }
 }
 
-.nf-response-msg, .mc4wp-success   {
+.ninja-forms-success-msg, .mc4wp-success   {
  	@extend .alert;
 	@extend .alert-success;
 }
@@ -1417,15 +1325,9 @@ table {
 	@extend .alert-info;
 }
 
-.nf-form-fields-required {
-  @extend .well;
-}
-
-.nf-form-errors {
-  .nf-error-field-errors {
-	   @extend .alert;
-	   @extend .alert-danger;
-  }
+.ninja-forms-error-msg     {
+	@extend .alert;
+	@extend .alert-danger;
 }
 
 .affix {
