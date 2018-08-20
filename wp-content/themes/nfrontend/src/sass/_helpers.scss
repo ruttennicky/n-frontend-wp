@@ -200,16 +200,6 @@
   }
 }
 
-@mixin border-color($type,$from:$link-color,$to:$link-hover-color,$angle:135deg) {
-  @if $type == gradient {
-    border-style: solid;
-    border-image: linear-gradient($angle,$from 0%,$to 100%);
-    border-image-slice: 1;
-  } @else {
-    border-color: $from;
-  }
-}
-
 @mixin text-color($type,$from:$link-color,$to:$link-hover-color,$angle:135deg) {
   @if $type == gradient {
     background-image: linear-gradient($angle,$from 0%,$to 100%);
@@ -866,7 +856,6 @@ a {
 
       @include background(none);
   		@include border(3px,solid, $link-color-primary,full);
-      @include border-color(gradient,$brand-primary,$brand-secondary);
     	@include border-radius($border-radius);
     	@include padding(10px, top);
     	@include padding(10px, bottom);
