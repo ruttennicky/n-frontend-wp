@@ -189,6 +189,22 @@
 	text-shadow:$hor $ver $blur $color
 }
 
+@mixin background($type,$from:$link-color,$to:$link-hover-color) {
+  @if $type == gradient {
+    background: $to;
+  	background: -moz-linear-gradient(top, $from 0%, $to 100%);
+  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+  	background: -webkit-linear-gradient(top, $from 0%,$to 100%);
+  	background: -o-linear-gradient(top, $from 0%,$to 100%);
+  	background: linear-gradient(to bottom, $from 0%,$to 100%);
+  	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$from}, endColorstr=#{$to})
+  } @else if $type == solid {
+    background: $from;
+  } @else {
+    background: none;
+  }
+}
+
 @mixin position($value,$side) {
     @if $side == left {
        left:$value;
@@ -208,7 +224,7 @@
 
 
 /*
-		==========================
+		    ==========================
         ======   PADDINGS   ======
         ==========================
 */
@@ -697,24 +713,24 @@
         ========================
 */
 
-.bg-white		      {	    background:$white;					}
-.bg-white-opacity {		background:$white-opacity;		}
-.bg-black		      {		background:$black;					  }
-.bg-black-opacity {		background:$black-opacity;		}
+.bg-white		      {	    @include background(solid,$white);					  }
+.bg-white-opacity {		  @include background(solid,$white-opacity);		}
+.bg-black		      {	    @include background(solid,$black);					  }
+.bg-black-opacity {		  @include background(solid,$black-opacity);		}
 
-.bg-primary 	  {     background:$brand-primary;  	}
-.bg-secondary	  {	    background:$brand-secondary;	}
-.bg-third 	  	{	    background:$brand-third; 			}
-.bg-fourth		  {		background:$brand-fourth;			  }
+.bg-primary 	  {       @include background(solid,$brand-primary); 	  }
+.bg-secondary	  {	      @include background(solid,$brand-secondary); 	}
+.bg-third 	  	{	      @include background(solid,$brand-third);  		}
+.bg-fourth		  {		    @include background(solid,$brand-fourth); 		}
 
-.bg-lightest-grey {		background:$lightest-grey;		}
-.bg-light-grey	  {		background:$light-grey;				}
-.bg-grey		      {		background:$grey;					    }
-.bg-darker-grey	  {		background:$darker-grey;			}
-.bg-dark-grey	    {		background:$dark-grey;				}
+.bg-lightest-grey {		  @include background(solid,$lightest-grey); 		}
+.bg-light-grey	  {		  @include background(solid,$light-grey); 			}
+.bg-grey		      {		  @include background(solid,$grey); 			      }
+.bg-darker-grey	  {		  @include background(solid,$darker-grey);     	}
+.bg-dark-grey	    {		  @include background(solid,$dark-grey); 				}
 
-.bg-primary-opacity		{		background:$brand-primary-opacity; 				}
-.bg-secondary-opacity	{		background:$brand-secondary-opacity; 			}
+.bg-primary-opacity		{		@include background(solid,$brand-primary-opacity); 			}
+.bg-secondary-opacity	{		@include background(solid,$brand-secondary-opacity); 		}
 
 
 /*
@@ -736,12 +752,14 @@
 
 ::-moz-selection {
     color: $white;
-    background: $brand-primary;
+
+    @include background(solid,$brand-primary);
 }
 
 ::selection {
     color: $white;
-    background: $brand-primary;
+
+    @include background(solid,$brand-primary);
 }
 
 body {
@@ -788,10 +806,10 @@ body {
 .marked {
 
 	a {
-		background: $brand-primary;
 		color: $white;
 		border:none;
 
+    @include background(solid,$brand-primary);
 		@include padding(10px,left);
 		@include padding(10px,right);
 		@include padding(5px,top);
@@ -799,7 +817,8 @@ body {
 
 		&:hover, &:focus, &:active {
 			color: $black;
-			background: $brand-secondary;
+
+      @include background(solid,$brand-secondary);
 		}
 
 	}
@@ -827,9 +846,9 @@ a {
     	text-transform:uppercase;
     	color:$link-color-primary;
       font-family:$font-family-cta;
-    	background:none;
 		  border:none;
 
+      @include background(none);
   		@include border(3px,solid, $link-color-primary,full);
     	@include border-radius($border-radius);
     	@include padding(10px, top);
@@ -838,9 +857,9 @@ a {
     	@include padding(40px, right);
 
     	&:hover,&:focus,&:active {
-    		background:$link-color;
     		color:$white;
 
+        @include background(solid);
     		@include border(3px,solid, $link-color-primary,full);
     	}
 
@@ -861,13 +880,14 @@ a {
      	@extend a.cta-primary;
 
     	color:$white;
-    	background:$link-color-primary;
 
+      @include background(solid,$link-color-primary);
     	@include border(3px,solid,$link-color-primary,full);
 
     	&:hover,&:focus,&:active {
-    		background: none;
     		color: $link-color;
+
+        @include background(none);
     	}
     }
 
@@ -879,9 +899,9 @@ a {
         @include border(3px,solid,$link-color-secondary,full);
 
         &:hover,&:focus,&:active {
-            background: $link-color-secondary;
             color: $white;
 
+            @include background(solid,$link-color-secondary);
             @include border(3px,solid,$link-color-secondary,full);
         }
     }
@@ -889,14 +909,13 @@ a {
     &.cta-secondary-inverse {
         @extend a.cta-primary-inverse;
 
-        background:$link-color-secondary;
-
+        @include background(solid,$link-color-secondary);
         @include border(3px,solid,$link-color-secondary,full);
 
         &:hover,&:focus,&:active {
             color:$link-color-secondary;
 
-			@include border(3px,solid,$link-color-secondary,full);
+			      @include border(3px,solid,$link-color-secondary,full);
         }
     }
 
@@ -908,9 +927,9 @@ a {
         @include border(3px,solid,$link-color-third,full);
 
         &:hover,&:focus,&:active {
-            background: $brand-third;
         	color:$white;
 
+          @include background(solid,$brand-third);
         	@include border(3px,solid,$link-color-third,full);
         }
     }
@@ -918,8 +937,8 @@ a {
     &.cta-third-inverse {
         @extend a.cta-primary-inverse;
 
-        background:$link-color-third;
 
+        @include background(solid,$link-color-third);
         @include border(3px,solid, $link-color-third,full);
 
         &:hover,&:focus,&:active {
@@ -937,18 +956,17 @@ a {
         @include border(3px,solid,$link-color-fourth,full);
 
         &:hover,&:focus,&:active {
-            background: $brand-fourth;
         	color:$white;
 
+          @include background(solid,$brand-fourth);
         	@include border(3px,solid,$link-color-fourth,full);
         }
     }
 
     &.cta-fourth-inverse {
-	    @extend a.cta-primary-inverse;
+	      @extend a.cta-primary-inverse;
 
-        background:$link-color-fourth;
-
+        @include background(solid,$link-color-fourth);
         @include border(3px,solid, $link-color-fourth,full);
 
         &:hover,&:focus,&:active {
@@ -965,11 +983,11 @@ a {
 
 		@include border(3px,solid,$white,full);
 
-		&:hover,&:focus,&:active {
-            color:$black;
-			background:$white;
+		  &:hover,&:focus,&:active {
+          color:$black;
 
-            @include border(3px,solid,$white,full);
+          @include background(solid,$white);
+          @include border(3px,solid,$white,full);
         }
     }
 
@@ -981,11 +999,11 @@ a {
 	    @include border(3px,solid,$black,full);
 
 	    &:hover,&:focus,&:active {
-            color:$white;
-			background:$black;
+          color:$white;
 
-            @include border(3px,solid,$black,full);
-        }
+          @include background(solid,$black);
+          @include border(3px,solid,$black,full);
+      }
     }
 
     &.gallery-item {
@@ -993,22 +1011,21 @@ a {
         @extend .block;
 
 		.caption {
-        	@include animation(0.5s);
+      height: 100%;
+      width: 100%;
+      opacity: 0;
 
-            background: $brand-primary-opacity;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-
-            -webkit-transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
 			-moz-transform-style: preserve-3d;
 			transform-style: preserve-3d;
 
+      @include background(solid,$brand-primary-opacity);
+      @include animation(0.5s);
 			@extend .p-absolute;
 
-            .caption-content {
-                color: $white;
-                text-align: center;
+      .caption-content {
+          color: $white;
+          text-align: center;
 			    width: 100%;
 			    margin: auto;
 			    position: absolute;
@@ -1016,14 +1033,14 @@ a {
 			    -webkit-transform: translate(-50%,-50%);
 			    -ms-transform: translate(-50%,-50%);
 			    transform: translate(-50%,-50%);
-            }
         }
+      }
 
-        &:hover,&:focus,&:active {
+      &:hover,&:focus,&:active {
 
-            .caption {      opacity:1;      }
+          .caption {      opacity:1;      }
 
-        }
+      }
     }
 
     &.gallery-item-non-hover {
@@ -1036,9 +1053,9 @@ a {
 	    @extend a.gallery-item;
 
 	    .caption {
-			background: none;
-			opacity: 1;
-		}
+        opacity: 1;
+        @include background(none);
+		  }
     }
 
     &.secondary {
@@ -1057,12 +1074,12 @@ a {
 
 form {
 	[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date], textarea, select {
-		background:none;
 		width:100%;
-        border:none;
-        color:$text-color;
-        font-weight: 400;
+    border:none;
+    color:$text-color;
+    font-weight: 400;
 
+    @include background(none);
 		@include padding(15px,left);
 		@include padding(15px,right);
 		@include padding(7px,top);
@@ -1092,7 +1109,7 @@ form {
 
 	}
 
-	option {		background: $white;			}
+	option {		  @include background(solid,$white);		}
 
 	input[type=submit],button {
 		@extend a.cta-primary-inverse;
@@ -1170,9 +1187,9 @@ h1, h2, h3, h4, h5, h6 {
 	@include margin(0,all);
 
 	.marked {
-		background:$brand-primary;
 		color:$white;
 
+    @include background(solid,$brand-primary);
 		@include padding(20px,left);
 		@include padding(20px,right);
 		@include padding(10px,top);
@@ -1272,7 +1289,7 @@ table {
 	.xs-text-center {	text-align:center;	    }
 	.xs-text-right	{	text-align:right;				}
 
-    .xs-no-bg		  {	background: none;				}
+    .xs-no-bg		  {	  @include background(none); }
 
     .xs-no-border	{	border:none;					  }
 }
@@ -1282,7 +1299,7 @@ table {
 	.sm-text-center {	text-align:center;	     }
 	.sm-text-right	{	text-align:right;				 }
 
-  .sm-no-bg	  	{	  background: none;				 }
+  .sm-no-bg	  	{	  @include background(none);	 }
 
   .sm-no-border	{	  border:none;					   }
 }
@@ -1295,7 +1312,7 @@ table {
 */
 
 .mm-menu {
-	background: $lightest-grey;
+  @include background(solid,$brand-primary);
 
 	.mm-next {
 
