@@ -13,18 +13,18 @@
         ==========================
 */
 
-$opacity: 						0.8;
+$opacity: 					 	    0.8;
 
 $brand-primary:     			rgba(231,76,60,1);
 $brand-secondary:  				rgba(44,62,80,1);
-$brand-third:   				rgba(236,240,241,1);
-$brand-fourth:					rgba(52,152,219,1);
+$brand-third:   				  rgba(236,240,241,1);
+$brand-fourth:					  rgba(52,152,219,1);
 
-$brand-primary-opacity: 		rgba(231,76,60,$opacity);
-$brand-secondary-opacity: 		rgba(44,62,80,$opacity);
-$white-opacity:					rgba(255,255,255,$opacity);
-$black-opacity:					rgba(0,0,0,$opacity);
-$invisible:						rgba(0,0,0,0);
+$brand-primary-opacity: 	rgba(231,76,60,$opacity);
+$brand-secondary-opacity: rgba(44,62,80,$opacity);
+$white-opacity:					  rgba(255,255,255,$opacity);
+$black-opacity:					  rgba(0,0,0,$opacity);
+$invisible:						    rgba(0,0,0,0);
 
 $lightest-grey:     			rgba(250,250,250,1);
 $light-grey:        			rgba(211,211,211,1);
@@ -33,15 +33,17 @@ $darker-grey:       			rgba(93,93,93,1);
 $dark-grey:        				rgba(45,45,45,1);
 $black:             			rgba(0,0,0,1);
 $white:             			rgba(255,255,255,1);
-$red:							rgba(237,19,0,1);
-$green:							rgba(24,244,130,1);
+$red:							        rgba(237,19,0,1);
+$green:							      rgba(24,244,130,1);
 
 $text-color:        			darken($brand-secondary,30%);
-$dark-text-color:				$white;
+$dark-text-color:				  $white;
 
 $font-family:        			"Source Sans Pro",sans-serif;
-$font-family-secondary:    	 	"Josefin Slab", cursive;
+$font-family-secondary:   "Josefin Slab", cursive;
 $font-family-third:				"Times", serif;
+
+$font-family-cta:         $font-family;
 
 $font-size:         			16px;
 $line-height:       			1.75em;
@@ -50,18 +52,18 @@ $link-color:        			$brand-primary;
 $link-hover-color:  			darken($brand-primary,20%);
 
 $link-color-primary:			$brand-primary;
-$link-hover-color-primary:		darken($brand-primary,30%);
+$link-hover-color-primary:		  darken($brand-primary,30%);
 
-$link-color-secondary: 			$brand-secondary;
+$link-color-secondary: 		$brand-secondary;
 $link-hover-color-secondary:  	darken($brand-secondary,30%);
 
 $link-color-third: 				$brand-third;
-$link-hover-color-third:  		darken($brand-third,30%);
+$link-hover-color-third:  		  darken($brand-third,30%);
 
 $link-color-fourth:				$brand-fourth;
-$link-hover-color-fourth:		darken($brand-fourth,30%);
+$link-hover-color-fourth:		    darken($brand-fourth,30%);
 
-$dark-link-color:				$white;
-$dark-link-hover-color: 		darken($white,10%);
+$dark-link-color:				  $white;
+$dark-link-hover-color: 		    darken($white,10%);
 
-$border-radius:					0;
+$border-radius:					  0;
