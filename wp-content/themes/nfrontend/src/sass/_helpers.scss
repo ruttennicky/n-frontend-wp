@@ -8,55 +8,55 @@
 {
     @if $side == left {
         @include media-breakpoint-between(xs, sm) {
-            margin-left:$value*0.6;
+            margin-left: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            margin-left:$value*0.75;
+            margin-left: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            margin-left:$value;
+            margin-left: $value;
         }
         @include media-breakpoint-up(lg) {
-            margin-left:$value;
+            margin-left: $value;
         }
     } @else if $side == right {
         @include media-breakpoint-between(xs, sm) {
-            margin-right:$value*0.6;
+            margin-right: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            margin-right:$value*0.75;
+            margin-right: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            margin-right:$value;
+            margin-right: $value;
         }
         @include media-breakpoint-up(lg) {
-            margin-right:$value;
+            margin-right: $value;
         }
     } @else if $side == top {
         @include media-breakpoint-between(xs, sm) {
-            margin-top:$value*0.6;
+            margin-top: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            margin-top:$value*0.75;
+            margin-top :$value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            margin-top:$value;
+            margin-top: $value;
         }
         @include media-breakpoint-up(lg) {
-            margin-top:$value;
+            margin-top: $value;
         }
     } @else if $side == bottom {
         @include media-breakpoint-between(xs, sm) {
-            margin-bottom:$value*0.6;
+            margin-bottom: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            margin-bottom:$value*0.75;
+            margin-bottom: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            margin-bottom:$value;
+            margin-bottom: $value;
         }
         @include media-breakpoint-up(lg) {
-            margin-bottom:$value;
+            margin-bottom: $value;
         }
     } @else {     margin:0;       }
 }
@@ -65,55 +65,55 @@
 {
     @if $side == left {
         @include media-breakpoint-between(xs, sm) {
-            padding-left:$value*0.6;
+            padding-left: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            padding-left:$value*0.75;
+            padding-left: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            padding-left:$value;
+            padding-left: $value;
         }
         @include media-breakpoint-up(lg) {
-            padding-left:$value;
+            padding-left: $value;
         }
     } @else if $side == right {
         @include media-breakpoint-between(xs, sm) {
-            padding-right:$value*0.6;
+            padding-right: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            padding-right:$value*0.75;
+            padding-right: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            padding-right:$value;
+            padding-right: $value;
         }
         @include media-breakpoint-up(lg) {
-            padding-right:$value;
+            padding-right: $value;
         }
     } @else if $side == top {
         @include media-breakpoint-between(xs, sm) {
-            padding-top:$value*0.75;
+            padding-top: $value*0.75;
         }
         @include media-breakpoint-between(sm, md) {
-            padding-top:$value*0.75;
+            padding-top: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            padding-top:$value;
+            padding-top: $value;
         }
         @include media-breakpoint-up(lg) {
-            padding-top:$value;
+            padding-top: $value;
         }
     } @else if $side == bottom {
         @include media-breakpoint-between(xs, sm) {
-            padding-bottom:$value*0.6;
+            padding-bottom: $value*0.6;
         }
         @include media-breakpoint-between(sm, md) {
-            padding-bottom:$value*0.75;
+            padding-bottom: $value*0.75;
         }
         @include media-breakpoint-between(md, lg) {
-            padding-bottom:$value;
+            padding-bottom: $value;
         }
         @include media-breakpoint-up(lg) {
-            padding-bottom:$value;
+            padding-bottom: $value;
         }
     } @else {     padding:0;       }
 }
@@ -186,22 +186,38 @@
 }
 
 @mixin text-shadow($hor,$ver,$blur,$color) {
-	text-shadow:$hor $ver $blur $color
+	text-shadow:$hor $ver $blur $color;
 }
 
-@mixin background($type,$from:$link-color,$to:$link-hover-color) {
+@mixin background($type,$from:$link-color,$to:$link-hover-color,$angle:135deg) {
   @if $type == gradient {
     background: $to;
-  	background: -moz-linear-gradient(top, $from 0%, $to 100%);
-  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
-  	background: -webkit-linear-gradient(top, $from 0%,$to 100%);
-  	background: -o-linear-gradient(top, $from 0%,$to 100%);
-  	background: linear-gradient(to bottom, $from 0%,$to 100%);
-  	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$from}, endColorstr=#{$to})
+    background: linear-gradient($angle,$from,0%,$to,100%);
   } @else if $type == solid {
     background: $from;
   } @else {
     background: none;
+  }
+}
+
+@mixin border-color($type,$from:$link-color,$to:$link-hover-color,$angle:135deg) {
+  @if $type == gradient {
+    border-style: solid;
+    border-image: linear-gradient($angle,$from,0%,$to,100%);
+    border-image-slice: 1;
+  } @else {
+    border-color: $from;
+  }
+}
+
+@mixin text-color($type,$from:$link-color,$to:$link-hover-color,$angle:135deg) {
+  @if $type == gradient {
+    background-image: linear-gradient($angle,$from,0%,$to,100%);
+    color:transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  } else {
+    color:$from;
   }
 }
 
@@ -850,6 +866,7 @@ a {
 
       @include background(none);
   		@include border(3px,solid, $link-color-primary,full);
+      @include border-color(gradient,$brand-primary,$brand-secondary);
     	@include border-radius($border-radius);
     	@include padding(10px, top);
     	@include padding(10px, bottom);
