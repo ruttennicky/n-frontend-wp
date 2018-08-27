@@ -1,14 +1,5 @@
 /*
         ==========================
-        ======    FONTS    =======
-        ==========================
-*/
-
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300|Josefin+Slab:400,700italic,400italic,700);
-
-
-/*
-        ==========================
         ======  VARIABLES  =======
         ==========================
 */
@@ -39,8 +30,8 @@ $green:							      rgba(24,244,130,1);
 $text-color:        			darken($brand-secondary,30%);
 $dark-text-color:				  $white;
 
-$font-family:        			"Source Sans Pro",sans-serif;
-$font-family-secondary:   "Josefin Slab", cursive;
+$font-family:        			"Helvetica",sans-serif;
+$font-family-secondary:   "Verdana", cursive;
 $font-family-third:				"Times", serif;
 
 $font-family-cta:         $font-family;
