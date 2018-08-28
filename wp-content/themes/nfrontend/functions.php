@@ -178,7 +178,7 @@
 	function custom_field_lurl() 	{		echo '<input type="text" id="l_url" name="linkedin_url" value="' . get_option( 'linkedin_url') . '" />';					}
 	function custom_field_purl() 	{		echo '<input type="text" id="p_url" name="pinterest_url" value="' . get_option( 'pinterest_url') . '" />';				}
 	function custom_field_pfurl() {		echo '<input type="text" id="pf_url" name="portfolio_url" value="' . get_option( 'portfolio_url') . '" />';				}
-	function custom_field_addr()	{		wp_editor( get_option( 'address'), 'address', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
+	function custom_field_addr()	{		echo '<textarea id="address" name="address">' . get_option('address') . '</textarea>';														}
 	function custom_field_gapi() 	{		echo '<input type="text" id="g_api" name="g_api" value="' . get_option( 'g_api') . '" />';												}
 	function custom_field_fbid() 	{		echo '<input type="text" id="fb_app_id" name="fb_app_id" value="' . get_option( 'fb_app_id') . '" />';						}
 	function custom_field_hjid() 	{		echo '<input type="text" id="hj_id" name="hj_id" value="' . get_option( 'hj_id'). '" />';													}
