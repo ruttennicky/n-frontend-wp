@@ -1124,7 +1124,7 @@ form {
 		@extend a.cta-primary-inverse;
  		@include animation(0.5s);
 		@include padding(30px,left);
-		@include padding(40px,right);
+		@include padding(30px,right);
 
 		&.small {
 			@include padding(10px,top);
