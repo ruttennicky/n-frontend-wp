@@ -34,7 +34,11 @@ $font-family:        			"Helvetica",sans-serif;
 $font-family-secondary:   "Verdana", cursive;
 $font-family-third:				"Times", serif;
 
+$font-weight:             400;
+$font-weight-bold:        700;
+
 $font-family-cta:         $font-family;
+$font-weight-cta:         $font-weight-bold;
 
 $font-size:         			16px;
 $line-height:       			1.75em;
@@ -43,18 +47,18 @@ $link-color:        			$brand-primary;
 $link-hover-color:  			darken($brand-primary,20%);
 
 $link-color-primary:			$brand-primary;
-$link-hover-color-primary:		  darken($brand-primary,30%);
+$link-hover-color-primary:darken($brand-primary,30%);
 
 $link-color-secondary: 		$brand-secondary;
-$link-hover-color-secondary:  	darken($brand-secondary,30%);
+$link-hover-color-secondary:darken($brand-secondary,30%);
 
 $link-color-third: 				$brand-third;
-$link-hover-color-third:  		  darken($brand-third,30%);
+$link-hover-color-third:  darken($brand-third,30%);
 
 $link-color-fourth:				$brand-fourth;
-$link-hover-color-fourth:		    darken($brand-fourth,30%);
+$link-hover-color-fourth:	darken($brand-fourth,30%);
 
 $dark-link-color:				  $white;
-$dark-link-hover-color: 		    darken($white,10%);
+$dark-link-hover-color: 	darken($white,10%);
 
 $border-radius:					  0;

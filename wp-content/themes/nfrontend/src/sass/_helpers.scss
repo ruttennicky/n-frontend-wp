@@ -548,8 +548,8 @@
 .f-s-3	{	 font-size:3em;	   }
 .f-s-5  {  font-size:5em;    }
 
-.f-bold      {   font-weight: 700;     		  }
-.f-non-bold  {   font-weight: 300;     		  }
+.f-bold      {   font-weight: $font-weight-bold;     		  }
+.f-non-bold  {   font-weight: $font-weight;          		  }
 .f-italic	   {	 font-style: italic;   		  }
 .f-upper	   {	 text-transform: uppercase;	}
 
@@ -601,6 +601,10 @@
 */
 
 .full-width,.js-full-screen 	{  	 	width:100%;     }
+.full-screen {
+  width:100%;
+  height:100%;
+}
 
 .p-relative 	{		position: relative;			}
 .p-absolute		{ 	position: absolute;		  }
@@ -645,24 +649,24 @@
 
 
 /*
-		=====================
+		    =====================
         ====== BORDERS ======
         =====================
 */
 
-.corners					 {	    @include border-radius(3px);								}
+.corners					       {	    @include border-radius(3px);								          }
 
 .border-lightest-grey-full   {      @include border(1px,solid,$light-grey,full);        		}
 .border-lightest-grey-left   {      @include border(1px,solid,$light-grey,left);        		}
 .border-lightest-grey-right  {      @include border(1px,solid,$light-grey,right);        		}
 .border-lightest-grey-top    {      @include border(1px,solid,$light-grey,top);        			}
-.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        		}
+.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        	}
 
 .border-light-grey-full    	 {      @include border(1px,solid,$light-grey,full);        		}
 .border-light-grey-left    	 {      @include border(1px,solid,$light-grey,left);        		}
 .border-light-grey-right   	 {      @include border(1px,solid,$light-grey,right);        		}
 .border-light-grey-top    	 {      @include border(1px,solid,$light-grey,top);        			}
-.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        		}
+.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        	}
 
 .border-grey-full    	 	 {      @include border(1px,solid,$grey,full);        				}
 .border-grey-left    		 {      @include border(1px,solid,$grey,left);        				}
@@ -749,7 +753,7 @@
 
 
 /*
-		===========================
+		    ===========================
         ====== HTML SELECTORS =====
         ===========================
 */
@@ -773,6 +777,7 @@ body {
     font-size:      $font-size;
     line-height:    $line-height;
     color:          $text-color;
+    font-weight:    $font-weight;
 }
 
 
@@ -852,6 +857,7 @@ a {
     	text-transform:uppercase;
     	color:$link-color-primary;
       font-family:$font-family-cta;
+      font-weight: $font-weight-cta;
 		  border:none;
 
       @include background(none);
@@ -898,80 +904,76 @@ a {
     }
 
     &.cta-secondary {
-        @extend a.cta-primary;
+      @extend a.cta-primary;
 
-        color:$link-color-secondary;
+      color:$link-color-secondary;
 
-        @include border(3px,solid,$link-color-secondary,full);
+      @include border(3px,solid,$link-color-secondary,full);
 
-        &:hover,&:focus,&:active {
-            color: $white;
+      &:hover,&:focus,&:active {
+          color: $white;
 
-            @include background(solid,$link-color-secondary);
-            @include border(3px,solid,$link-color-secondary,full);
-        }
+          @include background(solid,$link-color-secondary);
+          @include border(3px,solid,$link-color-secondary,full);
+      }
     }
 
     &.cta-secondary-inverse {
-        @extend a.cta-primary-inverse;
+      @extend a.cta-primary-inverse;
 
-        @include background(solid,$link-color-secondary);
-        @include border(3px,solid,$link-color-secondary,full);
+      @include background(solid,$link-color-secondary);
+      @include border(3px,solid,$link-color-secondary,full);
 
-        &:hover,&:focus,&:active {
-            color:$link-color-secondary;
+      &:hover,&:focus,&:active {
+          color:$link-color-secondary;
 
-			      @include border(3px,solid,$link-color-secondary,full);
-        }
+		      @include border(3px,solid,$link-color-secondary,full);
+      }
     }
 
     &.cta-third {
-        @extend a.cta-primary;
+      @extend a.cta-primary;
 
-        color:$link-color-third;
+      color:$link-color-third;
 
-        @include border(3px,solid,$link-color-third,full);
+      @include border(3px,solid,$link-color-third,full);
 
-        &:hover,&:focus,&:active {
-        	color:$white;
+      &:hover,&:focus,&:active {
+      	color:$white;
 
-          @include background(solid,$brand-third);
-        	@include border(3px,solid,$link-color-third,full);
-        }
+        @include background(solid,$brand-third);
+      	@include border(3px,solid,$link-color-third,full);
+      }
     }
 
     &.cta-third-inverse {
-        @extend a.cta-primary-inverse;
+      @extend a.cta-primary-inverse;
+      @include background(solid,$link-color-third);
+      @include border(3px,solid, $link-color-third,full);
 
+      &:hover,&:focus,&:active {
+          color:$link-color-third;
 
-        @include background(solid,$link-color-third);
-        @include border(3px,solid, $link-color-third,full);
-
-        &:hover,&:focus,&:active {
-            color:$link-color-third;
-
-            @include border(3px,solid, $link-color-third,full);
-        }
+          @include border(3px,solid, $link-color-third,full);
+      }
     }
 
     &.cta-fourth {
-	    @extend a.cta-primary;
+      color:$link-color-fourth;
 
-        color:$link-color-fourth;
+      @extend a.cta-primary;
+      @include border(3px,solid,$link-color-fourth,full);
 
+      &:hover,&:focus,&:active {
+        color:$white;
+
+        @include background(solid,$brand-fourth);
         @include border(3px,solid,$link-color-fourth,full);
-
-        &:hover,&:focus,&:active {
-        	color:$white;
-
-          @include background(solid,$brand-fourth);
-        	@include border(3px,solid,$link-color-fourth,full);
-        }
+      }
     }
 
     &.cta-fourth-inverse {
 	      @extend a.cta-primary-inverse;
-
         @include background(solid,$link-color-fourth);
         @include border(3px,solid, $link-color-fourth,full);
 
@@ -983,11 +985,10 @@ a {
     }
 
     &.cta-white {
-		@extend a.cta-primary;
+		  color:$white;
 
-		color:$white;
-
-		@include border(3px,solid,$white,full);
+      @extend a.cta-primary;
+		  @include border(3px,solid,$white,full);
 
 		  &:hover,&:focus,&:active {
           color:$black;
@@ -998,10 +999,9 @@ a {
     }
 
     &.cta-black {
-	    @extend a.cta-primary;
-
 	    color:$black;
 
+      @extend a.cta-primary;
 	    @include border(3px,solid,$black,full);
 
 	    &:hover,&:focus,&:active {
@@ -1017,8 +1017,6 @@ a {
         @extend .block;
 
 		.caption {
-      height: 100%;
-      width: 100%;
       opacity: 0;
 
       -webkit-transform-style: preserve-3d;
@@ -1028,17 +1026,20 @@ a {
       @include background(solid,$brand-primary-opacity);
       @include animation(0.5s);
 			@extend .p-absolute;
+      @extend .full-screen;
 
       .caption-content {
           color: $white;
-          text-align: center;
-			    width: 100%;
 			    margin: auto;
-			    position: absolute;
-			    top: 50%; left: 50%;
+			    top: 50%;
+          left: 50%;
 			    -webkit-transform: translate(-50%,-50%);
 			    -ms-transform: translate(-50%,-50%);
 			    transform: translate(-50%,-50%);
+
+          @extend .full-width;
+          @extend .p-absolute;
+          @extend .text-center;
         }
       }
 
@@ -1118,8 +1119,9 @@ form {
 	option {		  @include background(solid,$white);		}
 
 	input[type=submit],button {
-		@extend a.cta-primary-inverse;
+    pointer:cursor;
 
+		@extend a.cta-primary-inverse;
  		@include animation(0.5s);
 		@include padding(30px,left);
 		@include padding(40px,right);
@@ -1168,6 +1170,8 @@ form {
 		}
 
 		[type=submit], button {
+      cursor:pointer;
+
 			@extend a.cta-white;
 
 			&.small {
@@ -1224,35 +1228,35 @@ ul {
     }
 
     &.mm-listview {
-		font-size:1em;
+  		font-size:1em;
 
-		@include margin(20px,top);
+  		@include margin(20px,top);
 
-		li {
-			@include border(1px,$grey,solid,bottom);
+  		li {
+  			@include border(1px,$grey,solid,bottom);
 
-			a {
-				color:$link-color;
-				border:none;
+  			a {
+  				color:$link-color;
+  				border:none;
 
-				@include padding(40px,top);
-				@include padding(40px,bottom);
+  				@include padding(40px,top);
+  				@include padding(40px,bottom);
 
 
-				&:hover,&:focus,&.active {
-					color:$link-hover-color;
-				}
-			}
+  				&:hover,&:focus,&.active {
+  					color:$link-hover-color;
+  				}
+  			}
 
-			&:not(.mm-divider) {
+  			&:not(.mm-divider) {
 
-				&::after {
-					border:none;
-				}
+  				&::after {
+  					border:none;
+  				}
 
-			}
-		}
-	}
+  			}
+		  }
+	  }
 
     li {
 
