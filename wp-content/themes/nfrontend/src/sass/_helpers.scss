@@ -1118,7 +1118,7 @@ form {
 
 	option {		  @include background(solid,$white);		}
 
-	input[type=submit],button {
+	input[type=submit],input[type=button],button {
     pointer:cursor;
 
 		@extend a.cta-primary-inverse;
