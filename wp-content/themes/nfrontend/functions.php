@@ -6,12 +6,10 @@
 	      wp_enqueue_script('jquery-mmenu','//cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.6.5/js/jquery.mmenu.min.js',array('jquery'),false,true);
 	      wp_enqueue_script('jquery-bootstrap','//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',array('jquery'),false,true);
 	      wp_enqueue_script('jquery-fancybox','//cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js',array('jquery'),false,true);
-	      //wp_enqueue_script('jquery-easing','//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js',array('jquery'),false,true );
-	      //wp_enqueue_script('jquery-isotope','//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js',array('jquery'),false,true );
-	      //wp_enqueue_script('jquery-imagesloaded','//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.min.js',array('jquery'),'1.0',true);
 				if (get_option('g_api') != '')
 					wp_enqueue_script('googlemaps','//maps.googleapis.com/maps/api/js?key='.get_option('g_api'),array('jquery'),false,true);
 	      wp_enqueue_script('jquery-slick','//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js',array( 'jquery' ),false,true);
+  			wp_enqueue_script('jquery-css3animateit', '//cdnjs.cloudflare.com/ajax/libs/css3-animate-it/1.0.3/js/css3-animate-it.min.js',array('jquery'),false,true);
 				wp_enqueue_script('nfrontend', get_template_directory_uri() . '/js/nfrontend.js',array('jquery'),false,true);
     }
 	}
@@ -26,7 +24,7 @@
 			wp_enqueue_style('font-awesome','//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',false,false,'all');
 			wp_enqueue_style('jquery-fancybox','//cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css',false,false,'all');
 			wp_enqueue_style('jquery-mmenu','//cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.6.5/css/jquery.mmenu.all.min.css',false,false,'all');
-			wp_enqueue_style('jquery-animate','//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css',false,false,'all');
+			wp_enqueue_style('jquery-css3animateit','//cdnjs.cloudflare.com/ajax/libs/css3-animate-it/1.0.3/css/animations.min.css',false,false,'all');
 			wp_enqueue_style('nfrontend',get_stylesheet_uri(),false,false,'all');
 		}
 	}
