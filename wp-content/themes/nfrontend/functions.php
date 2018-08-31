@@ -4,7 +4,7 @@
 				wp_deregister_script('jquery');
 				wp_enqueue_script('jquery','//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js',array(),false,true);
 	      wp_enqueue_script('jquery-mmenu','//cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.6.5/js/jquery.mmenu.min.js',array('jquery'),false,true);
-	      wp_enqueue_script('jquery-bootstrap','//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',array('jquery'),false,true);
+	      wp_enqueue_script('jquery-bootstrap','//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js',array('jquery'),false,true);
 	      wp_enqueue_script('jquery-fancybox','//cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js',array('jquery'),false,true);
 				if (get_option('g_api') != '')
 					wp_enqueue_script('googlemaps','//maps.googleapis.com/maps/api/js?key='.get_option('g_api'),array('jquery'),false,true);
