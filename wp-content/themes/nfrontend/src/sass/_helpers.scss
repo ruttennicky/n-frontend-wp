@@ -1080,6 +1080,8 @@ a {
 }
 
 form {
+  @include placeholder($grey);
+
 	[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date], textarea, select {
 		width:100%;
     border:none;
@@ -1092,7 +1094,6 @@ form {
 		@include padding(7px,top);
 		@include padding(7px,bottom);
 		@include border(1px,solid,$light-grey,full);
-		@include placeholder($grey);
 
 		&.no-border {		border:none;			}
 		&.no-size	{	 	width: auto;			}
@@ -1158,11 +1159,12 @@ form {
 
 
 	&.dark {
+    @include placeholder($white);
+    
 		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
 			color: $dark-text-color;
 
 			@include border(2px,solid,$light-grey,full);
-			@include placeholder($white);
 
 			&:focus {
 				@include border(2px,solid,$white,full);
@@ -1322,7 +1324,7 @@ table {
 */
 
 .mm-menu {
-  @include background(solid,$brand-primary);
+  @include background(solid,$brand-primary,$brand-primary);
 
 	.mm-next {
 
@@ -1337,31 +1339,28 @@ table {
 			&:hover, &:focus, &:active {		border-bottom: none;		}
 		}
 	}
-}
 
-.ninja-forms-response-msg   {
-    p {         @include margin(0,all);         }
-}
+  .mm-listview {
+    li {
 
-.ninja-forms-success-msg, .mc4wp-success   {
- 	@extend .alert;
-	@extend .alert-success;
-}
+        border:none;
 
-.mc4wp-notice {
-	@extend .alert;
-	@extend .alert-info;
-}
+        @include animation(0.5);
 
-.ninja-forms-error-msg     {
-	@extend .alert;
-	@extend .alert-danger;
-}
+        a {
+          color:$dark-link-color;
+          @include border(1px,solid,$invisible,bottom);
 
-.affix {
-	z-index: 99;
+          &:hover, &:focus {
+            @include border(1px,solid,$dark-link-color,bottom);
+          }
+        }
 
-	@include padding(15px, top);
-	@include padding(15px, bottom);
-	@include animation(0.5s);
+        &.current-menu-item {
+
+          a { @include border(3px,solid,$dark-link-color,bottom); @extend .f-bold; }
+
+        }
+      }
+   }
 }
