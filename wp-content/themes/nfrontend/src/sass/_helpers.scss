@@ -1160,7 +1160,7 @@ form {
 
 	&.dark {
     @include placeholder($white);
-    
+
 		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
 			color: $dark-text-color;
 
@@ -1267,7 +1267,7 @@ ul {
 		    margin:0;
 		}
 
-	    &.current_page_item, &.current-page-ancestor, &.menu-item-home {
+	    &.current_page_item, &.current-page-ancestor {
 		    a {		@extend a.active;  	}
 	    }
     }
