@@ -11,6 +11,11 @@ $brand-secondary:  				rgba(44,62,80,1);
 $brand-third:   				  rgba(236,240,241,1);
 $brand-fourth:					  rgba(52,152,219,1);
 
+$theme-colors: (
+  primary: $brand-primary,
+  secondary: $brand-secondary
+);
+
 $brand-primary-opacity: 	rgba(231,76,60,$opacity);
 $brand-secondary-opacity: rgba(44,62,80,$opacity);
 $white-opacity:					  rgba(255,255,255,$opacity);
@@ -39,6 +44,12 @@ $font-weight-bold:        700;
 
 $font-family-cta:         $font-family;
 $font-weight-cta:         $font-weight-bold;
+$text-transform-cta:      none;
+$border-width-cta:        1px;
+$padding-top-cta:         10px;
+$padding-right-cta:       20px;
+$padding-bottom-cta:      10px;
+$padding-left-cta:        20px;
 
 $font-size:         			16px;
 $line-height:       			1.75em;

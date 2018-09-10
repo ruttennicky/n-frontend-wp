@@ -854,37 +854,39 @@ a {
     &.cta-primary {
     	display:inline-block;
     	text-align:center;
-    	text-transform:uppercase;
+    	text-transform:$text-transform-cta;
     	color:$link-color-primary;
       font-family:$font-family-cta;
       font-weight: $font-weight-cta;
 		  border:none;
 
       @include background(none);
-  		@include border(3px,solid, $link-color-primary,full);
+  		@include border($border-width-cta,solid, $link-color-primary,full);
     	@include border-radius($border-radius);
-    	@include padding(10px, top);
-    	@include padding(10px, bottom);
-    	@include padding(40px, left);
-    	@include padding(40px, right);
+    	@include padding($padding-top-cta, top);
+    	@include padding($padding-right-cta, right);
+    	@include padding($padding-bottom-cta, bottom);
+    	@include padding($padding-left-cta, left);
 
     	&:hover,&:focus,&:active {
     		color:$white;
 
         @include background(solid);
-    		@include border(3px,solid, $link-color-primary,full);
+    		@include border($border-width-cta,solid, $link-color-primary,full);
     	}
 
     	&.very-small {
-	    	@include padding(5px, top);
-			  @include padding(5px, bottom);
+	    	@include padding($border-width-cta*0.75, top);
+			  @include padding($border-width-cta*0.75, right);
+        @include padding($border-width-cta*0.75, bottom);
+        @include padding($border-width-cta*0.75, left);
     	}
 
     	&.tiny {
-        @include padding(5px,left);
-			  @include padding(5px,right);
-			  @include padding(3px,top);
-			  @include padding(3px,bottom);
+        @include padding($border-width-cta*0.5, top);
+			  @include padding($border-width-cta*0.5, right);
+        @include padding($border-width-cta*0.5, bottom);
+        @include padding($border-width-cta*0.5, left);
 		   }
     }
 
@@ -894,7 +896,7 @@ a {
     	color:$white;
 
       @include background(solid,$link-color-primary);
-    	@include border(3px,solid,$link-color-primary,full);
+    	@include border($border-width-cta,solid,$link-color-primary,full);
 
     	&:hover,&:focus,&:active {
     		color: $link-color;
@@ -908,13 +910,13 @@ a {
 
       color:$link-color-secondary;
 
-      @include border(3px,solid,$link-color-secondary,full);
+      @include border($border-width-cta,solid,$link-color-secondary,full);
 
       &:hover,&:focus,&:active {
           color: $white;
 
           @include background(solid,$link-color-secondary);
-          @include border(3px,solid,$link-color-secondary,full);
+          @include border($border-width-cta,solid,$link-color-secondary,full);
       }
     }
 
@@ -922,12 +924,12 @@ a {
       @extend a.cta-primary-inverse;
 
       @include background(solid,$link-color-secondary);
-      @include border(3px,solid,$link-color-secondary,full);
+      @include border($border-width-cta,solid,$link-color-secondary,full);
 
       &:hover,&:focus,&:active {
           color:$link-color-secondary;
 
-		      @include border(3px,solid,$link-color-secondary,full);
+		      @include border($border-width-cta,solid,$link-color-secondary,full);
       }
     }
 
@@ -936,25 +938,25 @@ a {
 
       color:$link-color-third;
 
-      @include border(3px,solid,$link-color-third,full);
+      @include border($border-width-cta,solid,$link-color-third,full);
 
       &:hover,&:focus,&:active {
       	color:$white;
 
         @include background(solid,$brand-third);
-      	@include border(3px,solid,$link-color-third,full);
+      	@include border($border-width-cta,solid,$link-color-third,full);
       }
     }
 
     &.cta-third-inverse {
       @extend a.cta-primary-inverse;
       @include background(solid,$link-color-third);
-      @include border(3px,solid, $link-color-third,full);
+      @include border($border-width-cta,solid, $link-color-third,full);
 
       &:hover,&:focus,&:active {
           color:$link-color-third;
 
-          @include border(3px,solid, $link-color-third,full);
+          @include border($border-width-cta,solid, $link-color-third,full);
       }
     }
 
@@ -962,25 +964,25 @@ a {
       color:$link-color-fourth;
 
       @extend a.cta-primary;
-      @include border(3px,solid,$link-color-fourth,full);
+      @include border($border-width-cta,solid,$link-color-fourth,full);
 
       &:hover,&:focus,&:active {
         color:$white;
 
         @include background(solid,$brand-fourth);
-        @include border(3px,solid,$link-color-fourth,full);
+        @include border($border-width-cta,solid,$link-color-fourth,full);
       }
     }
 
     &.cta-fourth-inverse {
 	      @extend a.cta-primary-inverse;
         @include background(solid,$link-color-fourth);
-        @include border(3px,solid, $link-color-fourth,full);
+        @include border($border-width-cta,solid, $link-color-fourth,full);
 
         &:hover,&:focus,&:active {
             color:$link-color-fourth;
 
-            @include border(3px,solid,$link-color-fourth,full);
+            @include border($border-width-cta,solid,$link-color-fourth,full);
         }
     }
 
@@ -988,13 +990,13 @@ a {
 		  color:$white;
 
       @extend a.cta-primary;
-		  @include border(3px,solid,$white,full);
+		  @include border($border-width-cta,solid,$white,full);
 
 		  &:hover,&:focus,&:active {
           color:$black;
 
           @include background(solid,$white);
-          @include border(3px,solid,$white,full);
+          @include border($border-width-cta,solid,$white,full);
         }
     }
 
@@ -1002,13 +1004,13 @@ a {
 	    color:$black;
 
       @extend a.cta-primary;
-	    @include border(3px,solid,$black,full);
+	    @include border($border-width-cta,solid,$black,full);
 
 	    &:hover,&:focus,&:active {
           color:$white;
 
           @include background(solid,$black);
-          @include border(3px,solid,$black,full);
+          @include border($border-width-cta,solid,$black,full);
       }
     }
 
@@ -1114,7 +1116,6 @@ form {
 		@include padding(10px,left);
 		@include padding(5px,top);
 		@include padding(5px,bottom);
-
 	}
 
 	option {		  @include background(solid,$white);		}

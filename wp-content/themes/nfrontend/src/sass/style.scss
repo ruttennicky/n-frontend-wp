@@ -1,10 +1,36 @@
+/*!
+Theme Name: N frontend
+Theme URI: https://wwww.n-digital.be
+Description: The Wordpress boilerplate for N digital studio
+Author: Nicky Rutten
+Author URI: https://www.n-digital.be
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Version: 1.0
+*/
 /*
         ==========================
         ======  INCLUDES  ========
         ==========================
 */
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/_functions";
+@import "../../node_modules/bootstrap/scss/_variables";
+@import "../../node_modules/bootstrap/scss/_mixins";
+
 @import "_variables";
+
+@import "../../node_modules/bootstrap/scss/_mixins";
+@import "../../node_modules/bootstrap/scss/_root";
+@import "../../node_modules/bootstrap/scss/_reboot";
+@import "../../node_modules/bootstrap/scss/_type";
+@import "../../node_modules/bootstrap/scss/_images";
+@import "../../node_modules/bootstrap/scss/_grid";
+@import "../../node_modules/bootstrap/scss/_forms";
+@import "../../node_modules/bootstrap/scss/_badge";
+@import "../../node_modules/bootstrap/scss/_alert";
+@import "../../node_modules/bootstrap/scss/_media";
+@import "../../node_modules/bootstrap/scss/_utilities";
+
 @import "_helpers";
 @import "_frontend";
