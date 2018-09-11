@@ -1365,3 +1365,22 @@ table {
       }
    }
 }
+
+.nf-response-msg,
+.mc4wp-success,
+.mc4wp-notice {
+  @extend .alert;
+	@extend .alert-success;
+  @extend .m-0;
+
+  p { @extend .m-0; }
+}
+
+.ninja-forms-error-msg,
+.mc4wp-error {
+  @extend .alert;
+  @extend .alert-danger;
+  @extend .m-0;
+
+  p { @extend .m-0; }
+}

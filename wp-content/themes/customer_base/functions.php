@@ -3,7 +3,6 @@
     if(!is_admin()) {
       wp_enqueue_script('jquery-bootstrap','//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js',array('jquery'),false,true);
       wp_enqueue_script('custom-scripts', get_stylesheet_directory_uri() . '/js/custom.js',array('jquery'),false,true);
-
     }
   }
 

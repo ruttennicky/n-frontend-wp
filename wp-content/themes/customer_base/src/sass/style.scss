@@ -14,24 +14,21 @@ Template: nfrontend
         ======  INCLUDES  ========
         ==========================
 */
-@import "../../node_modules/bootstrap/scss/_functions";
-@import "../../node_modules/bootstrap/scss/_variables";
-@import "../../node_modules/bootstrap/scss/_mixins";
-
 @import "../../../nfrontend/src/sass/_variables";
 @import "_custom_variables";
 
-@import "../../node_modules/bootstrap/scss/_mixins";
-@import "../../node_modules/bootstrap/scss/_root";
-@import "../../node_modules/bootstrap/scss/_reboot";
-@import "../../node_modules/bootstrap/scss/_type";
-@import "../../node_modules/bootstrap/scss/_images";
-@import "../../node_modules/bootstrap/scss/_grid";
-@import "../../node_modules/bootstrap/scss/_forms";
-@import "../../node_modules/bootstrap/scss/_badge";
-@import "../../node_modules/bootstrap/scss/_alert";
-@import "../../node_modules/bootstrap/scss/_media";
-@import "../../node_modules/bootstrap/scss/_utilities";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/badge";
+@import "../../node_modules/bootstrap/scss/alert";
+@import "../../node_modules/bootstrap/scss/media";
+@import "../../node_modules/bootstrap/scss/utilities";
 
 @import "../../../nfrontend/src/sass/_helpers";
 @import "_custom_frontend";
