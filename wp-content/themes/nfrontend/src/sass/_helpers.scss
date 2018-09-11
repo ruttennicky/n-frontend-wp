@@ -863,10 +863,10 @@ a {
       @include background(none);
   		@include border($border-width-cta,solid, $link-color-primary,full);
     	@include border-radius($border-radius);
-    	@include padding($padding-top-cta, top);
-    	@include padding($padding-right-cta, right);
-    	@include padding($padding-bottom-cta, bottom);
-    	@include padding($padding-left-cta, left);
+    	@include padding($padding-top-cta,top);
+    	@include padding($padding-right-cta,right);
+    	@include padding($padding-bottom-cta,bottom);
+    	@include padding($padding-left-cta,left);
 
     	&:hover,&:focus,&:active {
     		color:$white;
@@ -875,19 +875,20 @@ a {
     		@include border($border-width-cta,solid, $link-color-primary,full);
     	}
 
-    	&.very-small {
-	    	@include padding($border-width-cta*0.75, top);
-			  @include padding($border-width-cta*0.75, right);
-        @include padding($border-width-cta*0.75, bottom);
-        @include padding($border-width-cta*0.75, left);
+    	&.small {
+	    	@include padding($padding-top-cta*0.75,top);
+			  @include padding($padding-right-cta*0.75,right);
+        @include padding($padding-bottom-cta*0.75,bottom);
+        @include padding($padding-left-cta*0.75,left);
     	}
 
     	&.tiny {
-        @include padding($border-width-cta*0.5, top);
-			  @include padding($border-width-cta*0.5, right);
-        @include padding($border-width-cta*0.5, bottom);
-        @include padding($border-width-cta*0.5, left);
-		   }
+        @extend .f-s-08;
+        @include padding($padding-top-cta/2,top);
+			  @include padding($padding-right-cta/2,right);
+        @include padding($padding-bottom-cta/2,bottom);
+        @include padding($padding-left-cta/2,left);
+		  }
     }
 
     &.cta-primary-inverse {
