@@ -1372,7 +1372,7 @@ table {
 .mc4wp-notice {
   @extend .alert;
 	@extend .alert-success;
-  @extend .m-0;
+  @extend .m-top-40;
 
   p { @extend .m-0; }
 }
@@ -1381,7 +1381,7 @@ table {
 .mc4wp-error {
   @extend .alert;
   @extend .alert-danger;
-  @extend .m-0;
+  @extend .m-top-40;
 
   p { @extend .m-0; }
 }
