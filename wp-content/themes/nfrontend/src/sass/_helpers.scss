@@ -7,55 +7,43 @@
 @mixin margin($value,$side)
 {
     @if $side == left {
-        @include media-breakpoint-between(xs, sm) {
+        @include media-breakpoint-up(xs) {
             margin-left: $value*0.6;
         }
-        @include media-breakpoint-between(sm, md) {
+        @include media-breakpoint-up(sm){
             margin-left: $value*0.75;
         }
-        @include media-breakpoint-between(md, lg) {
-            margin-left: $value;
-        }
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(md) {
             margin-left: $value;
         }
     } @else if $side == right {
-        @include media-breakpoint-between(xs, sm) {
+        @include media-breakpoint-up(xs) {
             margin-right: $value*0.6;
         }
-        @include media-breakpoint-between(sm, md) {
+        @include media-breakpoint-up(sm){
             margin-right: $value*0.75;
         }
-        @include media-breakpoint-between(md, lg) {
-            margin-right: $value;
-        }
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(md) {
             margin-right: $value;
         }
     } @else if $side == top {
-        @include media-breakpoint-between(xs, sm) {
+        @include media-breakpoint-up(xs) {
             margin-top: $value*0.6;
         }
-        @include media-breakpoint-between(sm, md) {
-            margin-top :$value*0.75;
+        @include media-breakpoint-up(sm){
+            margin-top: $value*0.75;
         }
-        @include media-breakpoint-between(md, lg) {
-            margin-top: $value;
-        }
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(md) {
             margin-top: $value;
         }
     } @else if $side == bottom {
-        @include media-breakpoint-between(xs, sm) {
+        @include media-breakpoint-up(xs) {
             margin-bottom: $value*0.6;
         }
-        @include media-breakpoint-between(sm, md) {
+        @include media-breakpoint-up(sm){
             margin-bottom: $value*0.75;
         }
-        @include media-breakpoint-between(md, lg) {
-            margin-bottom: $value;
-        }
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(md) {
             margin-bottom: $value;
         }
     } @else {     margin:0;       }
@@ -63,59 +51,62 @@
 
 @mixin padding($value,$side)
 {
+  @if $side == left {
+      @include media-breakpoint-up(xs) {
+          padding-left: $value*0.6;
+      }
+      @include media-breakpoint-up(sm){
+          padding-left: $value*0.75;
+      }
+      @include media-breakpoint-up(md) {
+          padding-left: $value;
+      }
+  } @else if $side == right {
+      @include media-breakpoint-up(xs) {
+          padding-right: $value*0.6;
+      }
+      @include media-breakpoint-up(sm){
+          padding-right: $value*0.75;
+      }
+      @include media-breakpoint-up(md) {
+          padding-right: $value;
+      }
+  } @else if $side == top {
+      @include media-breakpoint-up(xs) {
+          padding-top: $value*0.6;
+      }
+      @include media-breakpoint-up(sm){
+          padding-top: $value*0.75;
+      }
+      @include media-breakpoint-up(md) {
+          padding-top: $value;
+      }
+  } @else if $side == bottom {
+      @include media-breakpoint-up(xs) {
+          padding-bottom: $value*0.6;
+      }
+      @include media-breakpoint-up(sm){
+          padding-bottom: $value*0.75;
+      }
+      @include media-breakpoint-up(md) {
+          padding-bottom: $value;
+      }
+  } @else {     padding:0;       }
+}
+
+@mixin position($value,$side) {
     @if $side == left {
-        @include media-breakpoint-between(xs, sm) {
-            padding-left: $value*0.6;
-        }
-        @include media-breakpoint-between(sm, md) {
-            padding-left: $value*0.75;
-        }
-        @include media-breakpoint-between(md, lg) {
-            padding-left: $value;
-        }
-        @include media-breakpoint-up(lg) {
-            padding-left: $value;
-        }
-    } @else if $side == right {
-        @include media-breakpoint-between(xs, sm) {
-            padding-right: $value*0.6;
-        }
-        @include media-breakpoint-between(sm, md) {
-            padding-right: $value*0.75;
-        }
-        @include media-breakpoint-between(md, lg) {
-            padding-right: $value;
-        }
-        @include media-breakpoint-up(lg) {
-            padding-right: $value;
-        }
-    } @else if $side == top {
-        @include media-breakpoint-between(xs, sm) {
-            padding-top: $value*0.75;
-        }
-        @include media-breakpoint-between(sm, md) {
-            padding-top: $value*0.75;
-        }
-        @include media-breakpoint-between(md, lg) {
-            padding-top: $value;
-        }
-        @include media-breakpoint-up(lg) {
-            padding-top: $value;
-        }
-    } @else if $side == bottom {
-        @include media-breakpoint-between(xs, sm) {
-            padding-bottom: $value*0.6;
-        }
-        @include media-breakpoint-between(sm, md) {
-            padding-bottom: $value*0.75;
-        }
-        @include media-breakpoint-between(md, lg) {
-            padding-bottom: $value;
-        }
-        @include media-breakpoint-up(lg) {
-            padding-bottom: $value;
-        }
-    } @else {     padding:0;       }
+      left: $value;
+    }
+    @else if $side == right {
+      right: $value;
+    }
+    @else if $side == top {
+      top: $value;
+    }
+    @else if $side == bottom {
+      bottom: $value;
+    }
 }
 
 @mixin border-radius($radius)    {
@@ -382,7 +373,7 @@
 
 
 /*
-		==========================
+		    ==========================
         ======    MARGINS   ======
         ==========================
 */
@@ -528,10 +519,11 @@
 .m-right-300  {   @include margin(300px,right);   }
 .m-right-350  {   @include margin(350px,right);   }
 .m-right-400  {   @include margin(400px,right);   }
+.m-auto       {   margin:auto;                    }
 
 
 /*
-		==========================
+		    ==========================
         ======    FONTS     ======
         ==========================
 */
@@ -550,8 +542,8 @@
 
 .f-bold      {   font-weight: $font-weight-bold;     		  }
 .f-non-bold  {   font-weight: $font-weight;          		  }
-.f-italic	   {	 font-style: italic;   		  }
-.f-upper	   {	 text-transform: uppercase;	}
+.f-italic	   {	 font-style: italic;   		                }
+.f-upper	   {	 text-transform: uppercase;	              }
 
 
 .f-white    	   {  	color:$white;   			  }
@@ -586,7 +578,7 @@
 
 
 /*
-		=======================
+		    =======================
         ======  OVERFLOW ======
         =======================
 */
@@ -595,20 +587,20 @@
 
 
 /*
-		===========================
+		    ===========================
         ======  POSITIONING  ======
         ===========================
 */
 
 .full-width,.js-full-screen 	{  	 	width:100%;     }
 .full-screen {
-  width:100%;
-  height:100%;
+  width: 100vw;
+  height: 100vw;
 }
 
-.p-relative 	{		position: relative;			}
-.p-absolute		{ 	position: absolute;		  }
-.p-fixed		  {		position: fixed;			  }
+.p-relative {		   position: relative;			     }
+.p-absolute	{ 	   position: absolute;		       }
+.p-fixed		{		   position: fixed;			         }
 
 .js-hide    {       visibility: hidden;          }
 
@@ -635,16 +627,6 @@
 .w-50p			{		width:50%;					 }
 .w-65p      {   width:65%;           }
 
-.a-l-0			{		left:0;						 }
-
-.a-r-0			{		right:0;					 }
-
-.a-t-0			{		top:0;						 }
-.a-t---50p	{		top:-50%;					 }
-.a-t---75p	{		top:-75%;					 }
-
-.a-b-0			{ 		bottom:0;				 }
-
 .block			{		display: block;		 }
 
 
@@ -654,67 +636,67 @@
         =====================
 */
 
-.corners					       {	    @include border-radius(3px);								          }
+.corners					           {	    @include border-radius(3px);								              }
 
-.border-lightest-grey-full   {      @include border(1px,solid,$light-grey,full);        		}
-.border-lightest-grey-left   {      @include border(1px,solid,$light-grey,left);        		}
-.border-lightest-grey-right  {      @include border(1px,solid,$light-grey,right);        		}
-.border-lightest-grey-top    {      @include border(1px,solid,$light-grey,top);        			}
-.border-lightest-grey-bottom {      @include border(1px,solid,$light-grey,bottom);        	}
+.border-lightest-grey-full   {      @include border(1px,solid,$lightest-grey,full);        		}
+.border-lightest-grey-left   {      @include border(1px,solid,$lightest-grey,left);        		}
+.border-lightest-grey-right  {      @include border(1px,solid,$lightest-grey,right);        	}
+.border-lightest-grey-top    {      @include border(1px,solid,$lightest-grey,top);        		}
+.border-lightest-grey-bottom {      @include border(1px,solid,$lightest-grey,bottom);        	}
 
-.border-light-grey-full    	 {      @include border(1px,solid,$light-grey,full);        		}
-.border-light-grey-left    	 {      @include border(1px,solid,$light-grey,left);        		}
-.border-light-grey-right   	 {      @include border(1px,solid,$light-grey,right);        		}
-.border-light-grey-top    	 {      @include border(1px,solid,$light-grey,top);        			}
-.border-light-grey-bottom 	 {      @include border(1px,solid,$light-grey,bottom);        	}
+.border-light-grey-full    {      @include border(1px,solid,$light-grey,full);        		    }
+.border-light-grey-left    {      @include border(1px,solid,$light-grey,left);        		    }
+.border-light-grey-right   {      @include border(1px,solid,$light-grey,right);        		    }
+.border-light-grey-top     {      @include border(1px,solid,$light-grey,top);        			    }
+.border-light-grey-bottom  {      @include border(1px,solid,$light-grey,bottom);        	    }
 
-.border-grey-full    	 	 {      @include border(1px,solid,$grey,full);        				}
-.border-grey-left    		 {      @include border(1px,solid,$grey,left);        				}
-.border-grey-right   	 	 {	    @include border(1px,solid,$grey,right);        				}
-.border-grey-top    	 	 {      @include border(1px,solid,$grey,top);        				  }
-.border-grey-bottom 	 	 {      @include border(1px,solid,$grey,bottom);        			}
+.border-grey-full    	 	   {      @include border(1px,solid,$grey,full);        				      }
+.border-grey-left    		   {      @include border(1px,solid,$grey,left);        				      }
+.border-grey-right   	 	   {	    @include border(1px,solid,$grey,right);        			 	      }
+.border-grey-top    	 	   {      @include border(1px,solid,$grey,top);        				        }
+.border-grey-bottom 	 	   {      @include border(1px,solid,$grey,bottom);        			      }
 
-.border-darker-grey-full	 {		@include border(1px,solid,$darker-grey,full);				  }
-.border-darker-grey-left	 {		@include border(1px,solid,$darker-grey,left);				  }
-.border-darker-grey-right	 {		@include border(1px,solid,$darker-grey,right);				}
-.border-darker-grey-top	 	 {		@include border(1px,solid,$darker-grey,top);				  }
-.border-darker-grey-bottom {		@include border(1px,solid,$darker-grey,bottom);				}
+.border-darker-grey-full	 {		@include border(1px,solid,$darker-grey,full);				          }
+.border-darker-grey-left	 {		@include border(1px,solid,$darker-grey,left);				          }
+.border-darker-grey-right	 {		@include border(1px,solid,$darker-grey,right);			 	        }
+.border-darker-grey-top	 	 {		@include border(1px,solid,$darker-grey,top);				          }
+.border-darker-grey-bottom {		@include border(1px,solid,$darker-grey,bottom);			        	}
 
-.border-dark-grey-full		 {		@include border(1px,solid,$dark-grey,full);					  }
-.border-dark-grey-left	 	 {		@include border(1px,solid,$dark-grey,left);					  }
-.border-dark-grey-right	 	 {		@include border(1px,solid,$dark-grey,right);				  }
-.border-dark-grey-top	 	   {		@include border(1px,solid,$dark-grey,top);					  }
-.border-dark-grey-bottom 	 {		@include border(1px,solid,$dark-grey,bottom);				  }
+.border-dark-grey-full		 {		@include border(1px,solid,$dark-grey,full);					          }
+.border-dark-grey-left	 	 {		@include border(1px,solid,$dark-grey,left);					          }
+.border-dark-grey-right	 	 {		@include border(1px,solid,$dark-grey,right);				          }
+.border-dark-grey-top	 	   {		@include border(1px,solid,$dark-grey,top);					          }
+.border-dark-grey-bottom 	 {		@include border(1px,solid,$dark-grey,bottom);				          }
 
-.border-primary-full 		   {      @include border(1px,solid,$brand-primary,full);          	}
-.border-primary-left 		   {      @include border(1px,solid,$brand-primary,left);        		}
-.border-primary-right 		 {      @include border(1px,solid,$brand-primary,right);        	}
-.border-primary-top 		   {      @include border(1px,solid,$brand-primary,top);        		}
-.border-primary-bottom 		 {      @include border(1px,solid,$brand-primary,bottom);     		}
+.border-primary-full 		   {      @include border(1px,solid,$brand-primary,full);          	  }
+.border-primary-left 		   {      @include border(1px,solid,$brand-primary,left);        		  }
+.border-primary-right 		 {      @include border(1px,solid,$brand-primary,right);        	  }
+.border-primary-top 		   {      @include border(1px,solid,$brand-primary,top);        		  }
+.border-primary-bottom 		 {      @include border(1px,solid,$brand-primary,bottom);     		  }
 
-.border-secondary-full 		 {      @include border(1px,solid,$brand-secondary,full);        	}
-.border-secondary-left 		 {      @include border(1px,solid,$brand-secondary,left);        	}
-.border-secondary-right 	 {      @include border(1px,solid,$brand-secondary,right);        }
-.border-secondary-top 		 {      @include border(1px,solid,$brand-secondary,top);        	}
-.border-secondary-bottom 	 {      @include border(1px,solid,$brand-secondary,bottom);     	}
+.border-secondary-full 		 {      @include border(1px,solid,$brand-secondary,full);          	}
+.border-secondary-left 		 {      @include border(1px,solid,$brand-secondary,left);        	  }
+.border-secondary-right 	 {      @include border(1px,solid,$brand-secondary,right);          }
+.border-secondary-top 		 {      @include border(1px,solid,$brand-secondary,top);        	  }
+.border-secondary-bottom 	 {      @include border(1px,solid,$brand-secondary,bottom);     	  }
 
-.border-third-full 			 {      @include border(1px,solid,$brand-third,full);        		}
-.border-third-left 			 {      @include border(1px,solid,$brand-third,left);        		}
-.border-third-right 		 {      @include border(1px,solid,$brand-third,right);        	}
-.border-third-top 			 {      @include border(1px,solid,$brand-third,top);        		}
-.border-third-bottom 		 {      @include border(1px,solid,$brand-third,bottom);     		}
+.border-third-full 			   {      @include border(1px,solid,$brand-third,full);        		    }
+.border-third-left 			   {      @include border(1px,solid,$brand-third,left);        		    }
+.border-third-right 		   {      @include border(1px,solid,$brand-third,right);        	    }
+.border-third-top 			   {      @include border(1px,solid,$brand-third,top);        		    }
+.border-third-bottom 		   {      @include border(1px,solid,$brand-third,bottom);     		    }
 
-.border-fourth-full 		 {      @include border(1px,solid,$brand-fourth,full);        	}
-.border-fourth-left 		 {      @include border(1px,solid,$brand-fourth,left);        	}
-.border-fourth-right 		 {      @include border(1px,solid,$brand-fourth,right);        	}
-.border-fourth-top 			 {      @include border(1px,solid,$brand-fourth,top);        		}
-.border-fourth-bottom 	 {      @include border(1px,solid,$brand-fourth,bottom);     	  }
+.border-fourth-full 		 {      @include border(1px,solid,$brand-fourth,full);        	      }
+.border-fourth-left 		 {      @include border(1px,solid,$brand-fourth,left);        	      }
+.border-fourth-right 		 {      @include border(1px,solid,$brand-fourth,right);        	      }
+.border-fourth-top 			 {      @include border(1px,solid,$brand-fourth,top);        		      }
+.border-fourth-bottom 	 {      @include border(1px,solid,$brand-fourth,bottom);     	        }
 
-.border-white-full			 {	    @include border(1px,solid,$white,full);						}
-.border-white-left			 {	    @include border(1px,solid,$white,left);						}
-.border-white-right			 {	    @include border(1px,solid,$white,right);					}
-.border-white-top			   {	    @include border(1px,solid,$white,top);						}
-.border-white-bottom		 {	    @include border(1px,solid,$white,bottom);					}
+.border-white-full			 {	    @include border(1px,solid,$white,full);					          	  }
+.border-white-left			 {	    @include border(1px,solid,$white,left);						            }
+.border-white-right			 {	    @include border(1px,solid,$white,right);					            }
+.border-white-top			   {	    @include border(1px,solid,$white,top);						            }
+.border-white-bottom		 {	    @include border(1px,solid,$white,bottom);					            }
 
 
 /*
@@ -723,33 +705,24 @@
         ========================
 */
 
-.bg-white		      {	    @include background(solid,$white);					  }
-.bg-white-opacity {		  @include background(solid,$white-opacity);		}
-.bg-black		      {	    @include background(solid,$black);					  }
-.bg-black-opacity {		  @include background(solid,$black-opacity);		}
+.bg-white		      {	    @include background(solid,$white);					    }
+.bg-white-opacity {		  @include background(solid,$white-opacity);		  }
+.bg-black		      {	    @include background(solid,$black);					    }
+.bg-black-opacity {		  @include background(solid,$black-opacity);		  }
 
-.bg-primary 	  {       @include background(solid,$brand-primary); 	  }
-.bg-secondary	  {	      @include background(solid,$brand-secondary); 	}
-.bg-third 	  	{	      @include background(solid,$brand-third);  		}
-.bg-fourth		  {		    @include background(solid,$brand-fourth); 		}
+.bg-primary 	    {       @include background(solid,$brand-primary); 	  }
+.bg-secondary	    {	      @include background(solid,$brand-secondary); 	}
+.bg-third 	  	  {	      @include background(solid,$brand-third);  		}
+.bg-fourth		    {		    @include background(solid,$brand-fourth); 		}
 
-.bg-lightest-grey {		  @include background(solid,$lightest-grey); 		}
-.bg-light-grey	  {		  @include background(solid,$light-grey); 			}
-.bg-grey		      {		  @include background(solid,$grey); 			      }
-.bg-darker-grey	  {		  @include background(solid,$darker-grey);     	}
-.bg-dark-grey	    {		  @include background(solid,$dark-grey); 				}
+.bg-lightest-grey {		  @include background(solid,$lightest-grey); 		  }
+.bg-light-grey	  {		  @include background(solid,$light-grey); 			  }
+.bg-grey		      {		  @include background(solid,$grey); 			        }
+.bg-darker-grey	  {		  @include background(solid,$darker-grey);     	  }
+.bg-dark-grey	    {		  @include background(solid,$dark-grey); 				  }
 
 .bg-primary-opacity		{		@include background(solid,$brand-primary-opacity); 			}
 .bg-secondary-opacity	{		@include background(solid,$brand-secondary-opacity); 		}
-
-
-/*
-		    =====================
-        ====== SHADOWS ======
-        =====================
-*/
-
-.sh-light-grey	{		@include shadow(3px,3px,3px,5px,$lightest-grey);		}
 
 
 /*
@@ -804,7 +777,6 @@ body {
 			@include border(1px,solid,$dark-link-hover-color, bottom);
 		}
 	}
-
 }
 
 
@@ -831,9 +803,7 @@ body {
 
       @include background(solid,$brand-secondary);
 		}
-
 	}
-
 }
 
 a {
@@ -841,14 +811,14 @@ a {
     text-decoration: none;
 
 	  @include animation(0.5s);
-    @include border(1px,dotted,$link-color,bottom);
+    @include border(1px,$link-border-type,$link-color,bottom);
 
     &:hover, &:focus, &.active {
         color:$link-hover-color;
         text-decoration:none;
         outline:none;
 
-        @include border(1px,solid,$link-hover-color,bottom);
+        @include border(1px,$link-hover-border-type,$link-hover-color,bottom);
     }
 
     &.cta-primary {
@@ -884,18 +854,17 @@ a {
 
     	&.tiny {
         @extend .f-s-08;
-        @include padding($padding-top-cta/2,top);
-			  @include padding($padding-right-cta/2,right);
-        @include padding($padding-bottom-cta/2,bottom);
-        @include padding($padding-left-cta/2,left);
+        @include padding($padding-top-cta*0.5,top);
+			  @include padding($padding-right-cta*0.5,right);
+        @include padding($padding-bottom-cta*0.5,bottom);
+        @include padding($padding-left-cta*0.5,left);
 		  }
     }
 
     &.cta-primary-inverse {
+      color:$white;
+
      	@extend a.cta-primary;
-
-    	color:$white;
-
       @include background(solid,$link-color-primary);
     	@include border($border-width-cta,solid,$link-color-primary,full);
 
@@ -907,10 +876,9 @@ a {
     }
 
     &.cta-secondary {
-      @extend a.cta-primary;
-
       color:$link-color-secondary;
 
+      @extend a.cta-primary;
       @include border($border-width-cta,solid,$link-color-secondary,full);
 
       &:hover,&:focus,&:active {
@@ -923,7 +891,6 @@ a {
 
     &.cta-secondary-inverse {
       @extend a.cta-primary-inverse;
-
       @include background(solid,$link-color-secondary);
       @include border($border-width-cta,solid,$link-color-secondary,full);
 
@@ -935,10 +902,9 @@ a {
     }
 
     &.cta-third {
-      @extend a.cta-primary;
-
       color:$link-color-third;
 
+      @extend a.cta-primary;
       @include border($border-width-cta,solid,$link-color-third,full);
 
       &:hover,&:focus,&:active {
@@ -1022,10 +988,6 @@ a {
 		.caption {
       opacity: 0;
 
-      -webkit-transform-style: preserve-3d;
-			-moz-transform-style: preserve-3d;
-			transform-style: preserve-3d;
-
       @include background(solid,$brand-primary-opacity);
       @include animation(0.5s);
 			@extend .p-absolute;
@@ -1034,12 +996,12 @@ a {
       .caption-content {
           color: $white;
 			    margin: auto;
-			    top: 50%;
-          left: 50%;
 			    -webkit-transform: translate(-50%,-50%);
 			    -ms-transform: translate(-50%,-50%);
 			    transform: translate(-50%,-50%);
 
+          @include position(50%,top);
+          @include position(50%,left);
           @extend .full-width;
           @extend .p-absolute;
           @extend .text-center;
@@ -1099,7 +1061,7 @@ form {
 		@include border(1px,solid,$light-grey,full);
 
 		&.no-border {		border:none;			}
-		&.no-size	{	 	width: auto;			}
+		&.no-size	  {	 	  width: auto;		}
 
 		&.small 	{
 			@include padding(5px,left);
@@ -1108,9 +1070,7 @@ form {
 			@include padding(5px,bottom);
 		}
 
-		&:focus {
-			@include border(1px,solid,$text-color,full);
-		}
+		&:focus {    @include border(1px,solid,$text-color,full);   }
 	}
 
 	select, option {
@@ -1121,7 +1081,7 @@ form {
 
 	option {		  @include background(solid,$white);		}
 
-	input[type=submit],input[type=button],button {
+	[type=submit],[type=button],button {
     pointer:cursor;
 
 		@extend a.cta-primary-inverse;
@@ -1149,7 +1109,7 @@ form {
 		}
 	}
 
-	textarea 			{			resize: vertical						}
+	textarea 			      {			resize: vertical						      }
 
 	input[type=submit] 	{			@include padding(30px,right);			}
 
@@ -1159,9 +1119,8 @@ form {
 		&.inline {		display: inline;		}
 	}
 
-
 	&.dark {
-    @include placeholder($white);
+    @include placeholder($white-opacity);
 
 		[type=text],[type=number],[type=password],[type=email],[type=tel],[type=date],textarea,select {
 			color: $dark-text-color;
@@ -1174,7 +1133,7 @@ form {
 		}
 
 		[type=submit], button {
-      cursor:pointer;
+      curor:pointer;
 
 			@extend a.cta-white;
 
@@ -1211,11 +1170,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
-h1 {
-	font-size:2em;
-
-	p {		margin:0;		}
-}
+h1 {        font-size:2em;          }
 h2 {        font-size:1.75em;       }
 h3 {        font-size:1.5em;        }
 h4 {        font-size:1.25em;       }
@@ -1223,13 +1178,6 @@ h5 {        font-size:1.1em;        }
 h6 {        font-size:1em;        	}
 
 ul {
-    &.no-border {
-        a {
-            border:none;
-
-            &:hover,&:focus,&:active {      border:none;        }
-        }
-    }
 
     &.mm-listview {
   		font-size:1em;
@@ -1263,13 +1211,7 @@ ul {
 	  }
 
     li {
-
-	    p {
-		    display:inline;
-		    margin:0;
-		}
-
-	    &.current_page_item, &.current-page-ancestor {
+	    &.current-menu-item, &.current-page-ancestor {
 		    a {		@extend a.active;  	}
 	    }
     }
@@ -1298,24 +1240,24 @@ table {
         ================================
 */
 
-@include media-breakpoint-between(xs, sm) {
-	.xs-text-left	  {	text-align:left;				}
-	.xs-text-center {	text-align:center;	    }
-	.xs-text-right	{	text-align:right;				}
+@include media-breakpoint-between(xs, sm)   {
+	.xs-text-left	  {	text-align:left !important;				}
+	.xs-text-center {	text-align:center !important;	    }
+	.xs-text-right	{	text-align:right !important;			}
 
-    .xs-no-bg		  {	  @include background(none); }
+  .xs-no-bg		    {	  @include background(none); }
 
-    .xs-no-border	{	border:none;					  }
+  .xs-no-border	  {	border:none !important;					  }
 }
 
-@include media-breakpoint-between(sm, md) {
-	.sm-text-left 	{	text-align:left;	       }
-	.sm-text-center {	text-align:center;	     }
-	.sm-text-right	{	text-align:right;				 }
+@include media-breakpoint-between(sm, md)    {
+	.sm-text-left 	{	text-align:left !important;	       }
+	.sm-text-center {	text-align:center !important;	     }
+	.sm-text-right	{	text-align:right !important;			 }
 
-  .sm-no-bg	  	{	  @include background(none);	 }
+  .sm-no-bg	  	  {	  @include background(none);	 }
 
-  .sm-no-border	{	  border:none;					   }
+  .sm-no-border	  {	  border:none;					       }
 }
 
 

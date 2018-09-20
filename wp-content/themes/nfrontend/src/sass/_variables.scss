@@ -55,7 +55,9 @@ $font-size:         			16px;
 $line-height:       			1.75em;
 
 $link-color:        			$brand-primary;
+$link-border-type:        dotted;
 $link-hover-color:  			darken($brand-primary,20%);
+$link-hover-border-type:  solid;
 
 $link-color-primary:			$brand-primary;
 $link-hover-color-primary:darken($brand-primary,30%);
