@@ -79,7 +79,7 @@
 	}
 
 	function load_fb_graph() {
-		if (get_option('fb_app_id') != '') {
+		if (get_option('fb_page_id') != '') {
 			echo "<div id='fb-root'></div>
 			<script>(function(d, s, id) {
 			  var js, fjs = d.getElementsByTagName(s)[0];
@@ -124,7 +124,6 @@
 		  register_setting('general','ga_id');
 			register_setting('general','gtm_id');
 			register_setting('general','hj_id');
-			register_setting('general','fb_app_id');
 			register_setting('general','fb_page_id');
 		  register_setting('general','g_api');
 		  register_setting('general','notice');
@@ -144,7 +143,6 @@
 			add_settings_field('hj_id','<label for="hj_id">Hotjar ID</label>','custom_field_hjid','general');
 			add_settings_field('gtm_id','<label for="ga_id">Google Tag Manager ID</label>','custom_field_gtmid','general');
 	    add_settings_field('g_api','<label for="g_api">Google API key</label>','custom_field_gapi','general');
-			add_settings_field('fb_app_id','<label for="fb_app_id">Facebook app ID</label>','custom_field_fbid','general');
 			add_settings_field('fb_page_id','<label for="fb_page_id">Facebook page ID</label>','custom_field_fbpid','general');
 		  add_settings_field('notice','<label for="notice">Melding</label>','custom_field_notice','general');
 	}
@@ -162,7 +160,6 @@
 	function custom_field_pfurl() {		echo '<input type="text" id="pf_url" name="portfolio_url" value="' . get_option( 'portfolio_url') . '" />';				}
 	function custom_field_addr()	{		echo '<textarea id="address" name="address">' . get_option('address') . '</textarea>';														}
 	function custom_field_gapi() 	{		echo '<input type="text" id="g_api" name="g_api" value="' . get_option( 'g_api') . '" />';												}
-	function custom_field_fbid() 	{		echo '<input type="text" id="fb_app_id" name="fb_app_id" value="' . get_option( 'fb_app_id') . '" />';						}
 	function custom_field_hjid() 	{		echo '<input type="text" id="hj_id" name="hj_id" value="' . get_option( 'hj_id'). '" />';													}
 	function custom_field_gaid() 	{		echo '<input type="text" id="ga_id" name="ga_id" value="' . get_option( 'ga_id'). '" />';													}
 	function custom_field_fbpid() {		echo '<input type="text" id="fb_page_id" name="fb_page_id" value="' . get_option( 'fb_page_id') . '" />';					}

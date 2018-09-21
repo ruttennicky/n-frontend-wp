@@ -69,17 +69,7 @@
           </ul>
         </div>
       </div>
-    <?php
-          endif;
-          if (get_option('fb_app_id') != ''):
-    ?>
-    <div class="fb-customerchat"
-      attribution="setup_tool"
-      page_id="<?php echo get_option('fb_app_id'); ?>">
-    </div>
-    <?php
-          endif;
-    ?>
+<?php  endif;   ?>
     </footer>
   </div>
   <nav id="mobile-menu-wrapper">
@@ -89,6 +79,15 @@
                     'menu_id' => 'mobile-menu'    ) );
 ?>
     </nav>
-<?php   wp_footer(); ?>
+<?php    if (get_option('fb_app_id') != ''):   ?>
+    <div class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="<?php echo get_option('fb_app_id'); ?>"
+      theme_color="#fd5f5f">
+    </div>
+<?php
+          endif;
+  wp_footer();
+?>
   </body>
 </html>
