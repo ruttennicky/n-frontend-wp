@@ -993,23 +993,16 @@ a {
           @include background(solid,$brand-primary-opacity);
           @include animation(0.5s);
     			@extend .p-absolute;
+          @extend .d-flex;
+          @extend .align-items-center;
 
           .caption-content {
-              width: 100%;
-              height: 100%;
               color: $white;
-    			    margin: auto;
-    			    -webkit-transform: translate(-50%,-50%);
-    			    -ms-transform: translate(-50%,-50%);
-    			    transform: translate(-50%,-50%);
 
-              @include position(50%,top);
-              @include position(50%,left);
-              @extend .p-absolute;
+              @extend .full-width;
               @extend .text-center;
-            }
-
-            &:hover,&:focus,&:active {    opacity:1;    }
+          }
+          &:hover,&:focus,&:active {    opacity:1;    }
         }
     }
 
