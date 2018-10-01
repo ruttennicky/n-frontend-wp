@@ -985,34 +985,32 @@ a {
         @extend .p-relative;
         @extend .block;
 
-		.caption {
-      opacity: 0;
+    		.caption {
+          opacity: 0;
+          width: 100%;
+          height: 100%;
 
-      @include background(solid,$brand-primary-opacity);
-      @include animation(0.5s);
-			@extend .p-absolute;
-      @extend .full-screen;
+          @include background(solid,$brand-primary-opacity);
+          @include animation(0.5s);
+    			@extend .p-absolute;
 
-      .caption-content {
-          color: $white;
-			    margin: auto;
-			    -webkit-transform: translate(-50%,-50%);
-			    -ms-transform: translate(-50%,-50%);
-			    transform: translate(-50%,-50%);
+          .caption-content {
+              width: 100%;
+              height: 100%;
+              color: $white;
+    			    margin: auto;
+    			    -webkit-transform: translate(-50%,-50%);
+    			    -ms-transform: translate(-50%,-50%);
+    			    transform: translate(-50%,-50%);
 
-          @include position(50%,top);
-          @include position(50%,left);
-          @extend .full-width;
-          @extend .p-absolute;
-          @extend .text-center;
+              @include position(50%,top);
+              @include position(50%,left);
+              @extend .p-absolute;
+              @extend .text-center;
+            }
+
+            &:hover,&:focus,&:active {    opacity:1;    }
         }
-      }
-
-      &:hover,&:focus,&:active {
-
-          .caption {      opacity:1;      }
-
-      }
     }
 
     &.gallery-item-non-hover {
