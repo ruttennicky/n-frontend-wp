@@ -2,9 +2,10 @@
  * Contains the postboxes logic, opening and closing postboxes, reordering and saving
  * the state and ordering to the database.
  *
+ * @summary Contains postboxes logic
+ *
  * @since 2.5.0
  * @requires jQuery
- * @output wp-admin/js/postbox.js
  */
 
 /* global ajaxurl, postBoxL10n */
@@ -27,7 +28,7 @@ var postboxes;
 	postboxes = {
 
 		/**
-		 * Handles a click on either the postbox heading or the postbox open/close icon.
+		 * @summary Handles a click on either the postbox heading or the postbox open/close icon.
 		 *
 		 * Opens or closes the postbox. Expects `this` to equal the clicked element.
 		 * Calls postboxes.pbshow if the postbox has been opened, calls postboxes.pbhide
@@ -75,13 +76,11 @@ var postboxes;
 			}
 
 			/**
-			 * Fires when a postbox has been opened or closed.
+			 * @summary Fires when a postbox has been opened or closed.
 			 *
 			 * Contains a jQuery object with the relevant postbox element.
 			 *
 			 * @since 4.0.0
-			 * @ignore
-			 *
 			 * @event postboxes#postbox-toggled
 			 * @type {Object}
 			 */
@@ -116,7 +115,7 @@ var postboxes;
 			});
 
 			/**
-			 * Hides a postbox.
+			 * @summary Hides a postbox.
 			 *
 			 * Event handler for the postbox dismiss button. After clicking the button
 			 * the postbox will be hidden.
@@ -132,14 +131,12 @@ var postboxes;
 			});
 
 			/**
-			 * Hides the postbox element
+			 * @summary Hides the postbox element
 			 *
 			 * Event handler for the screen options checkboxes. When a checkbox is
 			 * clicked this function will hide or show the relevant postboxes.
 			 *
 			 * @since 2.7.0
-			 * @ignore
-			 *
 			 * @fires postboxes#postbox-toggled
 			 *
 			 * @returns {void}
@@ -172,7 +169,7 @@ var postboxes;
 			});
 
 			/**
-			 * Changes the amount of columns based on the layout preferences.
+			 * @summary Changes the amount of columns based on the layout preferences.
 			 *
 			 * @since 2.8.0
 			 *
@@ -189,7 +186,7 @@ var postboxes;
 		},
 
 		/**
-		 * Initializes all the postboxes, mainly their sortable behaviour.
+		 * @summary Initializes all the postboxes, mainly their sortable behaviour.
 		 *
 		 * @since 2.7.0
 		 * @memberof postboxes
@@ -268,10 +265,10 @@ var postboxes;
 		},
 
 		/**
-		 * Saves the state of the postboxes to the server.
+		 * @summary Saves the state of the postboxes to the server.
 		 *
-		 * It sends two lists, one with all the closed postboxes, one with all the
-		 * hidden postboxes.
+		 * Saves the state of the postboxes to the server. It sends two lists, one with
+		 * all the closed postboxes, one with all the hidden postboxes.
 		 *
 		 * @since 2.7.0
 		 * @memberof postboxes
@@ -300,9 +297,10 @@ var postboxes;
 		},
 
 		/**
-		 * Saves the order of the postboxes to the server.
+		 * @summary Saves the order of the postboxes to the server.
 		 *
-		 * Sends a list of all postboxes inside a sortable area to the server.
+		 * Saves the order of the postboxes to the server. Sends a list of all postboxes
+		 * inside a sortable area to the server.
 		 *
 		 * @since 2.8.0
 		 * @memberof postboxes
@@ -328,7 +326,7 @@ var postboxes;
 		},
 
 		/**
-		 * Marks empty postbox areas.
+		 * @summary Marks empty postbox areas.
 		 *
 		 * Adds a message to empty sortable areas on the dashboard page. Also adds a
 		 * border around the side area on the post edit screen if there are no postboxes
@@ -364,7 +362,7 @@ var postboxes;
 		},
 
 		/**
-		 * Changes the amount of columns on the post edit page.
+		 * @summary Changes the amount of columns on the post edit page.
 		 *
 		 * @since 3.3.0
 		 * @memberof postboxes
@@ -385,16 +383,14 @@ var postboxes;
 			 * Fires when the amount of columns on the post edit page has been changed.
 			 *
 			 * @since 4.0.0
-			 * @ignore
-			 *
 			 * @event postboxes#postboxes-columnchange
 			 */
 			$( document ).trigger( 'postboxes-columnchange' );
 		},
 
 		/**
-		 * Changes the amount of columns the postboxes are in based on the current
-		 * orientation of the browser.
+		 * @summary Changes the amount of columns the postboxes are in based on the
+		 *          current orientation of the browser.
 		 *
 		 * @since 3.3.0
 		 * @memberof postboxes

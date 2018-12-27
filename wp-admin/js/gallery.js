@@ -1,7 +1,3 @@
-/**
- * @output wp-admin/js/gallery.js
- */
-
 /* global unescape, getUserSetting, setUserSetting */
 
 jQuery(document).ready(function($) {

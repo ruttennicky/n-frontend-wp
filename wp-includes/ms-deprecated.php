@@ -271,10 +271,13 @@ function wpmu_admin_do_redirect( $url = '' ) {
 	_deprecated_function( __FUNCTION__, '3.3.0', 'wp_redirect()' );
 
 	$ref = '';
-	if ( isset( $_GET['ref'] ) )
-		$ref = $_GET['ref'];
-	if ( isset( $_POST['ref'] ) )
-		$ref = $_POST['ref'];
+	if ( isset( $_GET['ref'] ) && isset( $_POST['ref'] ) && $_GET['ref'] !== $_POST['ref'] ) {
+		wp_die( __( 'A variable mismatch has been detected.' ), __( 'Sorry, you are not allowed to view this item.' ), 400 );
+	} elseif ( isset( $_POST['ref'] ) ) {
+		$ref = $_POST[ 'ref' ];
+	} elseif ( isset( $_GET['ref'] ) ) {
+		$ref = $_GET[ 'ref' ];
+	}
 
 	if ( $ref ) {
 		$ref = wpmu_admin_redirect_add_updated_param( $ref );
@@ -287,7 +290,9 @@ function wpmu_admin_do_redirect( $url = '' ) {
 	}
 
 	$url = wpmu_admin_redirect_add_updated_param( $url );
-	if ( isset( $_GET['redirect'] ) ) {
+	if ( isset( $_GET['redirect'] ) && isset( $_POST['redirect'] ) && $_GET['redirect'] !== $_POST['redirect'] ) {
+		wp_die( __( 'A variable mismatch has been detected.' ), __( 'Sorry, you are not allowed to view this item.' ), 400 );
+	} elseif ( isset( $_GET['redirect'] ) ) {
 		if ( substr( $_GET['redirect'], 0, 2 ) == 's_' )
 			$url .= '&action=blogs&s='. esc_html( substr( $_GET['redirect'], 2 ) );
 	} elseif ( isset( $_POST['redirect'] ) ) {
@@ -545,38 +550,4 @@ function is_user_option_local( $key, $user_id = 0, $blog_id = 0 ) {
 	$local_key = $wpdb->get_blog_prefix( $blog_id ) . $key;
 
 	return isset( $current_user->$local_key );
-}
-
-/**
- * Store basic site info in the blogs table.
- *
- * This function creates a row in the wp_blogs table and returns
- * the new blog's ID. It is the first step in creating a new blog.
- *
- * @since MU (3.0.0)
- * @deprecated 5.0.0 Use `wp_insert_site()`
- * @see wp_insert_site()
- *
- * @param string $domain  The domain of the new site.
- * @param string $path    The path of the new site.
- * @param int    $site_id Unless you're running a multi-network install, be sure to set this value to 1.
- * @return int|false The ID of the new row
- */
-function insert_blog($domain, $path, $site_id) {
-	_deprecated_function( __FUNCTION__, '5.0.0', 'wp_insert_site()' );
-
-	$data = array(
-		'domain'  => $domain,
-		'path'    => $path,
-		'site_id' => $site_id,
-	);
-
-	$site_id = wp_insert_site( $data );
-	if ( is_wp_error( $site_id ) ) {
-		return false;
-	}
-
-	clean_blog_cache( $site_id );
-
-	return $site_id;
 }

@@ -1,7 +1,3 @@
-/**
- * @output wp-includes/js/wplink.js
- */
-
 var wpLink;
 
 ( function( $, wpLinkL10n, wp ) {
@@ -563,7 +559,7 @@ var wpLink;
 			}
 
 			// Up Arrow and Down Arrow keys.
-			if ( event.shiftKey || ( 38 !== event.keyCode && 40 !== event.keyCode ) ) {
+			if ( 38 !== event.keyCode && 40 !== event.keyCode ) {
 				return;
 			}
 

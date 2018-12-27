@@ -1,11 +1,6 @@
-/**
- * Cookie functions.
- *
- * @output wp-includes/js/utils.js
- */
-
 /* global userSettings */
 /* exported getUserSetting, setUserSetting, deleteUserSetting */
+// utility functions
 
 var wpCookies = {
 // The following functions are from Cookie.js class in TinyMCE 3, Moxiecode, used under LGPL.
@@ -200,3 +195,4 @@ function getAllUserSettings() {
 
 	return wpCookies.getHash( 'wp-settings-' + userSettings.uid ) || {};
 }
+
