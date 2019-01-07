@@ -62,7 +62,7 @@
 						  window.dataLayer = window.dataLayer || [];
 						  function gtag(){dataLayer.push(arguments);}
 						  gtag('js', new Date());
-						  gtag('config', '". get_option('ga_id') .",'{'anonymize_ip': true });
+						  gtag('config', '". get_option('ga_id') ."',{'anonymize_ip': true });
 						</script>";
 		}
   }
