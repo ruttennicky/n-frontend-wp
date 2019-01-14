@@ -9,7 +9,8 @@
 					wp_enqueue_script('googlemaps','//maps.googleapis.com/maps/api/js?key='.get_option('g_api'),array('jquery'),false,true);
 	      wp_enqueue_script('jquery-slick','//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js',array( 'jquery' ),false,true);
   			wp_enqueue_script('jquery-css3animateit', '//cdnjs.cloudflare.com/ajax/libs/css3-animate-it/1.0.3/js/css3-animate-it.min.js',array('jquery'),false,true);
-				wp_enqueue_script('blueconic', '//cdn.blueconic.net/ndgtlstd.js',array('jquery'),false,true);
+				if (get_option('show_bc'))
+					wp_enqueue_script('blueconic', '//cdn.blueconic.net/ndgtlstd.js',array('jquery'),false,true);
 				wp_enqueue_script('nfrontend', get_template_directory_uri() . '/js/nfrontend.js',array('jquery'),false,true);
     }
 	}
@@ -127,6 +128,8 @@
 			register_setting('general','fb_page_id');
 		  register_setting('general','g_api');
 		  register_setting('general','notice');
+			register_setting('general','theme_color');
+			register_setting('general','show_bc');
 	    add_settings_field('contact_form_id','<label for="cfid">Contact form ID</label>','custom_field_cfid','general');
 	    add_settings_field('contact_page_id','<label for="cpid">Contact page ID</label>','custom_field_cpid','general');
 	    add_settings_field('vacature_page_id','<label for="vpid">Vacature page ID</label>','custom_field_vpid','general');
@@ -144,7 +147,10 @@
 			add_settings_field('gtm_id','<label for="ga_id">Google Tag Manager ID</label>','custom_field_gtmid','general');
 	    add_settings_field('g_api','<label for="g_api">Google API key</label>','custom_field_gapi','general');
 			add_settings_field('fb_page_id','<label for="fb_page_id">Facebook page ID</label>','custom_field_fbpid','general');
-		  add_settings_field('notice','<label for="notice">Melding</label>','custom_field_notice','general');
+			add_settings_field('theme_color','<label for="theme_color">Theme color</label>','custom_field_tc','general');
+			add_settings_field('show_bc','<label for="show_bc">Blueconic</label>','custom_field_bc','general');
+			add_settings_field('notice','<label for="notice">Melding</label>','custom_field_notice','general');
+
 	}
 
 	function custom_field_cfid() 	{		echo '<input type="text" id="cfid" name="contact_form_id" value="' . get_option( 'contact_form_id') . '" />';			}
@@ -164,6 +170,15 @@
 	function custom_field_gaid() 	{		echo '<input type="text" id="ga_id" name="ga_id" value="' . get_option( 'ga_id'). '" />';													}
 	function custom_field_fbpid() {		echo '<input type="text" id="fb_page_id" name="fb_page_id" value="' . get_option( 'fb_page_id') . '" />';					}
 	function custom_field_gtmid() {		echo '<input type="text" id="gtm_id" name="gtm_id" value="' . get_option( 'gtm_id'). '" />';											}
+	function custom_field_bc()
+	{
+		if (get_option('show_bc'))
+			echo '<input type="checkbox" id="show_bc" name="show_bc" value="true" checked />';
+		else {
+			echo '<input type="checkbox" id="show_bc" name="show_bc" value="false" />';
+		}
+	}
+	function custom_field_tc() 		{		echo '<input type="text" id="theme_color" name="theme_color" value="' . get_option( 'theme_color'). '" data-default-color="#444" class="color-field"/>'; 	}
 	function custom_field_notice(){		wp_editor( get_option( 'notice'), 'notice', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
 
 	function load_custom_login_logo() {

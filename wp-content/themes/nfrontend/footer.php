@@ -79,11 +79,15 @@
                     'menu_id' => 'mobile-menu'    ) );
 ?>
     </nav>
-<?php    if (get_option('fb_app_id') != ''):   ?>
+<?php    if (get_option('fb_page_id') != ''):   ?>
     <div class="fb-customerchat"
       attribution="setup_tool"
-      page_id="<?php echo get_option('fb_app_id'); ?>"
-      theme_color="#fd5f5f">
+      greeting_dialog_display="hide"
+      page_id="<?php echo get_option('fb_page_id'); ?>"
+      <?php if (get_option('theme_color') != ''): ?>
+      theme_color="<?php echo get_option('theme_color'); ?>"
+      <?php endif; ?>
+      >
     </div>
 <?php
           endif;
