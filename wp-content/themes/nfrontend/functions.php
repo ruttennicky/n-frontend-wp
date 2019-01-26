@@ -11,6 +11,7 @@
   			wp_enqueue_script('jquery-css3animateit', '//cdnjs.cloudflare.com/ajax/libs/css3-animate-it/1.0.3/js/css3-animate-it.min.js',array('jquery'),false,true);
 				if (get_option('show_bc'))
 					wp_enqueue_script('blueconic', '//cdn.blueconic.net/ndgtlstd.js',array('jquery'),false,true);
+				wp_enqueue_script('pingdom', '//rum-static.pingdom.net/pa-5c4cbec69a3f8300160004db.js',array('jquery'),false,true);
 				wp_enqueue_script('nfrontend', get_template_directory_uri() . '/js/nfrontend.js',array('jquery'),false,true);
     }
 	}
