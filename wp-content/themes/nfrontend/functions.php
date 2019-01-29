@@ -9,7 +9,7 @@
 					wp_enqueue_script('googlemaps','//maps.googleapis.com/maps/api/js?key='.get_option('g_api'),array('jquery'),false,true);
 	      wp_enqueue_script('jquery-slick','//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js',array( 'jquery' ),false,true);
   			wp_enqueue_script('jquery-css3animateit', '//cdnjs.cloudflare.com/ajax/libs/css3-animate-it/1.0.3/js/css3-animate-it.min.js',array('jquery'),false,true);
-				if (get_option('show_bc') != '')
+				if (get_option('bc_id') != '')
 					wp_enqueue_script('blueconic', '//cdn.blueconic.net/ndgtlstd.js',array('jquery'),false,true);
 				wp_enqueue_script('pingdom', '//rum-static.pingdom.net/pa-5c4cbec69a3f8300160004db.js',array('jquery'),false,true);
 				wp_enqueue_script('nfrontend', get_template_directory_uri() . '/js/nfrontend.js',array('jquery'),false,true);
@@ -131,6 +131,8 @@
 		  register_setting('general','notice');
 			register_setting('general','theme_color');
 			register_setting('general','show_bc');
+			register_setting('general','bc_id');
+			register_setting('general','d_id');
 	    add_settings_field('contact_form_id','<label for="cfid">Contact form ID</label>','custom_field_cfid','general');
 	    add_settings_field('contact_page_id','<label for="cpid">Contact page ID</label>','custom_field_cpid','general');
 	    add_settings_field('vacature_page_id','<label for="vpid">Vacature page ID</label>','custom_field_vpid','general');
@@ -149,7 +151,8 @@
 	    add_settings_field('g_api','<label for="g_api">Google API key</label>','custom_field_gapi','general');
 			add_settings_field('fb_page_id','<label for="fb_page_id">Facebook page ID</label>','custom_field_fbpid','general');
 			add_settings_field('theme_color','<label for="theme_color">Theme color</label>','custom_field_tc','general');
-			add_settings_field('show_bc','<label for="show_bc">Blueconic</label>','custom_field_bc','general');
+			add_settings_field('bc_id','<label for="bc_id">Blueconic id</label>','custom_field_bcid','general');
+			add_settings_field('d_id','<label for="d_id">Drift id</label>','custom_field_did','general');
 			add_settings_field('notice','<label for="notice">Melding</label>','custom_field_notice','general');
 
 	}
@@ -171,14 +174,8 @@
 	function custom_field_gaid() 	{		echo '<input type="text" id="ga_id" name="ga_id" value="' . get_option( 'ga_id'). '" />';													}
 	function custom_field_fbpid() {		echo '<input type="text" id="fb_page_id" name="fb_page_id" value="' . get_option( 'fb_page_id') . '" />';					}
 	function custom_field_gtmid() {		echo '<input type="text" id="gtm_id" name="gtm_id" value="' . get_option( 'gtm_id'). '" />';											}
-	function custom_field_bc()
-	{
-		if (get_option('show_bc'))
-			echo '<input type="checkbox" id="show_bc" name="show_bc" value="true" checked />';
-		else {
-			echo '<input type="checkbox" id="show_bc" name="show_bc" value="false" />';
-		}
-	}
+	function custom_field_bcid() 	{		echo '<input type="text" id="bc_id" name="bc_id" value="' . get_option( 'bc_id'). '" />';													}
+	function custom_field_did() 	{		echo '<input type="text" id="d_id" name="d_id" value="' . get_option( 'd_id'). '" />';														}
 	function custom_field_tc() 		{		echo '<input type="text" id="theme_color" name="theme_color" value="' . get_option( 'theme_color'). '" data-default-color="#444" class="color-field"/>'; 	}
 	function custom_field_notice(){		wp_editor( get_option( 'notice'), 'notice', array('media_buttons' => false, 'textarea_rows' => 5, 'teeny' => true, 'quicktags' => false) );	}
 
@@ -190,6 +187,40 @@
        		}
     	</style>
         ';
+	}
+
+	function load_drift_chat()
+	{
+		if (get_option('d_id'))
+		{
+			echo '
+					<script>
+					"use strict";
+					!function() {
+					var t = window.driftt = window.drift = window.driftt || [];
+					if (!t.init) {
+						if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+						t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
+						t.factory = function(e) {
+							return function() {
+								var n = Array.prototype.slice.call(arguments);
+								return n.unshift(e), t.push(n), t;
+							};
+						}, t.methods.forEach(function(e) {
+							t[e] = t.factory(e);
+						}), t.load = function(t) {
+							var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+							o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+							var i = document.getElementsByTagName("script")[0];
+							i.parentNode.insertBefore(o, i);
+						};
+					}
+					}();
+					drift.SNIPPET_VERSION = "0.3.1";
+					drift.load("' . get_option('d_id') . '");
+					</script>
+			';
+		}
 	}
 
 	function remove_verions_js_css($src) {
@@ -209,6 +240,7 @@
 	add_action('wp_footer','load_gtm',50);
 	add_action('wp_footer','load_hj',60);
 	add_action('wp_footer','load_fb_graph',70);
+	add_actiom('wp_footer','load_drift_chat',80);
 	add_action('init','load_theme_blocks');
   add_action('login_enqueue_scripts','load_custom_login_logo');
   add_action('after_setup_theme','load_theme_setup');
