@@ -1,5 +1,6 @@
 *.log
 *.lock
+*.html
 .DS_Store
 package-lock.json
 wp-config.php
@@ -10,6 +11,7 @@ wp-content/blogs.dir/
 wp-content/cache/
 wp-content/upgrade/
 wp-content/uploads/
+wp-content/mu-plugins/
 wp-content/wp-cache-config.php
 wp-content/plugins/
 wp-content/languages/
