@@ -230,7 +230,7 @@
 		acf_update_setting('google_api_key', get_option('g_api'));
 	}
 
-	function load_custom_upload_mimes( $existing_mimes ) {
+	function load_custom_upload_mimes($existing_mimes) {
 		$existing_mimes['webp'] = 'image/webp';
 		return $existing_mimes;
 	}
@@ -251,7 +251,7 @@
   add_filter('style_loader_src','remove_verions_js_css',9999);
   add_filter('script_loader_src','remove_verions_js_css',9999);
   add_filter('admin_init','load_custom_options');
-	add_filter('mime_types', 'webp_upload_mimes');
+	add_filter('mime_types', 'load_custom_upload_mimes');
 
   add_theme_support('yoast-seo-breadcrumbs');
 	add_theme_support('post-thumbnails');
