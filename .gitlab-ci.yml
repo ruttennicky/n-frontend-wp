@@ -15,7 +15,7 @@ test:
   stage: test
   script:
     - ssh $SSH_USER@$SSH_URL "cd subsites/$DEV_URL/ &&
-          git pull origin develop"
+          git pull origin develop && php wp-cli.phar plugin update --all && php wp-cli.phar language plugin update -all"
   environment:
      name: development
      url: https://$DEV_URL
@@ -26,7 +26,7 @@ staging:
   stage: staging
   script:
     - ssh $SSH_USER@$SSH_URL "cd subsites/$STAG_URL/ &&
-          git pull origin staging"
+          git pull origin staging  && php wp-cli.phar plugin update --all && php wp-cli.phar language plugin update -all"
   environment:
      name: development
      url: https://$STAG_URL
